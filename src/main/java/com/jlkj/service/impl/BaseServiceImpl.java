@@ -1,24 +1,26 @@
-package com.jlkj.service.impl;
+package com.jlkj.service.Impl;
 
+import com.jlkj.mapper.BaseMapper;
 import com.jlkj.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
- * Created by saber on 2019/6/3
+ * Created by Administrator on 2019/6/3
  */
-public class BaseServiceImpl<T> extends BaseService<T> {
+public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Autowired
-    BaseService<T> baseService;
+    BaseMapper<T> baseMapper;
 
-    public List<T> query(){
-        return baseService.query();
+    @Override
+    public List<T> query() {
+        return baseMapper.query();
     }
 
-    public T queryById(){
-        return baseService.queryById();
+    @Override
+    public T queryById() {
+        return baseMapper.queryById();
     }
-
 }

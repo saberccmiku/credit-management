@@ -8,16 +8,9 @@ import java.util.List;
 /**
  * Created by saber on 2019/6/3
  */
-public class BaseService<T> implements BaseMapper<T>{
+public interface BaseService<T> extends BaseMapper<T>{
 
-    @Autowired
-    private BaseMapper<T> baseMapper;
+    public List<T> query();
 
-    public List<T> query(){
-        return baseMapper.query();
-    }
-
-    public T queryById(){
-        return baseMapper.queryById();
-    }
+    public T queryById();
 }

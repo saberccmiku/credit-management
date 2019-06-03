@@ -1,4 +1,4 @@
-package com.jlkj.bean;
+package com.jlkj.entities;
 
 /**
  * Created by saber on 2019/6/3

@@ -1,6 +1,6 @@
 package com.jlkj.mapper;
 
-import com.jlkj.bean.User;
+import com.jlkj.entities.User;
 
 import java.util.List;
 

@@ -1,7 +1,8 @@
 package com.jlkj;
 
-import com.jlkj.service.impl.UserServiceImpl;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
+import com.jlkj.service.Impl.UserServiceImpl;
+import com.jlkj.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

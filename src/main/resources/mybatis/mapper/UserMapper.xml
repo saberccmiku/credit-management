@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.saber.restful.mapper.EmployeeMapper">
-    <select id="queryById" resultType="com.jlkj.bean.User">
-        select * from sec_user where id = #{id}
+<mapper namespace="com.jlkj.mapper.UserMapper">
+    <select id="queryById" resultType="com.jlkj.entities.User">
+        select * from SEC_USER where id = #{id}
     </select>
 
-    <select id="query" resultType="java.lang.String">
-        select * from sec_user where id = #{id}
+    <select id="query" resultType="com.jlkj.entities.User">
+        select * from SEC_USER
     </select>
 </mapper>
