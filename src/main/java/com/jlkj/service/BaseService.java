@@ -1,0 +1,23 @@
+package com.jlkj.service;
+
+import com.jlkj.mapper.BaseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+/**
+ * Created by saber on 2019/6/3
+ */
+public class BaseService<T> implements BaseMapper<T>{
+
+    @Autowired
+    private BaseMapper<T> baseMapper;
+
+    public List<T> query(){
+        return baseMapper.query();
+    }
+
+    public T queryById(){
+        return baseMapper.queryById();
+    }
+}
