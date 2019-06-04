@@ -11,13 +11,12 @@ import java.util.Map;
 /**
  * Created by saber on 2019/6/3
  */
-@Service
-public class UserService extends BaseService<User> {
+public interface UserService extends BaseService<User> {
 
-    @Autowired
-    private UserMapper userMapper;
-
-    public User queryByUserIdOrPhone(String userId){
-        return userMapper.queryByUserIdOrPhone(userId);
-    }
+    /**
+     * 根据登录账号获取用户信息，userId可为用户id或者手机号码
+     * @param userId 登录账号
+     * @return User
+     */
+     User queryByUserIdOrPhone(String userId);
 }

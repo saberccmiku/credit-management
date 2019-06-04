@@ -1,35 +1,18 @@
 package com.saber.credit.service;
 
-import com.saber.credit.mapper.BaseMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
 /**
  * Created by saber on 2019/6/3
  */
-public class BaseService<T> {
+public interface BaseService<T> {
 
-    @Autowired
-    private BaseMapper<T> baseMapper;
+     List<T> query() ;
 
-    public void setBaseMapper(BaseMapper<T> baseMapper){
-        this.baseMapper =baseMapper;
-    }
+     T queryById() ;
 
-    public List<T> query() {
-        return baseMapper.query();
-    }
+     void deleteById();
 
-    public T queryById() {
-        return baseMapper.queryById();
-    }
+     void updateById();
 
-    public void deleteById() {
-        baseMapper.deleteById();
-    }
-
-    public void updateById() {
-        baseMapper.updateById();
-    }
 }

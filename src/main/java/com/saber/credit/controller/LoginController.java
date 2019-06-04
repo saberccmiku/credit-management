@@ -1,13 +1,12 @@
 package com.saber.credit.controller;
 
 import com.saber.credit.entities.User;
-import com.saber.credit.service.UserService;
+import com.saber.credit.service.impl.UserServiceImpl;
 import com.saber.credit.util.MD5Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +20,7 @@ import java.util.Map;
 public class LoginController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @PostMapping(value = "/user/login")
     public String Login(@RequestParam("userName") String userName, @RequestParam("password") String password, Map<String, Object> map, HttpSession session) throws NoSuchAlgorithmException {

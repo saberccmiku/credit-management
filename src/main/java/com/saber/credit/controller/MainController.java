@@ -2,6 +2,7 @@ package com.saber.credit.controller;
 
 import com.saber.credit.entities.Menu;
 import com.saber.credit.service.MenuService;
+import com.saber.credit.service.impl.MenuServiceImpl;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class MainController {
 
     @Autowired
-    MenuService menuService;
+    private MenuServiceImpl menuService;
 
     @GetMapping("/main")
     public String sideMenu(Model model) {
