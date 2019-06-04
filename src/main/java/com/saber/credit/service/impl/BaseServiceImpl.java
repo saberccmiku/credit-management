@@ -20,17 +20,22 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public T queryById() {
-        return baseMapper.queryById();
+    public List<T> query(Integer page, Integer limit) {
+        return baseMapper.query(page,limit);
     }
 
     @Override
-    public void deleteById() {
-        baseMapper.deleteById();
+    public T queryById(String id) {
+        return baseMapper.queryById(id);
     }
 
     @Override
-    public void updateById() {
-        baseMapper.updateById();
+    public void deleteById(String id) {
+        baseMapper.deleteById(id);
+    }
+
+    @Override
+    public void updateById(String id) {
+        baseMapper.updateById(id);
     }
 }

@@ -9,10 +9,12 @@ public interface BaseService<T> {
 
      List<T> query() ;
 
-     T queryById() ;
+     List<T> query(Integer page, Integer limit);
 
-     void deleteById();
+     T queryById(String id) ;
 
-     void updateById();
+     void deleteById(String id);
+
+     void updateById(String id);
 
 }
