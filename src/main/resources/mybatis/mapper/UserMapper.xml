@@ -2,12 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jlkj.mapper.UserMapper">
-    <select id="queryById" resultType="com.jlkj.entities.User">
-        select * from SEC_USER where id = #{id}
+<mapper namespace="com.saber.credit.mapper.UserMapper">
+
+    <sql id="Base_Column_List">
+        ID id,
+        DEL_FLAG delFlag,
+        USER_ID userId,
+        NAME name,
+        SEX sex,
+        BIRTH birth,
+        ID_CARD idCard,
+        PHONE phone,
+        PASSWORD password,
+        EMAIL email,
+        NATIVE_PLACE nativePlace,
+        ADDRESS address,
+        DEVICE device
+    </sql>
+
+    <select id="queryById" resultType="com.saber.credit.entities.User">
+        select <include refid="Base_Column_List"/> from SEC_USER where id = #{id}
     </select>
 
-    <select id="query" resultType="com.jlkj.entities.User">
-        select * from SEC_USER
+    <select id="query" resultType="com.saber.credit.entities.User">
+        select <include refid="Base_Column_List"/>  from SEC_USER
+    </select>
+
+    <select id="queryByUserIdOrPhone" resultType="com.saber.credit.entities.User">
+        select <include refid="Base_Column_List"/>  from SEC_USER where user_id = #{userId} or phone =  #{userId}
     </select>
 </mapper>
