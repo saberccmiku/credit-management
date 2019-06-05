@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuService {
+
 }

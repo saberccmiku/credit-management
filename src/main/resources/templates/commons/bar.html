@@ -182,11 +182,19 @@
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
         </li>
-        <li class="nav-item" th:each="menu:${menus}">
-            <a class="nav-link" href="index.html">
-                <i class="" th:classappend="${menu.icoUrl}"></i>
+        <li class="nav-item" th:each="menu:${menus[0]}">
+            <a class="nav-link" data-toggle="collapse" th:href="'#'+${menu.title}" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title" th:text="${menu.title}"></span>
+                <i class="menu-arrow"></i>
+                <i class=""  th:classappend="${menu.icoUrl}"></i>
             </a>
+            <div class="collapse" th:id="${menu.title}">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item" th:each="menuItem:${menus[menu.id]}">
+                        <a class="nav-link" href="pages/ui-features/buttons.html">[[${menuItem.title}]]</a>
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </nav>

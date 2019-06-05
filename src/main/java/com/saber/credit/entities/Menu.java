@@ -8,24 +8,22 @@ import java.util.List;
  */
 public class Menu {
 
-    private String id;
+    private Integer id;
     private String title;
     private String icoUrl;
     private String sort;
     private String url;
     private String delFlag;
-    private String pId;
-
-    private List<Menu> sonMenuList;
+    private Integer pId;
 
     public Menu() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -69,21 +67,14 @@ public class Menu {
         this.delFlag = delFlag;
     }
 
-    public String getpId() {
+    public Integer getPid() {
         return pId;
     }
 
-    public void setpId(String pId) {
+    public void setPid(Integer pId) {
         this.pId = pId;
     }
 
-    public List<Menu> getSonMenuList() {
-        return sonMenuList;
-    }
-
-    public void setSonMenuList(List<Menu> sonMenuList) {
-        this.sonMenuList = sonMenuList;
-    }
 
     @Override
     public String toString() {
@@ -94,7 +85,7 @@ public class Menu {
                 ", sort='" + sort + '\'' +
                 ", url='" + url + '\'' +
                 ", delFlag='" + delFlag + '\'' +
-                ", sonMenuList=" + sonMenuList +
+                ", pId=" + pId +
                 '}';
     }
 }

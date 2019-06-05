@@ -9,10 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by saber on 2019/6/4
@@ -27,16 +26,9 @@ public class MainController {
     @GetMapping("/main")
     public String sideMenu(Model model) {
         List<Menu> menus = menuService.query();
-        List<Menu> menuList = new ArrayList<>();
-        Map<String,List<Menu>> map = new HashMap<>();
-        for (Menu menu : menus) {
-            if (menu.getpId()==null||menu.getpId().equals("")){
-                menuList.add(menu);
-            }else {
-
-            }
-        }
-        model.addAttribute("menus", menus);
+        Map<Integer,List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
+        model.addAttribute("menus", listMap);
+        System.out.println(listMap);
         return "dashboard";
     }
 

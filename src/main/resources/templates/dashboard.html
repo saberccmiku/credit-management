@@ -22,7 +22,7 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_sidebar.html -->
-      <div th:replace="commons/bar::#sideBar(activeUri='main')"></div>
+      <div th:replace="commons/bar::#sideBar"></div>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -30,8 +30,8 @@
             <div class="col-12">
               <span class="d-flex align-items-center purchase-popup">
                 <p>Like what you see? Check out our premium version for more.</p>
-                <a href="https://github.com/BootstrapDash/PurpleAdmin-Free-Admin-Template" target="_blank" class="btn ml-auto download-button">Download Free Version</a>
-                <a href="#product/purple-bootstrap-4-admin-template/" target="_blank" class="btn purchase-button">Upgrade To Pro</a>
+                <a href="https://github.com/BootstrapDash/PurpleAdmin-Free-Admin-Template" target="_blank" class="btn ml-auto download-button">前往链接下载移动端</a>
+                <a href="#product/purple-bootstrap-4-admin-template/" target="_blank" class="btn purchase-button">升级到高级会员模式</a>
                 <i class="mdi mdi-close popup-dismiss"></i>
               </span>
             </div>
@@ -41,51 +41,69 @@
               <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-home"></i>                 
               </span>
-              Dashboard
+              系统首页
             </h3>
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>Overview
+                  <span></span>刷新
                   <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                 </li>
               </ul>
             </nav>
           </div>
           <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                  <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
-                  <h4 class="font-weight-normal mb-3">Weekly Sales
-                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">$ 15,0000</h2>
-                  <h6 class="card-text">Increased by 60%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
+            <div class="col-md-3 stretch-card grid-margin">
               <div class="card bg-gradient-info card-img-holder text-white">
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
-                  <h4 class="font-weight-normal mb-3">Weekly Orders
-                    <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                  <h4 class="font-weight-normal mb-3">日活跃用户数量
+                    <i class="mdi mdi-account-multiple mdi-24px float-right"></i>
                   </h4>
-                  <h2 class="mb-5">45,6334</h2>
-                  <h6 class="card-text">Decreased by 10%</h6>
+                  <h2 class="mb-5">0</h2>
+                  <h6  class="card-text" data-toggle="tooltip" title="hhhhhhhhhhhhhhhhhhhhhh">近7日均活跃用户<i class="mr-2 ml-2" >3</i></h6>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 stretch-card grid-margin">
+            <div class="col-md-3 stretch-card grid-margin">
+              <div class="card bg-gradient-danger card-img-holder text-white">
+                <div class="card-body">
+                  <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
+                  <h4 class="font-weight-normal mb-3">新用户数量
+                    <i class="mdi mdi-account-multiple-plus mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-3">12</h2>
+                  <h5 class="mb-3">周同比<i class="mr-2 ml-2">30%</i>日环比<i class="mr-2 ml-2">10%</i></h5>
+                  <h6 class="card-text">
+                    近7日均新增用户<i class="mr-2 ml-2"> 2.14人</i>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 stretch-card grid-margin">
               <div class="card bg-gradient-success card-img-holder text-white">
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
-                  <h4 class="font-weight-normal mb-3">Visitors Online
-                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                  <h4 class="font-weight-normal mb-3">预计人均注册产品量
+                    <i class="mdi mdi-trophy-outline mdi-24px float-right"></i>
                   </h4>
                   <h2 class="mb-5">95,5741</h2>
-                  <h6 class="card-text">Increased by 5%</h6>
+                  <h6 class="card-text">近7日预计人均注册产品量<i class="mr-2 ml-2">1.25</i></h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 stretch-card grid-margin">
+              <div class="card bg-gradient-warning card-img-holder text-white">
+                <div class="card-body">
+                  <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
+                  <h4 class="font-weight-normal mb-3">收益
+                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                  </h4>
+                  <h2 class="mb-3">1000</h2>
+                  <h5 class="mb-3">周同比<i class="mr-2 ml-2">100%</i>日环比<i class="mr-2 ml-2">50%</i></h5>
+                  <h6 class="card-text">
+                    近7日均收益<i class="mr-2 ml-2">127.86元</i>
+                  </h6>
                 </div>
               </div>
             </div>
@@ -139,9 +157,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="menu:${menus}">
+                        <tr>
                           <td>
-                            <img src="" th:src="@{/asserts/images/faces/face1.jpg}" class="mr-2" alt="image"  th:text="${menu.title}">
+                            <img src="" th:src="@{/asserts/images/faces/face1.jpg}" class="mr-2" alt="image">
                             David Grey
                           </td>
                           <td>
@@ -155,6 +173,60 @@
                           </td>
                           <td>
                             WD-12345
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="" th:src="@{/asserts/images/faces/face2.jpg}" class="mr-2" alt="image">
+                            Stella Johnson
+                          </td>
+                          <td>
+                            High loading time
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-warning">PROGRESS</label>
+                          </td>
+                          <td>
+                            Dec 12, 2017
+                          </td>
+                          <td>
+                            WD-12346
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="" th:src="@{/asserts/images/faces/face3.jpg}" class="mr-2" alt="image">
+                            Marina Michel
+                          </td>
+                          <td>
+                            Website down for one week
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-info">ON HOLD</label>
+                          </td>
+                          <td>
+                            Dec 16, 2017
+                          </td>
+                          <td>
+                            WD-12347
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <img src="" th:src="@{/asserts/images/faces/face4.jpg}" class="mr-2" alt="image">
+                            John Doe
+                          </td>
+                          <td>
+                            Loosing control on server
+                          </td>
+                          <td>
+                            <label class="badge badge-gradient-danger">REJECTED</label>
+                          </td>
+                          <td>
+                            Dec 3, 2017
+                          </td>
+                          <td>
+                            WD-12348
                           </td>
                         </tr>
                       </tbody>
@@ -356,6 +428,10 @@
   <!-- Custom js for this page-->
   <script th:src="@{/asserts/js/dashboard.js}"></script>
   <!-- End custom js for this page-->
+
+  <script>
+      $(function () { $("[data-toggle='tooltip']").tooltip(); });
+  </script>
 </body>
 
 </html>

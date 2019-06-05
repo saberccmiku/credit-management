@@ -22,4 +22,5 @@
         select <include refid="Base_Column_List"/>  from SEC_MENU
     </select>
 
+
 </mapper>
