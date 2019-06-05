@@ -191,7 +191,7 @@
             <div class="collapse" th:id="${menu.title}">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item" th:each="menuItem:${menus[menu.id]}">
-                        <a class="nav-link" href="pages/ui-features/buttons.html">[[${menuItem.title}]]</a>
+                        <a class="nav-link" href="pages/ui-features/buttons.html" th:href="menuItem.url">[[${menuItem.title}]]</a>
                     </li>
                 </ul>
             </div>

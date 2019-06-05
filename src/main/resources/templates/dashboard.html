@@ -46,7 +46,7 @@
             <nav aria-label="breadcrumb">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>刷新
+                  <a th:href="main">刷新</a>
                   <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                 </li>
               </ul>
@@ -58,10 +58,10 @@
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
                   <h4 class="font-weight-normal mb-3">日活跃用户数量
-                    <i class="mdi mdi-account-multiple mdi-24px float-right"></i>
+                    <i class="mdi mdi-account-multiple mdi-24px col-md-1 float-right"  data-toggle="tooltip" title="当日启动App（或打开H5）的已登录用户的数量"></i>
                   </h4>
                   <h2 class="mb-5">0</h2>
-                  <h6  class="card-text" data-toggle="tooltip" title="hhhhhhhhhhhhhhhhhhhhhh">近7日均活跃用户<i class="mr-2 ml-2" >3</i></h6>
+                  <h6  class="card-text" >近7日均活跃用户<i class="mr-2 ml-2" >3</i></h6>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
                   <h4 class="font-weight-normal mb-3">新用户数量
-                    <i class="mdi mdi-account-multiple-plus mdi-24px float-right"></i>
+                    <i class="mdi mdi-account-multiple-plus mdi-24px float-right col-md-1" data-toggle="tooltip" data-html="true" title="新用户数量 = 当日新增注册用户</br>周同比 = (当日新增用户量-上周当日新增用户量)/上周当日用户增加量</br>日环比 = (当日新增用户-昨日新增用户)/昨日新增用户"></i>
                   </h4>
                   <h2 class="mb-3">12</h2>
                   <h5 class="mb-3">周同比<i class="mr-2 ml-2">30%</i>日环比<i class="mr-2 ml-2">10%</i></h5>
@@ -85,7 +85,7 @@
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
                   <h4 class="font-weight-normal mb-3">预计人均注册产品量
-                    <i class="mdi mdi-trophy-outline mdi-24px float-right"></i>
+                    <i class="mdi mdi-trophy-outline mdi-24px float-right col-md-1" data-toggle="tooltip" title="当日用户预注册信贷产品总数/当日注册产品的用户数"></i>
                   </h4>
                   <h2 class="mb-5">95,5741</h2>
                   <h6 class="card-text">近7日预计人均注册产品量<i class="mr-2 ml-2">1.25</i></h6>
@@ -97,7 +97,7 @@
                 <div class="card-body">
                   <img src="" th:src="@{/asserts/images/dashboard/circle.svg}" class="card-img-absolute" alt="circle-image"/>
                   <h4 class="font-weight-normal mb-3">收益
-                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    <i class="mdi mdi-diamond mdi-24px float-right col-md-1" data-toggle="tooltip" data-html="true" title="收益 = 以CPA结算的产品 * 合作单价 + 以UV结算的产品 * 合作单价<br/>周同比 = (当日收益-上周当日收益)/上周当日收益<br/>日环比 = (当日收益-昨日收益)/昨日收益"></i>
                   </h4>
                   <h2 class="mb-3">1000</h2>
                   <h5 class="mb-3">周同比<i class="mr-2 ml-2">100%</i>日环比<i class="mr-2 ml-2">50%</i></h5>
