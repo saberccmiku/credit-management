@@ -26,11 +26,12 @@ public class LoginController {
     public String Login(@RequestParam("userName") String userName, @RequestParam("password") String password, Map<String, Object> map, HttpSession session) throws NoSuchAlgorithmException {
         User user = userService.queryByUserIdOrPhone(userName);
         if (user != null && user.getPassword().equals(MD5Helper.MD5Digest(password))) {
-            session.setAttribute("loginUser", user.getUserId());
+            session.setAttribute("loginUser", user);
             return "redirect:/main";
         } else {
             map.put("msg", "账户或者密码错误");
             return "login";
         }
     }
+
 }
