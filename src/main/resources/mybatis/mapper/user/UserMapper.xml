@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saber.credit.mapper.UserMapper">
+
+    <sql id="Base_Column_List">
+        ID id,
+        DEL_FLAG delFlag,
+        ACCOUNT account,
+        NAME name,
+        SEX sex,
+        BIRTH birth,
+        ID_CARD idCard,
+        PHONE phone,
+        PASSWORD password,
+        EMAIL email,
+        NATIVE_PLACE nativePlace,
+        ADDRESS address,
+        DEVICE device
+    </sql>
+
+    <select id="queryById" resultType="com.saber.credit.entities.User">
+        SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
+        WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
+        CONCAT(TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE),'小时')
+        END intervalTime,a.LOGIN_COUNT loginCount,r.DEVICE_ID deviceId,
+        r.DEVICE_TYPE deviceType,u.NATIVE_PLACE nativePlace,r.NETWORK network
+        from SEC_USER u
+        LEFT JOIN
+        USER_ACTIVE a  ON u.id = a.user_id
+        LEFT JOIN
+        DEVICE_REGISTER r ON r.USER_ID = u.ID
+        where u.id = #{id}
+    </select>
+
+    <select id="query" resultType="com.saber.credit.entities.User">
+        select <include refid="Base_Column_List"/>  from SEC_USER
+    </select>
+
+    <select id="queryByUserIdOrPhone" resultType="com.saber.credit.entities.User">
+        select <include refid="Base_Column_List"/>  from SEC_USER where account = #{account} or phone =  #{account}
+    </select>
+
+    <select id="queryDetail" resultType="com.saber.credit.entities.User">
+        SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
+        WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
+        CONCAT(TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE),'小时')
+        END intervalTime,a.LOGIN_COUNT loginCount,r.DEVICE_ID deviceId,r.DEVICE_TYPE deviceType
+        from SEC_USER u
+        LEFT JOIN
+        USER_ACTIVE a  ON u.id = a.user_id
+        LEFT JOIN
+        DEVICE_REGISTER r ON r.USER_ID = u.ID
+    </select>
+
+    <select id="queryProductFlow" resultType="com.saber.credit.entities.Product">
+        SELECT f.ID id,f.GOODS_ID goodsId,f.USER_ID userId,f.CLICK_COUNT clickCount,f.READ_COUNT readCount,f.CREATE_DATE readDate,e.VALUE name
+        from GOODS_FLOW f
+        LEFT JOIN ENUMERATE e on e.id = f.GOODS_ID
+        WHERE f.USER_ID = #{userId}
+    </select>
+
+</mapper>

@@ -36,7 +36,7 @@ public class User {
     /**
      * 浏览的产品记录
      */
-    private List<Goods> goodsList;
+    private List<Product> productList;
 
 
     public User() {
@@ -228,12 +228,12 @@ public class User {
         this.network = network;
     }
 
-    public List<Goods> getGoodsList() {
-        return goodsList;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setGoodsList(List<Goods> goodsList) {
-        this.goodsList = goodsList;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override
@@ -262,7 +262,7 @@ public class User {
                 ", deviceType='" + deviceType + '\'' +
                 ", registerDate=" + registerDate + '\'' +
                 ", network=" + network + '\'' +
-                ", goodsList=" + goodsList +
+                ", productList=" + productList +
                 '}';
     }
 }

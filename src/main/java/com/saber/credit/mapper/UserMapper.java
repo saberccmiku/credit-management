@@ -1,6 +1,6 @@
 package com.saber.credit.mapper;
 
-import com.saber.credit.entities.Goods;
+import com.saber.credit.entities.Product;
 import com.saber.credit.entities.User;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +28,7 @@ public interface UserMapper extends BaseMapper<User>{
     /**
      * 根据登录账号获查询用户浏览过的产品记录
      * @param userId 登录账号
-     * @return Goods
+     * @return Product
      */
-    List<Goods> queryGoodsList(String userId);
+    List<Product> queryProductFlow(String userId);
 }

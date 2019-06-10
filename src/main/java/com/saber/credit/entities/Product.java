@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by saber on 2019/6/10
  * 信贷产品
  */
-public class Goods {
+public class Product {
 
     private String id;
     private String name;
@@ -56,7 +56,7 @@ public class Goods {
 
     @Override
     public String toString() {
-        return "Goods{" +
+        return "Product{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", readDate=" + readDate +

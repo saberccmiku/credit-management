@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Purple Admin</title>
+  <title>贷超管理系统</title>
   <!-- plugins:css -->
   <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
   <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
@@ -14,8 +14,6 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
-  <!-- endinject -->
-  <link rel="shortcut icon" th:href="@{/asserts/images/favicon.png}"/>
 </head>
 
 
@@ -168,9 +166,9 @@
                       </tr>
                     </thread>
                     <tbody>
-                    <tr th:each="goods:${user.goodsList}">
-                      <td>[[${goods.name}==null?'--':${goods.name}]]</td>
-                      <td>[[${#dates.format(goods.readDate, 'yyyy-MM-dd hh:mm:ss')}]]</td>
+                    <tr th:each="product:${user.productList}">
+                      <td>[[${product.name}==null?'--':${product.name}]]</td>
+                      <td>[[${#dates.format(product.readDate, 'yyyy-MM-dd hh:mm:ss')}]]</td>
                     </tr>
                     </tbody>
                   </table>

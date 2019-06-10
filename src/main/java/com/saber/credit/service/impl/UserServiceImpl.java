@@ -1,6 +1,6 @@
 package com.saber.credit.service.impl;
 
-import com.saber.credit.entities.Goods;
+import com.saber.credit.entities.Product;
 import com.saber.credit.entities.User;
 import com.saber.credit.mapper.UserMapper;
 import com.saber.credit.service.UserService;
@@ -29,7 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public List<Goods> queryGoodsList(String userId) {
-        return userMapper.queryGoodsList(userId);
+    public List<Product> queryProductFlow(String userId) {
+        return userMapper.queryProductFlow(userId);
     }
 }

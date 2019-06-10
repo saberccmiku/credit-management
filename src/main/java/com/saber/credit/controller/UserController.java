@@ -1,6 +1,6 @@
 package com.saber.credit.controller;
 
-import com.saber.credit.entities.Goods;
+import com.saber.credit.entities.Product;
 import com.saber.credit.entities.User;
 import com.saber.credit.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ public class UserController extends BaseController{
         initPage(model);
         List<User> userList = userService.queryDetail(1, 20);
         for (User user:userList) {
-            List<Goods> goodsList = userService.queryGoodsList(user.getId());
-            for (Goods goods:goodsList) {
-                user.setClickCount(user.getClickCount()+goods.getClickCount());
-                user.setReadCount(user.getReadCount()+goods.getReadCount());
+            List<Product> productList = userService.queryProductFlow(user.getId());
+            for (Product product : productList) {
+                user.setClickCount(user.getClickCount()+ product.getClickCount());
+                user.setReadCount(user.getReadCount()+ product.getReadCount());
             }
         }
         model.addAttribute("users",userList);
@@ -41,12 +41,12 @@ public class UserController extends BaseController{
     public String userDetail(@PathVariable("id") String id,Model model){
         initPage(model);
         User user = userService.queryById(id);
-        List<Goods> goodsList = userService.queryGoodsList(id);
-        for (Goods goods:goodsList) {
-            user.setClickCount(user.getClickCount()+goods.getClickCount());
-            user.setReadCount(user.getReadCount()+goods.getReadCount());
+        List<Product> productList = userService.queryProductFlow(id);
+        for (Product product : productList) {
+            user.setClickCount(user.getClickCount()+ product.getClickCount());
+            user.setReadCount(user.getReadCount()+ product.getReadCount());
         }
-        user.setGoodsList(goodsList);
+        user.setProductList(productList);
         model.addAttribute("user",user);
         return "user/detail";
     }
