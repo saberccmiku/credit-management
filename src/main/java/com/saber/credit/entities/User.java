@@ -1,6 +1,7 @@
 package com.saber.credit.entities;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by saber on 2019/6/3
@@ -9,7 +10,7 @@ public class User {
 
     private String id;
     private String delFlag;
-    private String userId;
+    private String account;
     private String name;
     private Date birth;
     private String sex;
@@ -20,6 +21,23 @@ public class User {
     private String nativePlace;
     private String address;
     private String device;
+
+    private String fromName;
+    private Date firstLoginDate;
+    private String intervalTime;
+    private String loginCount;
+    private int readCount;
+    private int clickCount;
+    private String deviceId;
+    private String deviceType;
+    private Date registerDate;
+    private String network;
+
+    /**
+     * 浏览的产品记录
+     */
+    private List<Goods> goodsList;
+
 
     public User() {
     }
@@ -40,12 +58,12 @@ public class User {
         this.delFlag = delFlag;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getName() {
@@ -128,12 +146,102 @@ public class User {
         this.device = device;
     }
 
+
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public Date getFirstLoginDate() {
+        return firstLoginDate;
+    }
+
+    public void setFirstLoginDate(Date firstLoginDate) {
+        this.firstLoginDate = firstLoginDate;
+    }
+
+    public String getIntervalTime() {
+        return intervalTime;
+    }
+
+    public void setIntervalTime(String intervalTime) {
+        this.intervalTime = intervalTime;
+    }
+
+    public String getLoginCount() {
+        return loginCount;
+    }
+
+    public void setLoginCount(String loginCount) {
+        this.loginCount = loginCount;
+    }
+
+    public int getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(int readCount) {
+        this.readCount = readCount;
+    }
+
+    public int getClickCount() {
+        return clickCount;
+    }
+
+    public void setClickCount(int clickCount) {
+        this.clickCount = clickCount;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public String getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network = network;
+    }
+
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
                 ", delFlag='" + delFlag + '\'' +
-                ", userId='" + userId + '\'' +
+                ", account='" + account + '\'' +
                 ", name='" + name + '\'' +
                 ", birth=" + birth +
                 ", sex='" + sex + '\'' +
@@ -144,6 +252,17 @@ public class User {
                 ", nativePlace='" + nativePlace + '\'' +
                 ", address='" + address + '\'' +
                 ", device='" + device + '\'' +
+                ", fromName='" + fromName + '\'' +
+                ", firstLoginDate=" + firstLoginDate +
+                ", intervalTime='" + intervalTime + '\'' +
+                ", loginCount='" + loginCount + '\'' +
+                ", readCount='" + readCount + '\'' +
+                ", clickCount='" + clickCount + '\'' +
+                ", deviceId='" + deviceId + '\'' +
+                ", deviceType='" + deviceType + '\'' +
+                ", registerDate=" + registerDate + '\'' +
+                ", network=" + network + '\'' +
+                ", goodsList=" + goodsList +
                 '}';
     }
 }

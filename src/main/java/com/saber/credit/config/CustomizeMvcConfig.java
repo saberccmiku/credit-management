@@ -21,13 +21,14 @@ public class CustomizeMvcConfig implements WebMvcConfigurer {
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("login");
                 registry.addViewController("/main.html").setViewName("dashboard");
+                registry.addViewController("/index.html").setViewName("login");
             }
 
             @Override
             public void addInterceptors(InterceptorRegistry registry) {
                 registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**")
                 //springBoot2.x.x以下静态资源不拦截 以上会拦截所以需要自己排除静态资源包括webjars
-                .excludePathPatterns("/dashboard.html","/","/user/login","/asserts/**","/vendors/**","/webjars/**");
+                .excludePathPatterns("/index.html","/","/user/login","/asserts/**","/vendors/**","/webjars/**");
             }
         };
     }

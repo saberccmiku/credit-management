@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Purple Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+  <!-- endinject -->
+  <link rel="shortcut icon" th:href="@{/asserts/images/favicon.png}"/>
+</head>
+
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="commons/bar::topBar"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_sidebar.html -->
+      <div th:replace="commons/bar::#sideBar"></div>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <!--pageHeader-->
+          <div class="page-header">
+            <h3 class="page-title">
+              <button class="btn btn-social-icon-text btn-dribbble" th:href="@{/user/list}"><i class="mdi mdi-dribbble" th:href="@{/user/list}"></i>用户管理</button>
+            </h3>
+            <a class="mdi mdi-backspace text-primary" th:href="@{/user/list}"></a>
+          </div>
+          <!--用户详情-->
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card-header bg-light">用户详情</div>
+              <div class="card-group">
+                <div class="card text-center border-success">
+                  <div class="card-body text-center">
+                    <img src="" th:src="@{/asserts/images/faces/face27.jpg}" class="rounded" alt="image">
+                  </div>
+                </div>
+                <div class="card border-success" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">用户姓名:</li>
+                    <li class="list-group-item">性别:</li>
+                    <li class="list-group-item">城市:</li>
+                    <li class="list-group-item">最后访问:</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">[[${user.name}==null?'--':${user.name}]]</li>
+                    <li class="list-group-item">[[${user.sex}==null?'--':${user.sex}]]</li>
+                    <li class="list-group-item">[[${user.nativePlace}==null?'--':${user.nativePlace}]]</li>
+                    <li class="list-group-item">[[${#dates.format(user.firstLoginDate, 'yyyy-MM-dd hh:mm:ss')}]]</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">手机号:</li>
+                    <li class="list-group-item">生日:</li>
+                    <li class="list-group-item">注册时间:</li>
+                    <li class="list-group-item">&nbsp</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">[[${user.phone}==null?'--':${user.phone}]]</li>
+                    <li class="list-group-item">[[${user.birth}==null?'--':${user.birth}]]</li>
+                    <li class="list-group-item">[[${#dates.format(user.registerDate, 'yyyy-MM-dd hh:mm:ss')}]]</li>
+                    <li class="list-group-item">&nbsp</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--统计信息-->
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card-header  bg-light">统计信息</div>
+              <div class="card">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thread>
+                        <tr>
+                          <th>
+                            浏览产品量
+                          </th>
+                          <th>
+                            注册产品量
+                          </th>
+                          <th>
+                            信贷APP安装数量
+                          </th>
+                        </tr>
+                      </thread>
+                      <tbody>
+                        <tr>
+                          <td>[[${user.readCount}==null?'--':${user.readCount}]]</td>
+                          <td>0</td>
+                          <td>0</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!--设备信息-->
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card-header bg-light">设备信息</div>
+              <div class="card-group">
+                <div class="card border-success" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">终端型号:</li>
+                    <li class="list-group-item">设备使用人数:</li>
+                    <li class="list-group-item">设备ID:</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">[[${user.deviceType}==null?'--':${user.deviceType}]]</li>
+                    <li class="list-group-item">0</li>
+                    <li class="list-group-item">[[${user.deviceId}==null?'--':${user.deviceId}]]</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">是否安装作弊软件:</li>
+                    <li class="list-group-item">网络类型:</li>
+                    <li class="list-group-item">&nbsp</li>
+                  </ul>
+                </div>
+                <div class="card" style="width: 18rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">否</li>
+                    <li class="list-group-item">[[${user.network}==null?'--':${user.network}]]</li>
+                    <li class="list-group-item">&nbsp</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--浏览信贷产品记录-->
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card-header  bg-light">浏览信贷产品记录</div>
+              <div class="card">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thread>
+                      <tr>
+                        <th>
+                          信贷产品
+                        </th>
+                        <th>
+                          浏览时间
+                        </th>
+                      </tr>
+                    </thread>
+                    <tbody>
+                    <tr th:each="goods:${user.goodsList}">
+                      <td>[[${goods.name}==null?'--':${goods.name}]]</td>
+                      <td>[[${#dates.format(goods.readDate, 'yyyy-MM-dd hh:mm:ss')}]]</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <div th:replace="/commons/bar::#footerBar"></div>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+  <script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script th:src="@{/asserts/js/off-canvas.js}"></script>
+  <script th:src="@{/asserts/js/misc.js}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
+
+</html>

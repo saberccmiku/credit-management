@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+    <!-- endinject -->
+    <link rel="shortcut icon" th:href="@{/asserts/images/favicon.png}"/>
+</head>
+
+<body>
+<div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="commons/bar::topBar"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="commons/bar::#sideBar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">用户列表</h4>
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                用户编号
+                                            </th>
+                                            <th>
+                                                注册时间
+                                            </th>
+                                            <th>
+                                                首登App时间
+                                            </th>
+                                            <th>
+                                                间隔时长
+                                            </th>
+                                            <th>
+                                                App启动数
+                                            </th>
+                                            <th>
+                                                浏览产品量
+                                            </th>
+                                            <th>
+                                                产品点击量
+                                            </th>
+                                            <th>
+                                                预计注册量
+                                            </th>
+                                            <th>
+                                                活跃天数
+                                            </th>
+                                            <th>
+                                                设备系统
+                                            </th>
+                                            <th>
+                                                设备型号
+                                            </th>
+                                            <th>
+                                                操作
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="user:${users}">
+                                            <td>
+                                                <img src="" th:src="@{/asserts/images/faces/face1.jpg}" class="mr-2"
+                                                     alt="image">
+                                                [[${user.name}]]
+                                            </td>
+                                            <td>
+                                                [[${#dates.format(user.registerDate, 'yyyy-MM-dd hh:mm:ss')}]]
+                                            </td>
+                                            <td>
+                                                <label class="badge badge-gradient-success">[[${#dates.format(user.firstLoginDate,
+                                                    'yyyy-MM-dd hh:mm:ss')}]]</label>
+                                            </td>
+                                            <td>
+                                                [[${user.intervalTime}]]
+                                            </td>
+                                            <td>
+                                                [[${user.loginCount}]]
+                                            </td>
+                                            <td>
+                                                [[${user.readCount}]]
+                                            </td>
+                                            <td>
+                                                [[${user.clickCount}]]
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>
+                                                [[${user.deviceId}]]
+                                            </td>
+                                            <td>
+                                                [[${user.deviceType}]]
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-gradient-primary" th:href="@{/user/}+${user.id}">查看</a>
+                                                <button class="btn btn-sm btn-gradient-danger">拉黑</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <form class="d-sm-flex justify-content-end">
+                                    <span class="text-muted text-center text-sm-right d-block d-sm-inline-block">共0条数据
+                                      <i class="btn mdi mdi-chevron-double-left btn-sm" href="#"></i>
+                                        <a class="btn btn-sm btn-outline-dark">1</a>
+                                        <a class="btn btn-sm btn-outline-dark">···</a>
+                                        <a class="btn btn-sm btn-outline-dark">10</a>
+                                      <i class="btn mdi mdi-chevron-double-right btn-sm"  href="#"></i>
+                                          <div class="btn-group">
+                                                <select class="custom-select">
+                                                  <option selected value="1">10 条/页</option>
+                                                  <option value="2">20 条/页</option>
+                                                  <option value="3">30 条/页</option>
+                                                </select>
+                                          </div>
+                                        <a class="mr-2 ml-2">跳至</a>
+                                        <input type="email" class="form-control form-control-sm col-1 btn-group" id="pageNum" aria-describedby="pageNum" placeholder="">
+                                        <a class="mr-4 ml-2">页</a>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <div th:replace="/commons/bar::#footerBar"></div>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/asserts/js/off-canvas.js}"></script>
+<script th:src="@{/asserts/js/misc.js}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<!-- End custom js for this page-->
+</body>
+
+</html>

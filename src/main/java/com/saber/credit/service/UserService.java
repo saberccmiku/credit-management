@@ -1,12 +1,9 @@
 package com.saber.credit.service;
 
+import com.saber.credit.entities.Goods;
 import com.saber.credit.entities.User;
-import com.saber.credit.mapper.UserMapper;
-import com.sun.tracing.dtrace.Attributes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by saber on 2019/6/3
@@ -19,4 +16,16 @@ public interface UserService extends BaseService<User> {
      * @return User
      */
      User queryByUserIdOrPhone(String userId);
+
+    /**
+     * 查询用户管理列表界面的用户信息
+     * @return userList
+     */
+    List<User> queryDetail(Integer page,Integer limit);
+    /**
+     * 根据登录账号获查询用户浏览过的产品记录
+     * @param userId 登录账号
+     * @return Goods
+     */
+    List<Goods> queryGoodsList(String userId);
 }
