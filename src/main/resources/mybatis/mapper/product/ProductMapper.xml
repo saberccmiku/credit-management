@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.saber.credit.mapper.UserMapper">
+<mapper namespace="com.saber.credit.mapper.ProductMapper">
 
     <select id="queryById" resultType="com.saber.credit.entities.Product">
         SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
