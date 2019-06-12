@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saber.credit.mapper.EnumerateMapper">
+
+    <sql id="Base_Column_List">
+        ID id,
+        PARENT_CODE parentCode,
+        CODE code,
+        VALUE value
+    </sql>
+
+    <select id="queryByCode" resultType="com.saber.credit.entities.Enumerate">
+        select <include refid="Base_Column_List"/> from ENUMERATE where CODE = #{code}
+    </select>
+
+    <select id="queryByPCode" resultType="com.saber.credit.entities.Enumerate">
+        select <include refid="Base_Column_List"/>  from ENUMERATE where PARENT_CODE = #{parentCode}
+    </select>
+
+
+</mapper>

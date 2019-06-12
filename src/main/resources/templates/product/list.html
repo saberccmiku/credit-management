@@ -19,14 +19,26 @@
 <body>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
-
+    <div th:replace="/commons/bar::topBar"></div>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:../../partials/_sidebar.html -->
-
+      <div th:replace="/commons/bar::#sideBar"></div>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+          <div class="col-lg-12 grid-margin stretch-card">
+          <h2>
+            <a class="btn btn-sm btn-success" th:href="@{/product/add}">添加产品</a>
+            <!-- Example single danger button -->
+            <div class="btn-group">
+              <a class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown">更多功能</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item">贷款超市排序</a>
+              </div>
+            </div>
+          </h2>
+          </div>
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
@@ -196,6 +208,7 @@
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
+        <div th:replace="/commons/bar::#footerBar"></div>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
