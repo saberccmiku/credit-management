@@ -99,7 +99,7 @@
                     <div class="col-sm-4">
                       <input type="text" class="form-control rounded" id="introduction" placeholder="请输入产品简介,最多12个字" required>
                       <div class="invalid-feedback">
-                        填写产品简介
+                        请填写产品简介
                       </div>
                     </div>
                   </div>
@@ -114,7 +114,7 @@
                           <option value="">年利率</option>
                         </select>
                         <div class="invalid-feedback">
-                          填写贷款利率.
+                          请填写贷款利率.
                         </div>
                       </div>
                       <h6 class="mt-4">提示：<span class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
@@ -151,9 +151,17 @@
                   <div class="form-group row">
                     <label for="auditDuration" class="col-sm-2 col-form-label">审核时长 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="auditDuration" placeholder="City" required>
+                      <div class="form-inline">
+                      <input type="text" class="form-control rounded" id="auditDuration" placeholder="请输入审核时长" required>
+                      <select class="custom-select ml-5" required>
+                        <option value="">秒</option>
+                        <option value="">分钟</option>
+                        <option value="">小时</option>
+                        <option value="">天</option>
+                      </select>
                       <div class="invalid-feedback">
-                        Please provide a valid city.
+                        请填写审核时长.
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -161,9 +169,17 @@
                   <div class="form-group row">
                     <label for="paySpeed" class="col-sm-2 col-form-label">下款速度 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="paySpeed" placeholder="City" required>
+                      <div class="form-inline">
+                      <input type="text" class="form-control rounded" id="paySpeed" placeholder="申请借款到下款的时长" required>
+                      <select class="custom-select ml-5" required>
+                        <option value="">秒</option>
+                        <option value="">分钟</option>
+                        <option value="">小时</option>
+                        <option value="">天</option>
+                      </select>
                       <div class="invalid-feedback">
-                        Please provide a valid city.
+                        请填写下款速度.
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -171,17 +187,21 @@
                   <div class="form-group row">
                     <label for="links" class="col-sm-2 col-form-label">合作推广链接 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="links" placeholder="City" required>
+                      <input type="text" class="form-control rounded" id="links" placeholder="https://www.baidu.com" required>
                       <div class="invalid-feedback">
                         Please provide a valid city.
                       </div>
+                      <h6 class="mt-4">提示：<span class="text-danger">推荐使用以https://开头的链接</span></h6>
                     </div>
                   </div>
                   <!--到账方式-->
                   <div class="form-group row">
-                    <label for="account" class="col-sm-2 col-form-label">到账方式 :</label>
+                    <label class="col-sm-2 col-form-label">到账方式 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="account" placeholder="City" required>
+                      <select class="custom-select" required>
+                        <option value="">请选择</option>
+                        <option th:each="enumerateItem:${enumerate.ACCOUNT_WAY.itemList}">[[${enumerateItem.value}]]</option>
+                      </select>
                       <div class="invalid-feedback">
                         Please provide a valid city.
                       </div>
@@ -189,9 +209,12 @@
                   </div>
                   <!--还款方式-->
                   <div class="form-group row">
-                    <label for="repayment" class="col-sm-2 col-form-label">还款方式 :</label>
+                    <label class="col-sm-2 col-form-label">还款方式 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="repayment" placeholder="City" required>
+                      <select class="custom-select" required>
+                        <option value="">请选择</option>
+                        <option th:each="enumerateItem:${enumerate.REPAYMENT_WAY.itemList}">[[${enumerateItem.value}]]</option>
+                      </select>
                       <div class="invalid-feedback">
                         Please provide a valid city.
                       </div>
@@ -201,21 +224,39 @@
                   <div class="form-group row">
                     <label for="registerCount" class="col-sm-2 col-form-label">日最高注册量 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="registerCount" placeholder="City" required>
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
+                      <div class="input-group mb-3 ">
+                        <input type="text" id ="registerCount" class="form-control rounded" placeholder="请输入数字" aria-label="registerCount" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">个</span>
+                        </div>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
                       </div>
                     </div>
+                      <i class="mdi mdi-help-circle text-info d-flex align-self-center mb-3" data-toggle="tooltip" data-placement="top" title="日最高注册量的提示：当日注册量达到上限（进件上限）后，该产品在移动端的各个列表中将被置底显示。
+举例：如果该产品是在首页推荐位中，且该推荐位在后台有10个产品，但移动端只展示4个产品，则把该产品置底到第10位。以此类推，直到10个产品都达到进件上限，则不再继续排序。次日恢复默认排序。"></i>
                   </div>
+
                   <!--进件时间段-->
                   <div class="form-group row">
                     <label for="innerTime" class="col-sm-2 col-form-label">进件时间段 :</label>
-                    <div class="col-sm-4">
+                      <div class="form-check form-check-info ml-4">
+                        <label class="form-check-label">
+                          <input type="radio" class="form-check-input" name="innerTime" id="innerTime01" value="" checked>
+                          CPA
+                        </label>
+                      </div>
+                      <div class="form-check ml-2 form-check-info">
+                        <label class="form-check-label">
+                          <input type="radio" class="form-check-input" name="innerTime" id="innerTime02" value="option2">
+                          UV
+                        </label>
+                      </div>
                       <input type="text" class="form-control rounded" id="innerTime" placeholder="City" required>
                       <div class="invalid-feedback">
                         Please provide a valid city.
                       </div>
-                    </div>
                   </div>
                   <!--申请条件-->
                   <div class="form-group row">
@@ -367,7 +408,9 @@
             nonSelectedText: '请选择贷款周期'
         });
     });
-
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
 </script>
 </body>
 </html>

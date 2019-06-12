@@ -20,7 +20,7 @@ public class ProductController extends BaseController{
     @GetMapping(value = "/product/add")
     public String toAddPage(Model model){
         initPage(model);
-        initEnumerate(model,"SETTLEMENT_CYCLE","CREDIT_CYCLE");
+        initEnumerate(model,"SETTLEMENT_CYCLE","CREDIT_CYCLE","ACCOUNT_WAY","REPAYMENT_WAY");
         return "product/add";
     }
 
