@@ -145,6 +145,7 @@
                       <select id="creditCycle" class="custom-select ml-5" multiple="multiple" required>
                         <option th:each="enumerateItem:${enumerate.CREDIT_CYCLE.itemList}">[[${enumerateItem.value}]]</option>
                       </select>
+                      <div class="invalid-feedback">请选择贷款周期</div>
                       <h6 class="mt-4">提示：<span class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
                     </div>
                   </div>
@@ -256,11 +257,11 @@
                         </label>
                       </div>
                       <div class="ml-3 input-group">
-                        <input type="text" id="innerTime01" class="form-control rounded" placeholder="0" disabled required>
+                        <input type="text" id="innerTime01" class="form-control rounded" placeholder="0" th:value="0" disabled required>
                         <i class="mdi mdi-window-minimize align-self-center"></i>
-                        <input type="text" id="innerTime02" class="form-control rounded" placeholder="24" disabled required>
+                        <input type="text" id="innerTime02" class="form-control rounded" placeholder="24" th:value="24" disabled required>
                         <div class="invalid-feedback">
-                          Please provide a valid city.
+                          请填写进件时间段.
                         </div>
                       </div>
                     </div>
@@ -287,7 +288,14 @@
                             <i class="input-helper"></i></label>
                         </div>
                     </div>
-                      <div class="d-none"><input name="checkCreditMaterial" value=""></div>
+                      <div class="">
+                        <div>
+                            <input type="checkbox" class="custom-control-input d-none" name="checkCreditMaterial" id="checkCreditMaterial" required>
+                            <label class="custom-control-label  d-none" for="checkCreditMaterial">Check this checkbox</label>
+                            <div class="invalid-feedback mb-2">请选择贷款所需材料</div>
+                        </div>
+                      </div>
+
                       <button type="button" class="btn btn-sm btn-gradient-success btn-fw" data-toggle="modal" data-target="#customContentModalCenter">自定义内容</button>
                     </div>
                   </div>
@@ -497,7 +505,11 @@
                     chk_value.push($(this).val());
                 });
                 //给隐藏的input赋值 判断当前checkbox是否选中了
-                $("#checkCreditMaterial").val("dadadadada");
+                if (chk_value.length!==0){
+                    $("#checkCreditMaterial").prop("checked",true);
+                }else {
+                    $("#checkCreditMaterial").prop("checked",false);
+                }
             });
         });
     });
