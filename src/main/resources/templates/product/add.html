@@ -16,6 +16,7 @@
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">填写产品信息</h4>
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" th:action="@{/product}" novalidate>
                   <!--合作方式-->
                   <div class="form-group row">
                       <label class="col-sm-2 col-form-label ant-form-item-required">合作方式 :</label>
