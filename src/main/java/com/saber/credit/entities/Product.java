@@ -39,6 +39,8 @@ public class Product {
     private String verify;
     private String businessName;
     private String contact;
+    private String contactPhone;
+    private String contactWeChat;
     //流量信息
     private Integer readCount;
     private Integer clickCount;
@@ -308,6 +310,23 @@ public class Product {
         this.clickCount = clickCount;
     }
 
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public String getContactWeChat() {
+        return contactWeChat;
+    }
+
+    public void setContactWeChat(String contactWeChat) {
+        this.contactWeChat = contactWeChat;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -342,6 +361,8 @@ public class Product {
                 ", verify='" + verify + '\'' +
                 ", businessName='" + businessName + '\'' +
                 ", contact='" + contact + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                ", contactWeChat='" + contactWeChat + '\'' +
                 ", readCount=" + readCount +
                 ", clickCount=" + clickCount +
                 '}';

@@ -8,8 +8,8 @@
 <!--topBar-->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row" th:fragment="topBar">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="dashboard.html"><img th:src="@{/asserts/images/logo.svg}" alt="logo" src=""/></a>
-        <a class="navbar-brand brand-logo-mini" href="dashboard.html"><img src="" th:src="@{/asserts/images/logo-mini.svg}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" th:href="@{/main}"><img th:src="@{/asserts/images/logo.svg}" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" th:href="@{/main}"><img src="" th:src="@{/asserts/images/logo-mini.svg}" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <div class="search-field d-none d-md-block">

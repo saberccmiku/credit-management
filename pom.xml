@@ -120,6 +120,17 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
+		<dependency>
+			<groupId>org.webjars.bowergithub.kartik-v</groupId>
+			<artifactId>bootstrap-fileinput</artifactId>
+			<version>5.0.3</version>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.webjars</groupId>-->
+			<!--<artifactId>bootstrap</artifactId>-->
+			<!--<version>4.3.1</version>-->
+		<!--</dependency>-->
+
 	</dependencies>
 
 	<build>
