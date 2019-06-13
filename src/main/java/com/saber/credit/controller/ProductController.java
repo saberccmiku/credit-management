@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProductController extends BaseController{
 
-    @GetMapping(value = "/product/list")
+    @GetMapping(value = "/product/products")
     public String productList(Model model){
         initPage(model);
         return "product/list";

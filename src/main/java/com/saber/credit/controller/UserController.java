@@ -22,7 +22,7 @@ public class UserController extends BaseController{
     private UserServiceImpl userService;
 
 
-    @GetMapping(value = "/user/list")
+    @GetMapping(value = "/user/users")
     public String userList(Integer page, Integer limit, Model model){
         initPage(model);
         List<User> userList = userService.queryDetail(1, 20);
