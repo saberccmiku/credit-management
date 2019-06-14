@@ -1,6 +1,8 @@
 package com.saber.credit.controller;
 
 import com.saber.credit.entities.Product;
+import com.saber.credit.service.impl.ProductServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class ProductController extends BaseController{
+
+    @Autowired
+    private ProductServiceImpl productService;
 
     @GetMapping(value = "/product/products")
     public String productList(Model model){
@@ -28,9 +33,7 @@ public class ProductController extends BaseController{
 
     @PostMapping(value = "/product")
     public String saveProduct(Product product){
-        System.out.println("---------------------------------");
-        System.out.println(product);
-        System.out.println("---------------------------------");
+        productService.insert(product);
         return "redirect:/product/products";
     }
 

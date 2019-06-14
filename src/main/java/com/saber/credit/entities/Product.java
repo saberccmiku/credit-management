@@ -6,14 +6,8 @@ import java.util.Date;
  * Created by saber on 2019/6/10
  * 信贷产品
  */
-public class Product {
+public class Product extends BaseBean{
 
-    private String id;
-    private String createUser;
-    private Date createDate;
-    private String lastChangeUser;
-    private Date lastChangeDate;
-    private String delFlag;
     private String name;
     private String logo;
     private String introduction;
@@ -30,7 +24,8 @@ public class Product {
     private String account;
     private String repayment;
     private Integer registerCount;
-    private String innerTime;
+    private Double innerTimeMin;
+    private Double innerTimeMax;
     private String application;
     private String creditMaterial;
     private String creditInfo;
@@ -45,54 +40,6 @@ public class Product {
     private Integer readCount;
     private Integer clickCount;
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getLastChangeUser() {
-        return lastChangeUser;
-    }
-
-    public void setLastChangeUser(String lastChangeUser) {
-        this.lastChangeUser = lastChangeUser;
-    }
-
-    public Date getLastChangeDate() {
-        return lastChangeDate;
-    }
-
-    public void setLastChangeDate(Date lastChangeDate) {
-        this.lastChangeDate = lastChangeDate;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
 
     public String getName() {
         return name;
@@ -222,12 +169,21 @@ public class Product {
         this.registerCount = registerCount;
     }
 
-    public String getInnerTime() {
-        return innerTime;
+
+    public Double getInnerTimeMin() {
+        return innerTimeMin;
     }
 
-    public void setInnerTime(String innerTime) {
-        this.innerTime = innerTime;
+    public void setInnerTimeMin(Double innerTimeMin) {
+        this.innerTimeMin = innerTimeMin;
+    }
+
+    public Double getInnerTimeMax() {
+        return innerTimeMax;
+    }
+
+    public void setInnerTimeMax(Double innerTimeMax) {
+        this.innerTimeMax = innerTimeMax;
     }
 
     public String getApplication() {
@@ -327,44 +283,5 @@ public class Product {
         this.contactWeChat = contactWeChat;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", createUser='" + createUser + '\'' +
-                ", createDate=" + createDate +
-                ", lastChangeUser='" + lastChangeUser + '\'' +
-                ", lastChangeDate=" + lastChangeDate +
-                ", delFlag='" + delFlag + '\'' +
-                ", name='" + name + '\'' +
-                ", logo='" + logo + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", cooperation='" + cooperation + '\'' +
-                ", settlementCycle='" + settlementCycle + '\'' +
-                ", price=" + price +
-                ", creditRate=" + creditRate +
-                ", amountMax=" + amountMax +
-                ", amountMin=" + amountMin +
-                ", creditCycle='" + creditCycle + '\'' +
-                ", auditDuration=" + auditDuration +
-                ", paySpeed=" + paySpeed +
-                ", links='" + links + '\'' +
-                ", account='" + account + '\'' +
-                ", repayment='" + repayment + '\'' +
-                ", registerCount=" + registerCount +
-                ", innerTime='" + innerTime + '\'' +
-                ", application='" + application + '\'' +
-                ", creditMaterial='" + creditMaterial + '\'' +
-                ", creditInfo='" + creditInfo + '\'' +
-                ", review='" + review + '\'' +
-                ", prePayment=" + prePayment +
-                ", verify='" + verify + '\'' +
-                ", businessName='" + businessName + '\'' +
-                ", contact='" + contact + '\'' +
-                ", contactPhone='" + contactPhone + '\'' +
-                ", contactWeChat='" + contactWeChat + '\'' +
-                ", readCount=" + readCount +
-                ", clickCount=" + clickCount +
-                '}';
-    }
+
 }

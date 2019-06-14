@@ -4,19 +4,11 @@ package com.saber.credit.entities;
  * Created by saber on 2019/6/12
  * 枚举类的子类
  */
-public class EnumerateItem {
-    private String id;
+public class EnumerateItem  extends BaseBean{
+
     private String code;
     private String parentCode;
     private String value;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;
@@ -45,8 +37,7 @@ public class EnumerateItem {
     @Override
     public String toString() {
         return "EnumerateItem{" +
-                "id='" + id + '\'' +
-                ", code='" + code + '\'' +
+                "code='" + code + '\'' +
                 ", parentCode='" + parentCode + '\'' +
                 ", value='" + value + '\'' +
                 '}';

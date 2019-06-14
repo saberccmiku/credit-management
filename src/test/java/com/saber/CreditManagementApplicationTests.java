@@ -28,7 +28,7 @@ public class CreditManagementApplicationTests {
 //		System.out.println(pageInfo.getTotal());
 
 		List<Menu> menus = menuService.query();
-		Map<Integer,List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
+		Map<String,List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
 		System.out.println(listMap);
 		System.out.println("-------------------------------分界线-------------------------------");
 	}

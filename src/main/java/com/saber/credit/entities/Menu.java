@@ -6,25 +6,16 @@ import java.util.List;
  * Created by saber on 2019/6/4
  * 菜单栏目
  */
-public class Menu {
+public class Menu extends BaseBean {
 
-    private Integer id;
     private String title;
     private String icoUrl;
     private String sort;
     private String url;
     private String delFlag;
-    private Integer pId;
+    private String pId;
 
     public Menu() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -67,11 +58,11 @@ public class Menu {
         this.delFlag = delFlag;
     }
 
-    public Integer getPid() {
+    public String getPid() {
         return pId;
     }
 
-    public void setPid(Integer pId) {
+    public void setPid(String pId) {
         this.pId = pId;
     }
 
@@ -79,8 +70,7 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", icoUrl='" + icoUrl + '\'' +
                 ", sort='" + sort + '\'' +
                 ", url='" + url + '\'' +

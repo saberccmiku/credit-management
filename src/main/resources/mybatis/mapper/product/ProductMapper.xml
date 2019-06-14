@@ -34,5 +34,14 @@
         DEVICE_REGISTER r ON r.USER_ID = u.ID
     </select>
 
+    <insert id="insert">
+        INSERT INTO PRODUCT (ID,CREATE_USER,CREATE_DATE,LAST_CHANGE_USER,LAST_CHANGE_DATE,DEL_FLAG,NAME,LOGO,
+        INTRODUCTION,COOPERATION,SETTLEMENT_CYCLE,PRICE,CREDIT_RATE,AMOUNT_MAX,AMOUNT_MIN,CREDIT_CYCLE,AUDIT_DURATION,
+        PAY_SPEED,LINKS,ACCOUNT,REPAYMENT,REGISTER_COUNT,INNER_TIME_MIN,INNER_TIME_MAX,APPLICATION,CREDIT_MATERIAL,CREDIT_INFO,REVIEW,
+        PRE_PAYMENT,VERIFY,BUSINESS_NAME,CONTACT,CONTACT_PHONE,CONTACT_WECHAT) VALUES (#{id},#{createUser},#{createDate},#{lastChangeUser},
+        #{lastChangeDate},#{delFlag},#{name},#{logo},#{introduction},#{cooperation},#{settlementCycle},#{price},#{creditRate},#{amountMax},#{amountMin},
+        #{creditCycle},#{auditDuration},#{paySpeed},#{links},#{account},#{repayment},#{registerCount},#{innerTimeMin},#{innerTimeMax},#{application},
+        #{creditMaterial},#{creditInfo},#{review},#{prePayment},#{verify},#{businessName},#{contact},#{contactPhone},#{contactWeChat})
+    </insert>
 
 </mapper>

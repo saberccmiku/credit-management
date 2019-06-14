@@ -1,11 +1,16 @@
 package com.saber.credit.mapper;
 
+import com.saber.credit.entities.BaseBean;
+import com.saber.credit.entities.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
  * Created by saber on 2019/6/3
  * 所有mapper层对象可以继承该抽象接口实现基本的增删改操作
  */
+@Repository
 public interface BaseMapper<T> {
     /**
      * 查询所有数据
@@ -32,4 +37,10 @@ public interface BaseMapper<T> {
      * @param id 该id对应的数据
      */
     void updateById(String id);
+
+    /**
+     * 插入数据
+     * @param t 对象
+     */
+    void insert(T t);
 }

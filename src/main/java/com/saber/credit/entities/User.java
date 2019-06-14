@@ -6,10 +6,8 @@ import java.util.List;
 /**
  * Created by saber on 2019/6/3
  */
-public class User {
+public class User  extends BaseBean{
 
-    private String id;
-    private String delFlag;
     private String account;
     private String name;
     private Date birth;
@@ -42,21 +40,6 @@ public class User {
     public User() {
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
 
     public String getAccount() {
         return account;
@@ -239,9 +222,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", delFlag='" + delFlag + '\'' +
-                ", account='" + account + '\'' +
+                "account='" + account + '\'' +
                 ", name='" + name + '\'' +
                 ", birth=" + birth +
                 ", sex='" + sex + '\'' +

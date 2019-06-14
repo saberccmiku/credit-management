@@ -30,7 +30,7 @@ public class BaseController {
      */
     void initPage(Model model) {
         List<Menu> menus = menuService.query();
-        Map<Integer, List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
+        Map<String, List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
         model.addAttribute("menus", listMap);
     }
 

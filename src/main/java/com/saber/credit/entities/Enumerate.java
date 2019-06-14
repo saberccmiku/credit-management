@@ -6,21 +6,12 @@ import java.util.List;
  * Created by saber on 2019/6/12.
  * 枚举类
  */
-public class Enumerate {
+public class Enumerate extends BaseBean {
 
-    private String id;
     private String code;
     private String parentCode;
     private String value;
     List<EnumerateItem> itemList;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;
@@ -57,8 +48,7 @@ public class Enumerate {
     @Override
     public String toString() {
         return "Enumerate{" +
-                "id='" + id + '\'' +
-                ", code='" + code + '\'' +
+                "code='" + code + '\'' +
                 ", parentCode='" + parentCode + '\'' +
                 ", value='" + value + '\'' +
                 ", itemList=" + itemList +
