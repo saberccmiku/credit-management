@@ -34,7 +34,12 @@
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">填写产品信息</h4>
+                <div class="page-header">
+                  <h3 class="page-title">
+                    请填写产品信息
+                  </h3>
+                  <a class="mdi mdi-backspace icon-md text-primary" th:href="@{/product/products}"></a>
+                </div>
                 <form class="needs-validation" method="post" th:action="@{/product}" novalidate>
                   <!--合作方式-->
                   <div class="form-group row">
@@ -79,7 +84,7 @@
                   <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label ant-form-item-required">产品名称 :</label>
                     <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="name" placeholder="请输入产品名称,最多7个字" required>
+                      <input type="text" class="form-control rounded" id="name" name="name" placeholder="请输入产品名称,最多7个字" required>
                       <div class="invalid-feedback">
                         请填写产品名称
                       </div>

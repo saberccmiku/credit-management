@@ -4,6 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.saber.credit.mapper.ProductMapper">
 
+    <sql id="Base_Column_List">
+            ID id,CREATE_USER,CREATE_DATE,LAST_CHANGE_USER,LAST_CHANGE_DATE,DEL_FLAG,
+            NAME name,LOGO logo ,INTRODUCTION introduction,COOPERATION cooperation,SETTLEMENT_CYCLE settlementCycle,
+            PRICE price, CREDIT_RATE creditRate,AMOUNT_MAX amountMax,AMOUNT_MIN amountMin,CREDIT_CYCLE creditCycle,
+            AUDIT_DURATION auditDuration,PAY_SPEED paySpeed,LINKS links,ACCOUNT account,REPAYMENT repayment,REGISTER_COUNT registerCount,
+            INNER_TIME_MIN innerTimeMin,INNER_TIME_MAX innerTimeMax,APPLICATION application,CREDIT_MATERIAL creditMaterial,CREDIT_INFO creditInfo,
+            REVIEW review,PRE_PAYMENT prePayment,VERIFY verify,BUSINESS_NAME businessName,CONTACT contact,CONTACT_PHONE contactPhone,
+            CONTACT_WECHAT contactWeChat,AUDIT_DURATION_UNIT auditDurationUnit,PAY_SPEED_UNIT paySpeedUnit,
+            CREDIT_RATE_UNIT creditRateUnit
+    </sql>
+
     <select id="queryById" resultType="com.saber.credit.entities.Product">
         SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
         WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
@@ -19,7 +30,7 @@
     </select>
 
     <select id="query" resultType="com.saber.credit.entities.Product">
-        select *  from SEC_USER
+        select <include refid="Base_Column_List"/>  from PRODUCT
     </select>
 
     <select id="queryDetail" resultType="com.saber.credit.entities.Product">

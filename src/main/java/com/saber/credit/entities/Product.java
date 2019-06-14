@@ -307,4 +307,43 @@ public class Product extends BaseBean{
     public void setCreditRateUnit(String creditRateUnit) {
         this.creditRateUnit = creditRateUnit;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", logo='" + logo + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", cooperation='" + cooperation + '\'' +
+                ", settlementCycle='" + settlementCycle + '\'' +
+                ", price=" + price +
+                ", creditRate=" + creditRate +
+                ", creditRateUnit='" + creditRateUnit + '\'' +
+                ", amountMax=" + amountMax +
+                ", amountMin=" + amountMin +
+                ", creditCycle='" + creditCycle + '\'' +
+                ", auditDuration=" + auditDuration +
+                ", auditDurationUnit='" + auditDurationUnit + '\'' +
+                ", paySpeed=" + paySpeed +
+                ", paySpeedUnit='" + paySpeedUnit + '\'' +
+                ", links='" + links + '\'' +
+                ", account='" + account + '\'' +
+                ", repayment='" + repayment + '\'' +
+                ", registerCount=" + registerCount +
+                ", innerTimeMin=" + innerTimeMin +
+                ", innerTimeMax=" + innerTimeMax +
+                ", application='" + application + '\'' +
+                ", creditMaterial='" + creditMaterial + '\'' +
+                ", creditInfo='" + creditInfo + '\'' +
+                ", review='" + review + '\'' +
+                ", prePayment='" + prePayment + '\'' +
+                ", verify='" + verify + '\'' +
+                ", businessName='" + businessName + '\'' +
+                ", contact='" + contact + '\'' +
+                ", contactPhone='" + contactPhone + '\'' +
+                ", contactWeChat='" + contactWeChat + '\'' +
+                ", readCount=" + readCount +
+                ", clickCount=" + clickCount +
+                '}';
+    }
 }

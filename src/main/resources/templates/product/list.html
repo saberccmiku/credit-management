@@ -38,165 +38,63 @@
             </div>
           </h2>
         </div>
-        <div class="col-lg-12 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card text-center" style="padding-left: 0;padding-right: 0">
           <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">Bordered table</h4>
-              <p class="card-description">
-                Add class <code>.table-bordered</code>
-              </p>
-              <table class="table table-bordered">
+            <div class="card-body table-responsive">
+              <table class="table text-nowrap table-bordered">
                 <thead>
-                <tr>
-                  <th>
-                    #
-                  </th>
-                  <th>
-                    First name
-                  </th>
-                  <th>
-                    Progress
-                  </th>
-                  <th>
-                    Amount
-                  </th>
-                  <th>
-                    Deadline
-                  </th>
+                <tr class="table-secondary">
+                  <th class="text-dark" th:each="title:${titleArr}">
+                    [[${title}]]
+              </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr class="card-description" th:each="product:${products}">
                   <td>
-                    1
+                    [[${product.id}]]
                   </td>
                   <td>
-                    Herman Beck
+                    [[${product.logo}]]
                   </td>
                   <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    [[${product.name}]]
                   </td>
                   <td>
-                    $ 77.99
+                    [[${product.amountMin+'-'+product.amountMax}]]
                   </td>
                   <td>
-                    May 15, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    2
+                    [[${product.settlementCycle}]]
                   </td>
                   <td>
-                    Messsy Adam
+                    [[${product.creditRate+product.creditRateUnit}]]
                   </td>
                   <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    详情页UV
                   </td>
                   <td>
-                    $245.30
+                    按钮UV
                   </td>
                   <td>
-                    July 1, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    3
+                    预计注册量
                   </td>
                   <td>
-                    John Richards
+                    虚拟访问量
                   </td>
                   <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    [[${product.cooperation}]]
                   </td>
                   <td>
-                    $138.00
+                    [[${product.price}]]
                   </td>
                   <td>
-                    Apr 12, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    4
+                    [[${#dates.format(product.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
                   </td>
                   <td>
-                    Peter Meggik
+                    产品上架状态
                   </td>
                   <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </td>
-                  <td>
-                    $ 77.99
-                  </td>
-                  <td>
-                    May 15, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    5
-                  </td>
-                  <td>
-                    Edward
-                  </td>
-                  <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </td>
-                  <td>
-                    $ 160.25
-                  </td>
-                  <td>
-                    May 03, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    6
-                  </td>
-                  <td>
-                    John Doe
-                  </td>
-                  <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </td>
-                  <td>
-                    $ 123.21
-                  </td>
-                  <td>
-                    April 05, 2015
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    7
-                  </td>
-                  <td>
-                    Henry Tom
-                  </td>
-                  <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </td>
-                  <td>
-                    $ 150.00
-                  </td>
-                  <td>
-                    June 16, 2015
+                    <i>查看</i><i>编辑</i><i>删除</i>
                   </td>
                 </tr>
                 </tbody>
