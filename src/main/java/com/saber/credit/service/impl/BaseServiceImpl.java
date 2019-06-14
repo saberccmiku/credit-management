@@ -6,6 +6,7 @@ import com.saber.credit.mapper.BaseMapper;
 import com.saber.credit.service.BaseService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -36,16 +37,19 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
         return baseMapper.queryById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void deleteById(String id) {
         baseMapper.deleteById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateById(String id) {
         baseMapper.updateById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void insert(T t) {
         User loginUser = (User) session.getAttribute("loginUser");

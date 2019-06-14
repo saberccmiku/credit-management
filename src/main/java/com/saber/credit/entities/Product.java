@@ -1,7 +1,5 @@
 package com.saber.credit.entities;
 
-import java.util.Date;
-
 /**
  * Created by saber on 2019/6/10
  * 信贷产品
@@ -15,11 +13,14 @@ public class Product extends BaseBean{
     private String settlementCycle;
     private Double price;
     private Double creditRate;
+    private String creditRateUnit;
     private Double amountMax;
     private Double amountMin;
     private String creditCycle;
     private Double auditDuration;
+    private String auditDurationUnit;
     private Double paySpeed;
+    private String paySpeedUnit;
     private String links;
     private String account;
     private String repayment;
@@ -30,7 +31,7 @@ public class Product extends BaseBean{
     private String creditMaterial;
     private String creditInfo;
     private String review;
-    private Double prePayment;
+    private String prePayment;
     private String verify;
     private String businessName;
     private String contact;
@@ -218,11 +219,11 @@ public class Product extends BaseBean{
         this.review = review;
     }
 
-    public Double getPrePayment() {
+    public String getPrePayment() {
         return prePayment;
     }
 
-    public void setPrePayment(Double prePayment) {
+    public void setPrePayment(String prePayment) {
         this.prePayment = prePayment;
     }
 
@@ -283,5 +284,27 @@ public class Product extends BaseBean{
         this.contactWeChat = contactWeChat;
     }
 
+    public String getAuditDurationUnit() {
+        return auditDurationUnit;
+    }
 
+    public void setAuditDurationUnit(String auditDurationUnit) {
+        this.auditDurationUnit = auditDurationUnit;
+    }
+
+    public String getPaySpeedUnit() {
+        return paySpeedUnit;
+    }
+
+    public void setPaySpeedUnit(String paySpeedUnit) {
+        this.paySpeedUnit = paySpeedUnit;
+    }
+
+    public String getCreditRateUnit() {
+        return creditRateUnit;
+    }
+
+    public void setCreditRateUnit(String creditRateUnit) {
+        this.creditRateUnit = creditRateUnit;
+    }
 }

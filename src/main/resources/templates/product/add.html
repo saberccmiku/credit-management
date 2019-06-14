@@ -41,13 +41,13 @@
                       <label class="col-sm-2 col-form-label ant-form-item-required">合作方式 :</label>
                         <div class="form-check form-check-info ml-4">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="cooperation"  value="" checked>
+                            <input type="radio" class="form-check-input" name="cooperation"  value="CPA" checked>
                             CPA
                           </label>
                         </div>
                         <div class="form-check ml-2 form-check-info">
                           <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="cooperation"  value="">
+                            <input type="radio" class="form-check-input" name="cooperation"  value="UV">
                             UV
                           </label>
                         </div>
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                   </div>
-                  产品logo
+                  <!--产品logo-->
                   <div class="form-group row">
                     <label for="logo" class="col-sm-2 col-form-label ant-form-item-required">产品logo :</label>
                     <div class="col-sm-4">
@@ -95,7 +95,7 @@
                       </div>
                     </div>
                   </div>
-                  产品简介
+                  <!--产品简介-->
                   <div class="form-group row">
                     <label for="introduction" class="col-sm-2 col-form-label ant-form-item-required">产品简介 :</label>
                     <div class="col-sm-4">
@@ -111,9 +111,9 @@
                     <div class="col-sm-4">
                       <div class="form-inline">
                         <input type="text" class="form-control rounded" id="creditRate" name="creditRate" placeholder="请填写贷款利率" required>
-                        <select class="custom-select ml-5" name="creditRateUnit" required>
-                          <option value="">日利率</option>
-                          <option value="">年利率</option>
+                        <select class="custom-select ml-5" name="creditRateUnit">
+                          <option value="日利率">日利率</option>
+                          <option value="年利率">年利率</option>
                         </select>
                         <div class="invalid-feedback">
                           请填写贷款利率.
@@ -132,9 +132,9 @@
                           <span class="input-group-text">~</span>
                         </div>
                         <input type="text" class="form-control" placeholder="最大100W" name="amountMax" required>
-                      </div>
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
+                        <div class="invalid-feedback">
+                          请输入贷款额度.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -155,12 +155,12 @@
                     <label for="auditDuration" class="col-sm-2 col-form-label">审核时长 :</label>
                     <div class="col-sm-4">
                       <div class="form-inline">
-                      <input type="text" class="form-control rounded" id="auditDuration" placeholder="请输入审核时长" required>
-                      <select class="custom-select ml-5" name="auditDuration" required>
-                        <option value="">秒</option>
-                        <option value="">分钟</option>
-                        <option value="">小时</option>
-                        <option value="">天</option>
+                      <input type="text" class="form-control rounded" id="auditDuration" name="auditDuration" placeholder="请输入审核时长" required>
+                      <select class="custom-select ml-5" name="auditDurationUnit" >
+                        <option >秒</option>
+                        <option >分钟</option>
+                        <option >小时</option>
+                        <option >天</option>
                       </select>
                       <div class="invalid-feedback">
                         请填写审核时长.
@@ -173,12 +173,12 @@
                     <label for="paySpeed" class="col-sm-2 col-form-label ant-form-item-required">下款速度 :</label>
                     <div class="col-sm-4">
                       <div class="form-inline">
-                      <input type="text" class="form-control rounded" id="paySpeed" placeholder="申请借款到下款的时长" required>
-                      <select class="custom-select ml-5" name="paySpeed" required>
-                        <option value="">秒</option>
-                        <option value="">分钟</option>
-                        <option value="">小时</option>
-                        <option value="">天</option>
+                      <input type="text" class="form-control rounded" id="paySpeed" name="paySpeed" placeholder="申请借款到下款的时长" required>
+                      <select class="custom-select ml-5" name="paySpeedUnit">
+                        <option value="秒">秒</option>
+                        <option value="分钟">分钟</option>
+                        <option value="小时">小时</option>
+                        <option value="天">天</option>
                       </select>
                       <div class="invalid-feedback">
                         请填写下款速度.
@@ -247,20 +247,20 @@
                     <div class="ml-4 form-inline">
                       <div class="form-check form-check-info">
                         <label class="form-check-label">
-                          <input type="radio" class="form-check-input" value="全天" checked>
+                          <input type="radio" class="form-check-input" name="innerTime" value="全天" checked>
                           全天
                         </label>
                       </div>
                       <div class="form-check form-check-info ml-2">
                         <label class="form-check-label">
-                          <input type="radio" class="" name="innerTime" value="规定时段">
+                          <input type="radio" class="form-check-input" name="innerTime" value="规定时段">
                           规定时段
                         </label>
                       </div>
                       <div class="ml-3 input-group">
-                        <input type="text" id="innerTimeMin" class="form-control rounded" name="innerTimeMin" placeholder="0" th:value="0" disabled required>
+                        <input type="text" id="innerTimeMin" class="form-control rounded" name="innerTimeMin" placeholder="0" th:value="0" readonly required>
                         <i class="mdi mdi-window-minimize align-self-center"></i>
-                        <input type="text" id="innerTimeMax" class="form-control rounded" name="innerTimeMax" placeholder="24" th:value="24" disabled required>
+                        <input type="text" id="innerTimeMax" class="form-control rounded" name="innerTimeMax" placeholder="24" th:value="24" readonly required>
                         <div class="invalid-feedback">
                           请填写进件时间段.
                         </div>
@@ -284,7 +284,7 @@
                     <div class="row" id="creditMaterialRow">
                         <div class="form-check form-check-primary ml-4" th:each="enumerateItem:${enumerate.CREDIT_MATERIAL_TYPE.itemList}">
                           <label class="form-check-label">
-                            <input type="checkbox" name="creditMaterial" th:value="${enumerateItem.value}" class="form-check-input" required>
+                            <input type="checkbox" name="creditMaterial" th:value="${enumerateItem.value}" class="form-check-input">
                             [[${enumerateItem.value}]]
                             <i class="input-helper"></i></label>
                         </div>
@@ -448,11 +448,11 @@
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
-//                    if (form.checkValidity() === false) {
-//                        event.preventDefault();
-//                        event.stopPropagation();
-//                    }
-//                    form.classList.add('was-validated');
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
                 }, false);
             });
         }, false);
@@ -472,7 +472,7 @@
             //向页面增加自定义内容的复选框
             $("#creditMaterialRow").append("<div class='form-check form-check-primary ml-4'>"+
             "<label class='form-check-label'>"+
-                "<input type='checkbox' class='form-check-input'>"+content+"<i class='input-helper'></i></label> </div>");
+                "<input type='checkbox' class='form-check-input' name='creditMaterial' value='"+content+"'>"+content+"<i class='input-helper'></i></label> </div>");
         });
 
         //title
@@ -490,11 +490,11 @@
             $('input[name="innerTime"]').change(function() {
                 var selectedValue = $("input[name='innerTime']:checked").val();
                 if (selectedValue==="全天"){
-                    $('#innerTime01').attr("disabled",true);
-                    $('#innerTime02').attr("disabled",true);
+                    $('#innerTimeMin').attr("readonly",true);
+                    $('#innerTimeMax').attr("readonly",true);
                 }else {
-                    $('#innerTime01').attr("disabled",false);
-                    $('#innerTime02').attr("disabled",false);
+                    $('#innerTimeMin').attr("readonly",false);
+                    $('#innerTimeMax').attr("readonly",false);
                 }
             });
         });
