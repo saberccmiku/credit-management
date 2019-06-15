@@ -55,19 +55,22 @@
                     [[${product.id}]]
                   </td>
                   <td>
-                    [[${product.logo}]]
+                    <img src="" th:src="@{/asserts/images/faces/face5.jpg}">
                   </td>
                   <td>
                     [[${product.name}]]
                   </td>
-                  <td>
-                    [[${product.amountMin+'-'+product.amountMax}]]
+                  <td >
+                    [[(${#numbers.formatInteger(product.amountMin,0)}>=10000?${#numbers.formatInteger(product.amountMin,0)}/10000+'万':
+                      ${#numbers.formatInteger(product.amountMin,0)})+'元-'+
+                      (${#numbers.formatInteger(product.amountMax,0)}>=10000?${#numbers.formatInteger(product.amountMax,0)}/10000+'万':
+                      ${#numbers.formatInteger(product.amountMax,0)})+'元']]
                   </td>
                   <td>
-                    [[${product.settlementCycle}]]
+                    [[${product.creditCycle}]]
                   </td>
                   <td>
-                    [[${product.creditRate+product.creditRateUnit}]]
+                    [[${product.creditRate+'%/'+#strings.substring(product.creditRateUnit,0,1)}]]
                   </td>
                   <td>
                     详情页UV

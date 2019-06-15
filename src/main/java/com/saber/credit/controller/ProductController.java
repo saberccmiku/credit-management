@@ -6,6 +6,7 @@ import com.sun.org.apache.xerces.internal.xs.StringList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,6 +29,19 @@ public class ProductController extends BaseController{
         List<Product> products = productService.query(0, 10);
         String [] titleList = new String[]{"编号","logo","信贷名称","放款金额区间","放款周期区间","利息","详情页UV","按钮UV",
                 "预计注册量","虚拟访问量","合作方式","合作价格","添加时间","产品上架状态","操作"};
+
+        StringBuffer sb ;
+        for(Product product:products){
+            sb = new StringBuffer();
+            //计算放款周期区间
+            if (!StringUtils.isEmpty(product.getCreditCycle())){
+                String[] array = product.getCreditCycle().split(",");
+                if (array.length>1){
+                    product.setCreditCycle(sb.append(array[0]).append("-").append(array[array.length-1]).toString());
+                }
+            }
+
+        }
         model.addAttribute("products",products);
         model.addAttribute("titleArr",titleList);
         return "product/list";
