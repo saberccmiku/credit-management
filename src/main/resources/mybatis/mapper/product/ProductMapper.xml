@@ -12,7 +12,7 @@
             INNER_TIME_MIN innerTimeMin,INNER_TIME_MAX innerTimeMax,APPLICATION application,CREDIT_MATERIAL creditMaterial,CREDIT_INFO creditInfo,
             REVIEW review,PRE_PAYMENT prePayment,VERIFY verify,BUSINESS_NAME businessName,CONTACT contact,CONTACT_PHONE contactPhone,
             CONTACT_WECHAT contactWeChat,AUDIT_DURATION_UNIT auditDurationUnit,PAY_SPEED_UNIT paySpeedUnit,
-            CREDIT_RATE_UNIT creditRateUnit
+            CREDIT_RATE_UNIT creditRateUnit,IS_SHOW isShow
     </sql>
 
     <select id="queryById" resultType="com.saber.credit.entities.Product">
@@ -45,15 +45,57 @@
         DEVICE_REGISTER r ON r.USER_ID = u.ID
     </select>
 
-    <insert id="insert">
+    <insert id="insert" parameterType="com.saber.credit.entities.Product">
         INSERT INTO PRODUCT (ID,CREATE_USER,CREATE_DATE,LAST_CHANGE_USER,LAST_CHANGE_DATE,DEL_FLAG,NAME,LOGO,
         INTRODUCTION,COOPERATION,SETTLEMENT_CYCLE,PRICE,CREDIT_RATE,AMOUNT_MAX,AMOUNT_MIN,CREDIT_CYCLE,AUDIT_DURATION,
         PAY_SPEED,LINKS,ACCOUNT,REPAYMENT,REGISTER_COUNT,INNER_TIME_MIN,INNER_TIME_MAX,APPLICATION,CREDIT_MATERIAL,CREDIT_INFO,REVIEW,
-        PRE_PAYMENT,VERIFY,BUSINESS_NAME,CONTACT,CONTACT_PHONE,CONTACT_WECHAT,AUDIT_DURATION_UNIT,PAY_SPEED_UNIT,CREDIT_RATE_UNIT) VALUES (#{id},#{createUser},#{createDate},#{lastChangeUser},
+        PRE_PAYMENT,VERIFY,BUSINESS_NAME,CONTACT,CONTACT_PHONE,CONTACT_WECHAT,AUDIT_DURATION_UNIT,PAY_SPEED_UNIT,CREDIT_RATE_UNIT,IS_SHOW) VALUES (#{id},#{createUser},#{createDate},#{lastChangeUser},
         #{lastChangeDate},#{delFlag},#{name},#{logo},#{introduction},#{cooperation},#{settlementCycle},#{price},#{creditRate},#{amountMax},#{amountMin},
         #{creditCycle},#{auditDuration},#{paySpeed},#{links},#{account},#{repayment},#{registerCount},#{innerTimeMin},#{innerTimeMax},#{application},
         #{creditMaterial},#{creditInfo},#{review},#{prePayment},#{verify},#{businessName},#{contact},#{contactPhone},#{contactWeChat},#{auditDurationUnit},
-        #{paySpeedUnit},#{creditRateUnit})
+        #{paySpeedUnit},#{creditRateUnit},'是')
     </insert>
+
+    <update id="update" parameterType="com.saber.credit.entities.Product">
+        UPDATE PRODUCT
+        <trim prefix="set" suffixOverrides=",">
+            <if test="lastChangeUser!=null">LAST_CHANGE_USER = #{lastChangeUser},</if>
+            <if test="lastChangeDate!=null">LAST_CHANGE_DATE = #{lastChangeDate},</if>
+            <if test="delFlag!=null">DEL_FLAG = #{delFlag},</if>
+            <if test="name!=null">NAME = #{name},</if>
+            <if test="logo!=null">LOGO = #{logo},</if>
+            <if test="introduction!=null">INTRODUCTION = #{introduction},</if>
+            <if test="cooperation!=null">COOPERATION = #{cooperation},</if>
+            <if test="settlementCycle!=null">SETTLEMENT_CYCLE = #{settlementCycle},</if>
+            <if test="price!=null">PRICE = #{price},</if>
+            <if test="creditRate!=null">CREDIT_RATE = #{creditRate},</if>
+            <if test="amountMax!=null">AMOUNT_MAX = #{amountMax},</if>
+            <if test="amountMin!=null">AMOUNT_MIN = #{amountMin},</if>
+            <if test="creditCycle!=null">CREDIT_CYCLE = #{creditCycle},</if>
+            <if test="auditDuration!=null">AUDIT_DURATION = #{auditDuration},</if>
+            <if test="paySpeed!=null">PAY_SPEED = #{paySpeed},</if>
+            <if test="links!=null">LINKS = #{links},</if>
+            <if test="account!=null">ACCOUNT = #{account},</if>
+            <if test="repayment!=null">REPAYMENT = #{repayment},</if>
+            <if test="registerCount!=null">REGISTER_COUNT = #{registerCount},</if>
+            <if test="innerTimeMin!=null">INNER_TIME_MIN = #{innerTimeMin},</if>
+            <if test="innerTimeMax!=null">INNER_TIME_MAX = #{innerTimeMax},</if>
+            <if test="application!=null">APPLICATION = #{application},</if>
+            <if test="creditMaterial!=null">CREDIT_MATERIAL = #{creditMaterial},</if>
+            <if test="creditInfo!=null">CREDIT_INFO = #{creditInfo},</if>
+            <if test="review!=null">REVIEW = #{review},</if>
+            <if test="prePayment!=null">PRE_PAYMENT = #{prePayment},</if>
+            <if test="verify!=null">VERIFY = #{verify},</if>
+            <if test="businessName!=null">BUSINESS_NAME = #{businessName},</if>
+            <if test="contact!=null">CONTACT = #{contact},</if>
+            <if test="contactPhone!=null">CONTACT_PHONE = #{contactPhone},</if>
+            <if test="contactWeChat!=null">CONTACT_WECHAT = #{contactWeChat},</if>
+            <if test="auditDurationUnit!=null">AUDIT_DURATION_UNIT = #{auditDurationUnit},</if>
+            <if test="paySpeedUnit!=null">PAY_SPEED_UNIT = #{paySpeedUnit},</if>
+            <if test="creditRateUnit!=null">CREDIT_RATE_UNIT = #{creditRateUnit},</if>
+            <if test="isShow!=null">IS_SHOW = #{isShow},</if>
+        </trim>
+        WHERE ID = #{id}
+    </update>
 
 </mapper>

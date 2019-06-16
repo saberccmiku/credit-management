@@ -39,14 +39,14 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void deleteById(String id) {
-        baseMapper.deleteById(id);
+    public void delete(String id) {
+        baseMapper.delete(id);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updateById(String id) {
-        baseMapper.updateById(id);
+    public void update(T t) {
+        baseMapper.update(t);
     }
 
     @Transactional(rollbackFor = Exception.class)

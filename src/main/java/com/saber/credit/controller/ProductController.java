@@ -2,16 +2,14 @@ package com.saber.credit.controller;
 
 import com.saber.credit.entities.Product;
 import com.saber.credit.service.impl.ProductServiceImpl;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by saber on 2019/6/12.
@@ -47,6 +45,12 @@ public class ProductController extends BaseController{
         return "product/list";
     }
 
+    @GetMapping(value = "/product/productInfo")
+    public String detail(Model model){
+        initPage(model);
+        return "product/detail";
+    }
+
     @GetMapping(value = "/product/add")
     public String toAddPage(Model model){
         initPage(model);
@@ -59,5 +63,15 @@ public class ProductController extends BaseController{
         productService.insert(product);
         return "redirect:/product/products";
     }
+
+    @PutMapping(value = "/product/updateProduct")
+    public String update( @RequestBody Product product,Model model) {
+        Product tempProduct = new Product();
+        tempProduct.setId(product.getId());
+        tempProduct.setIsShow(product.getIsShow());
+        productService.update(tempProduct);
+        return productList(model);
+    }
+
 
 }

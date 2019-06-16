@@ -119,18 +119,18 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-
+		<!--bootstrap-fileInput-->
 		<dependency>
 			<groupId>org.webjars.bowergithub.kartik-v</groupId>
 			<artifactId>bootstrap-fileinput</artifactId>
 			<version>5.0.3</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.webjars</groupId>-->
-			<!--<artifactId>bootstrap</artifactId>-->
-			<!--<version>4.3.1</version>-->
-		<!--</dependency>-->
-
+		<!--bootstrap-switch-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-switch</artifactId>
+			<version>3.3.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

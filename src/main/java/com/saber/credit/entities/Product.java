@@ -37,6 +37,8 @@ public class Product extends BaseBean{
     private String contact;
     private String contactPhone;
     private String contactWeChat;
+    private String isShow;
+
     //流量信息
     private Integer readCount;
     private Integer clickCount;
@@ -268,6 +270,14 @@ public class Product extends BaseBean{
     }
 
 
+    public String getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(String isShow) {
+        this.isShow = isShow;
+    }
+
     public String getContactPhone() {
         return contactPhone;
     }
@@ -342,6 +352,7 @@ public class Product extends BaseBean{
                 ", contact='" + contact + '\'' +
                 ", contactPhone='" + contactPhone + '\'' +
                 ", contactWeChat='" + contactWeChat + '\'' +
+                ", isShow='" + isShow + '\'' +
                 ", readCount=" + readCount +
                 ", clickCount=" + clickCount +
                 '}';

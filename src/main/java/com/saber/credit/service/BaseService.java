@@ -29,12 +29,12 @@ public interface BaseService<T> {
      /**
       * 通过id删除数据
       */
-     void deleteById(String id);
+     void delete(String id);
      /**
       * 通过id修改数据
-      * @param id 该id对应的数据
+      * @param t 对应的数据
       */
-     void updateById(String id);
+     void update(T t);
 
      /**
       * 插入数据
