@@ -15,22 +15,12 @@
             CREDIT_RATE_UNIT creditRateUnit,IS_SHOW isShow
     </sql>
 
-    <select id="queryById" resultType="com.saber.credit.entities.Product">
-        SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
-        WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
-        CONCAT(TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE),'小时')
-        END intervalTime,a.LOGIN_COUNT loginCount,r.DEVICE_ID deviceId,
-        r.DEVICE_TYPE deviceType,u.NATIVE_PLACE nativePlace,r.NETWORK network
-        from SEC_USER u
-        LEFT JOIN
-        USER_ACTIVE a  ON u.id = a.user_id
-        LEFT JOIN
-        DEVICE_REGISTER r ON r.USER_ID = u.ID
-        where u.id = #{id}
-    </select>
-
     <select id="query" resultType="com.saber.credit.entities.Product">
         select <include refid="Base_Column_List"/>  from PRODUCT
+    </select>
+
+    <select id="queryById" resultType="com.saber.credit.entities.Product">
+        select <include refid="Base_Column_List"/>  from PRODUCT WHERE ID =#{id}
     </select>
 
     <select id="queryDetail" resultType="com.saber.credit.entities.Product">

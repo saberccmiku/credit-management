@@ -1,8 +1,13 @@
 package com.saber.credit.controller;
 
+import com.saber.credit.entities.Information;
+import com.saber.credit.service.impl.InformationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 /**
  * Created by saber on 2019/6/4
@@ -11,10 +16,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController extends BaseController{
 
+    @Autowired
+    private InformationServiceImpl informationService;
+
     @GetMapping("/main")
     public String sideMenu(Model model) {
         initPage(model);
-        return "dashboard";
+        return "main/dashboard";
+    }
+
+    @GetMapping("/information")
+    public String toAnnouncement(Model model){
+        initPage(model);
+        List<Information> informationList = informationService.query(1, 20);
+        model.addAttribute("informationList",informationList);
+        return "main/information";
     }
 
 }

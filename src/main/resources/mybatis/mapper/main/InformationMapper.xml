@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saber.credit.mapper.InformationMapper">
+
+    <sql id="Base_Column_List">
+        ID id,
+        CREATE_DATE createDate,
+        TITLE title,
+        TYPE type,
+        CONTENT content
+    </sql>
+
+    <select id="queryById" resultType="com.saber.credit.entities.Information">
+        select <include refid="Base_Column_List"/> from INFORMATION where id = #{id}
+    </select>
+
+    <select id="query" resultType="com.saber.credit.entities.Information">
+        select <include refid="Base_Column_List"/>  from INFORMATION
+    </select>
+
+
+</mapper>

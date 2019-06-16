@@ -45,9 +45,11 @@ public class ProductController extends BaseController{
         return "product/list";
     }
 
-    @GetMapping(value = "/product/productInfo")
-    public String detail(Model model){
+    @GetMapping(value = "/product/productInfo/{id}")
+    public String detail(@PathVariable("id") String id, Model model){
         initPage(model);
+        Product product = productService.queryById(id);
+        model.addAttribute("product",product);
         return "product/detail";
     }
 
