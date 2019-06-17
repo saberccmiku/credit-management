@@ -1,5 +1,6 @@
-package com.saber.credit.controller;
+package com.saber.credit.controller.product;
 
+import com.saber.credit.controller.BaseController;
 import com.saber.credit.entities.Product;
 import com.saber.credit.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import java.util.List;
  * 产品
  */
 @Controller
-public class ProductController extends BaseController{
+public class ProductController extends BaseController {
 
     @Autowired
     private ProductServiceImpl productService;

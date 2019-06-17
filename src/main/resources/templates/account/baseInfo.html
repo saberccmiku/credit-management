@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <<title>贷超管理系统</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap-fileinput/css/fileinput.css}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+</head>
+
+<body>
+<div class="container-scroller">
+  <!-- partial:../../partials/_navbar.html -->
+  <div th:replace="/commons/bar::topBar"></div>
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:../../partials/_sidebar.html -->
+    <div th:replace="/commons/bar::#sideBar"></div>
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">个人资料</h4>
+              <p class="card-description">
+                修改个人资料
+              </p>
+              <form class="needs-validation" th:action="@{/account/mine}" method="post" novalidate>
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <!--头像-->
+                <div class="form-group row">
+                  <label for="avatar" class="col-sm-2 col-form-label">头像 :</label>
+                  <div class="col-sm-4">
+                    <input id="avatar" name="avatar" type="file" multiple  class="file-loading"  data-show-upload="false" data-show-caption="true">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="name" class="ant-form-item-required">姓名</label>
+                  <input type="text" class="form-control" id="name"  name="name" placeholder="请填写姓名" th:value="${user.name}" required>
+                  <div class="invalid-feedback">
+                    请填写正确的姓名.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="ant-form-item-required">邮箱</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="请填写邮箱" th:value="${user.email}" required>
+                  <div class="invalid-feedback">
+                    请填写正确的邮箱地址.
+                  </div>
+                </div>
+                <div>
+                  <button class="btn btn-info" type="submit">提交</button>
+                  <a class="btn btn-outline-info" th:href="@{/main}">取消</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- partial:../../partials/_footer.html -->
+      <div th:replace="/commons/bar::#footerBar"></div>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script th:src="@{/webjars/bootstrap-fileinput/js/fileinput.js}"></script>
+<script th:src="@{/webjars/bootstrap-fileinput/js/locales/zh.js}"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/asserts/js/off-canvas.js}"></script>
+<script th:src="@{/asserts/js/misc.js}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<!-- End custom js for this page-->
+<script>
+
+    //初始化fileinput插件
+    $(function () {
+        //0.初始化fileinput
+        var oFileInput = new FileInput();
+        oFileInput.Init("avatar", "/api/OrderApi/ImportOrder");
+    });
+
+    //初始化fileinput
+    var FileInput = function () {
+        var oFile = new Object();
+
+        //初始化fileinput控件（第一次初始化）
+        oFile.Init = function(ctrlName, uploadUrl) {
+            var control = $('#' + ctrlName);
+
+            //初始化上传控件的样式
+            control.fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: '/api/OrderApi/ImportOrder', //上传的地址,影响略缩图上的删除和上传按钮
+                allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                showUpload: false, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式
+                dropZoneEnabled: true,//是否显示拖拽区域
+                showCancel:false,
+                //minImageWidth: 50, //图片的最小宽度
+                //minImageHeight: 50,//图片的最小高度
+                //maxImageWidth: 1000,//图片的最大宽度
+                //maxImageHeight: 1000,//图片的最大高度
+                maxFileSize: 200,//单位为kb，如果为0表示不限制文件大小
+                minFileCount: 1,
+                maxFileCount: 1, //表示允许同时上传的最大文件个数
+                enctype: 'multipart/form-data',
+                validateInitialCount:true,
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+                layoutTemplates :{
+//                    actionDelete:'', //去除上传预览的缩略图中的删除图标
+//                    actionUpload:'',//去除上传预览缩略图中的上传图片；
+//                    actionZoom:'<i class="mdi mdi-user-box-outline"></i>'   //去除上传预览缩略图中的查看详情预览的缩略图标。
+                }
+            });
+            //导入文件上传完成之后的事件
+            $("#avatar").on("fileuploaded", function (event, data, previewId, index) {
+                $("#myModal").modal("hide");
+                var data = data.response.lstOrderImport;
+                if (data == undefined) {
+                    toastr.error('文件格式类型不正确');
+                    return;
+                }
+                //1.初始化表格
+                var oTable = new TableInit();
+                oTable.Init(data);
+                $("#div_startimport").show();
+            });
+        };
+        return oFile;
+    };
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
+</script>
+</body>
+</html>

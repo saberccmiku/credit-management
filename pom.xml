@@ -78,12 +78,6 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<!--bootstrap-->
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>4.3.1</version>
-		</dependency>
 		<!--popper-->
 		<dependency>
 			<groupId>org.webjars</groupId>

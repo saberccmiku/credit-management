@@ -337,7 +337,7 @@ public class Product extends BaseBean{
                 ", paySpeed=" + paySpeed +
                 ", paySpeedUnit='" + paySpeedUnit + '\'' +
                 ", links='" + links + '\'' +
-                ", account='" + account + '\'' +
+                ", user='" + account + '\'' +
                 ", repayment='" + repayment + '\'' +
                 ", registerCount=" + registerCount +
                 ", innerTimeMin=" + innerTimeMin +

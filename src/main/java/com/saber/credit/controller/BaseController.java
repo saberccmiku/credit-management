@@ -28,7 +28,7 @@ public class BaseController {
      *
      * @param model model
      */
-    void initPage(Model model) {
+    public void initPage(Model model) {
         List<Menu> menus = menuService.query();
         Map<String, List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
         model.addAttribute("menus", listMap);
@@ -53,7 +53,7 @@ public class BaseController {
      * @param model  model
      * @param params params 枚举的统一标志
      */
-     void initEnumerate(Model model, String... params) {
+    public void initEnumerate(Model model, String... params) {
         Map<String,Enumerate> map = new HashMap<>();
         for (String code : params) {
             Enumerate enumerate = enumerateService.queryByCode(code);

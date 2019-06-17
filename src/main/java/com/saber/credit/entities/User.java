@@ -15,6 +15,7 @@ public class User  extends BaseBean{
     private String idCard;
     private String phone;
     private String password;
+    private String oldPassword;
     private String email;
     private String nativePlace;
     private String address;
@@ -129,6 +130,13 @@ public class User  extends BaseBean{
         this.device = device;
     }
 
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
 
     public String getFromName() {
         return fromName;
@@ -219,31 +227,4 @@ public class User  extends BaseBean{
         this.productList = productList;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "account='" + account + '\'' +
-                ", name='" + name + '\'' +
-                ", birth=" + birth +
-                ", sex='" + sex + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", nativePlace='" + nativePlace + '\'' +
-                ", address='" + address + '\'' +
-                ", device='" + device + '\'' +
-                ", fromName='" + fromName + '\'' +
-                ", firstLoginDate=" + firstLoginDate +
-                ", intervalTime='" + intervalTime + '\'' +
-                ", loginCount='" + loginCount + '\'' +
-                ", readCount='" + readCount + '\'' +
-                ", clickCount='" + clickCount + '\'' +
-                ", deviceId='" + deviceId + '\'' +
-                ", deviceType='" + deviceType + '\'' +
-                ", registerDate=" + registerDate + '\'' +
-                ", network=" + network + '\'' +
-                ", productList=" + productList +
-                '}';
-    }
 }

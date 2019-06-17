@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <<title>贷超管理系统</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+</head>
+
+<body>
+<div class="container-scroller">
+  <!-- partial:../../partials/_navbar.html -->
+  <div th:replace="/commons/bar::topBar"></div>
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:../../partials/_sidebar.html -->
+    <div th:replace="/commons/bar::#sideBar"></div>
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="col-12 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title mb-5">修改密码</h4>
+              <form class="needs-validation " th:action="@{/account/mine}" method="post" novalidate>
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <div class="form-group">
+                  <label for="oldPassword" class="ant-form-item-required">旧密码</label>
+                  <input type="password" class="form-control" id="oldPassword"  name="oldPassword" placeholder="请输入字母、数字和符合两种以上的组合，6-20个字符"  required>
+                  <div class="invalid-feedback">
+                    请填写正确的旧密码.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="ant-form-item-required">密码</label>
+                  <input type="password" class="form-control" id="password"  name="password" placeholder="请输入字母、数字和符合两种以上的组合，6-20个字符"  required>
+                  <div class="invalid-feedback">
+                    请填写正确的旧密码.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPsd" class="ant-form-item-required">确认密码</label>
+                  <input type="password" class="form-control" id="confirmPsd"  name="confirmPsd" placeholder="请输入字母、数字和符合两种以上的组合，6-20个字符" required>
+                  <div class="invalid-feedback">
+                    请填写正确的旧密码.
+                  </div>
+                </div>
+                <div>
+                  <button class="btn btn-info" type="submit">提交</button>
+                  <a class="btn btn-outline-info" th:href="@{/main}">取消</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- partial:../../partials/_footer.html -->
+      <div th:replace="/commons/bar::#footerBar"></div>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/asserts/js/off-canvas.js}"></script>
+<script th:src="@{/asserts/js/misc.js}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<!-- End custom js for this page-->
+</body>
+</html>

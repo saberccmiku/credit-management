@@ -61,4 +61,17 @@
         WHERE f.USER_ID = #{userId}
     </select>
 
+
+    <update id="update" parameterType="com.saber.credit.entities.User">
+        UPDATE SEC_USER
+        <trim prefix="set" suffixOverrides=",">
+            <if test="lastChangeUser!=null">LAST_CHANGE_USER = #{lastChangeUser},</if>
+            <if test="lastChangeDate!=null">LAST_CHANGE_DATE = #{lastChangeDate},</if>
+            <if test="delFlag!=null">DEL_FLAG = #{delFlag},</if>
+            <if test="name!=null">NAME = #{name},</if>
+            <if test="email!=null">EMAIL = #{email},</if>
+        </trim>
+        WHERE ID = #{id}
+    </update>
+
 </mapper>

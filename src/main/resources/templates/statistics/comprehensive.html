@@ -28,31 +28,8 @@
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
-        <!--pageHeader-->
-        <div class="page-header">
-          <h3 class="page-title">
-            <button class="btn btn-social-icon-text btn-dribbble" th:href="@{/product/products}"><i class="mdi mdi-bullhorn" th:href="@{/user/users}"></i>平台公告</button>
-          </h3>
-          <a class="mdi mdi-backspace icon-md text-primary" th:href="@{/product/products}"></a>
+        <div class="col-lg-12 grid-margin stretch-card">
         </div>
-
-          <ul class="list-group col-lg-12">
-            <li class="list-group-item " data-toggle="collapse" href="#collapseExample" aria-expanded="false" th:aria-controls="${'information'+information.id}" th:each="information:${informationList}">
-              [[${'【'+information.type+'】 '+information.title}]]
-              <div class="float-right">
-                [[${#dates.format(information.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
-                <i class="mdi mdi-chevron-right icon-sm"></i>
-              </div>
-
-            </li>
-          </ul>
-        <!--展开信息-->
-        <div class="collapse"  th:each="information:${informationList}" th:id="${'information'+information.id}">
-          <div class="card card-body">
-           [[${information.content}]]
-          </div>
-        </div>
-
       </div>
       <!-- content-wrapper ends -->
       <!-- partial:../../partials/_footer.html -->
