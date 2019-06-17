@@ -1,4 +1,4 @@
-package com.saber.credit.right;
+package com.saber.credit.controller.user;
 
 import com.saber.credit.controller.BaseController;
 import org.springframework.stereotype.Controller;
@@ -7,15 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by saber on 2019/6/17.
- * 权限-角色管理
+ * 用户-消息通知
  */
-
 @Controller
-public class RoleController extends BaseController {
+public class MessageController extends BaseController {
 
-    @GetMapping(value = "/right/role")
+    @GetMapping(value = "user/message")
     public String List(Model model){
         initPage(model);
-        return "right/role";
+        return "user/message";
     }
 }

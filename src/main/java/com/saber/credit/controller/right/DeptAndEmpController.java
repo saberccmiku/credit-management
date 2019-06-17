@@ -1,4 +1,4 @@
-package com.saber.credit.controller.user;
+package com.saber.credit.controller.right;
 
 import com.saber.credit.controller.BaseController;
 import org.springframework.stereotype.Controller;
@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by saber on 2019/6/17.
- * 用户-消息通知
+ * 权限-部门与员工
  */
-@Controller
-public class Information extends BaseController {
 
-    @GetMapping(value = "user/information")
-    public String List(Model model){
+@Controller
+public class DeptAndEmpController extends BaseController{
+
+    @GetMapping(value = "/right/deptAndEmp")
+    public String list(Model model){
         initPage(model);
-        return "user/information";
+        return "right/deptAndEmp";
     }
 }

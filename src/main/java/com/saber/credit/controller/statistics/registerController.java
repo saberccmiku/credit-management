@@ -1,4 +1,4 @@
-package com.saber.credit.right;
+package com.saber.credit.controller.statistics;
 
 import com.saber.credit.controller.BaseController;
 import org.springframework.stereotype.Controller;
@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Created by saber on 2019/6/17.
- * 权限-操作日志
+ * 统计-用户注册量
  */
 @Controller
-public class LogController extends BaseController {
+public class registerController extends BaseController {
 
-    @GetMapping(value = "/statistics/import")
-    public String List(Model model){
+    @GetMapping(value = "/statistics/register")
+    public String list(Model model){
         initPage(model);
-        return "statistics/import";
+        return "statistics/register";
     }
 }
