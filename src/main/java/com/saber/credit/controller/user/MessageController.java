@@ -15,6 +15,7 @@ public class MessageController extends BaseController {
     @GetMapping(value = "user/message")
     public String List(Model model){
         initPage(model);
+        initEnumerate(model,"MESSAGE_TYPE");
         return "user/message";
     }
 }

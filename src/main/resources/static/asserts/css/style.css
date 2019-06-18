@@ -10762,6 +10762,19 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-default:hover {
+  color: #fff;
+  background-color: #e4e4e9;
+  border-color: #f4f4f4;
+}
+
+
 .btn-primary {
   color: #fff;
   background-color: #b66dff;
@@ -13719,7 +13732,7 @@ button.close {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 30%;
     margin: 30px auto;
   }
   .modal-dialog-centered {
