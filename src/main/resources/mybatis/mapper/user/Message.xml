@@ -16,55 +16,40 @@
     </sql>
 
     <select id="queryById" resultType="com.saber.credit.entities.Message">
-        SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
-        WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
-        CONCAT(TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE),'小时')
-        END intervalTime,a.LOGIN_COUNT loginCount,r.DEVICE_ID deviceId,
-        r.DEVICE_TYPE deviceType,u.NATIVE_PLACE nativePlace,r.NETWORK network
-        from SEC_USER u
-        LEFT JOIN
-        USER_ACTIVE a  ON u.id = a.user_id
-        LEFT JOIN
-        DEVICE_REGISTER r ON r.USER_ID = u.ID
-        where u.id = #{id}
+        SELECT <include refid="Base_Column_List"/>  FROM MESSAGE
+        where ID = #{id}
     </select>
 
     <select id="query" resultType="com.saber.credit.entities.Message">
-        select <include refid="Base_Column_List"/>  from SEC_USER
+        select <include refid="Base_Column_List"/>  from MESSAGE
     </select>
 
-    <select id="queryByUserIdOrPhone" resultType="com.saber.credit.entities.Message">
-        select <include refid="Base_Column_List"/>  from SEC_USER where account = #{account} or phone =  #{account}
-    </select>
+    <insert id="insert" parameterType="com.saber.credit.entities.Message">
+        INSERT INTO MESSAGE (ID,CREATE_USER,CREATE_DATE,LAST_CHANGE_USER,
+                LAST_CHANGE_DATE,DEL_FLAG,TITLE,SEND_TYPE,MESSAGE_TYPE,
+                CONTENT,JUMP_TYPE,SEND_TIME) VALUES {
+                #{id},#{createUser},#{createDate},#{lastChangeUser},#{lastChangeDate},
+                #{delFlag},#{title},#{sendType},#{messageType},#{content},#{jumpType},#{sendTime}
+                }
+    </insert>
 
-    <select id="queryDetail" resultType="com.saber.credit.entities.Message">
-        SELECT u.ID id,u.NAME name,u.PHONE PHONE,a.FROM_ID fromName,a.CREATE_DATE registerDate,a.FIRST_LOGIN_DATE firstLoginDate,CASE
-        WHEN TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE) &lt; 1 THEN '1小时内' ELSE
-        CONCAT(TIMESTAMPDIFF(HOUR,a.CREATE_DATE,a.FIRST_LOGIN_DATE),'小时')
-        END intervalTime,a.LOGIN_COUNT loginCount,r.DEVICE_ID deviceId,r.DEVICE_TYPE deviceType
-        from SEC_USER u
-        LEFT JOIN
-        USER_ACTIVE a  ON u.id = a.user_id
-        LEFT JOIN
-        DEVICE_REGISTER r ON r.USER_ID = u.ID
-    </select>
-
-    <select id="queryProductFlow" resultType="com.saber.credit.entities.Message">
-        SELECT f.ID id,f.GOODS_ID goodsId,f.USER_ID userId,f.CLICK_COUNT clickCount,f.READ_COUNT readCount,f.CREATE_DATE readDate,e.VALUE name
-        from GOODS_FLOW f
-        LEFT JOIN ENUMERATE e on e.id = f.GOODS_ID
-        WHERE f.USER_ID = #{userId}
-    </select>
+    <delete id="delete" parameterType="com.saber.credit.entities.Message">
+        DELETE from MESSAGE WHERE  ID = #{id}
+    </delete>
 
 
     <update id="update" parameterType="com.saber.credit.entities.Message">
-        UPDATE SEC_USER
+        UPDATE MESSAGE
         <trim prefix="set" suffixOverrides=",">
             <if test="lastChangeUser!=null">LAST_CHANGE_USER = #{lastChangeUser},</if>
             <if test="lastChangeDate!=null">LAST_CHANGE_DATE = #{lastChangeDate},</if>
             <if test="delFlag!=null">DEL_FLAG = #{delFlag},</if>
-            <if test="name!=null">NAME = #{name},</if>
-            <if test="email!=null">EMAIL = #{email},</if>
+            <if test="title!=null">TITLE = #{title},</if>
+            <if test="sendType!=null">SEND_TYPE = #{sendType},</if>
+            <if test="messageType!=null">MESSAGE_TYPE = #{messageType},</if>
+            <if test="content!=null">CONTENT = #{content},</if>
+            <if test="jumpType!=null">JUMP_TYPE = #{jumpType},</if>
+            <if test="sendTime!=null">SEND_TIME = #{sendTime},</if>
         </trim>
         WHERE ID = #{id}
     </update>
