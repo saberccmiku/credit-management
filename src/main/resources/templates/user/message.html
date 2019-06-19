@@ -51,6 +51,7 @@
                 </button>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <form class="forms-sample needs-validation" th:action="@{/user/sendMessage}" method="post" novalidate>
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content bg-white">
                       <div class="modal-header">
@@ -61,11 +62,11 @@
                       </div>
                       <div class="modal-body">
                         <div class="card-body">
-                        <form class="forms-sample">
                           <div class="form-group row">
                             <label for="title" class="col-sm-4 col-form-label ant-form-item-required">通知标题：</label>
                             <div class="col-sm-8 row">
-                              <input type="text" class="form-control rounded" id="title" name="title" placeholder="请输入通知标题,15个字以内">
+                              <input type="text" class="form-control rounded" id="title" name="title" placeholder="请输入通知标题,15个字以内" required>
+                              <div class="invalid-feedback">请输入通知标题,15个字以内</div>
                             </div>
                           </div>
                           <div class="form-group row">
@@ -100,7 +101,8 @@
                           <div class="form-group row">
                             <label for="content" class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
                             <div class="col-sm-8 row">
-                              <textarea class="form-control" id="content" rows="4"></textarea>
+                              <textarea class="form-control" id="content" rows="4" required></textarea>
+                              <div class="invalid-feedback">请输入通知内容</div>
                             </div>
                           </div>
                           <div class="form-group row">
@@ -131,19 +133,20 @@
                             <div class="col-sm-8 row">
                               <div class="input-group" style="height: 20px">
                                 <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
-                                <input type="text" class="  input-sm form-control rounded" id="sendTime" name="sendTime">
+                                <input type="text" class="  input-sm form-control rounded" id="sendTime" name="sendTime" required>
+                                <div class="invalid-feedback">请选择发布时间</div>
                               </div>
                             </div>
                           </div>
-                        </form>
                         </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default rounded" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-info">保存</button>
+                        <button type="submit" class="btn btn-info">保存</button>
                       </div>
                     </div>
                   </div>
+                  </form>
                 </div>
               </h4>
               <table class="table table-striped">
@@ -221,11 +224,31 @@
 <script th:src="@{/asserts/js/misc.js}"></script>
 <script th:src="@{/bootstrap-daterangepicker/moment.min.js}"></script>
 <script th:src="@{/bootstrap-daterangepicker/daterangepicker.js}"></script>
-
+<script th:src="@{/asserts/js/sweetalert.min.js}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
-<script type="text/javascript">
+<script  th:inline="javascript">
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
     $('input[name="sendTime"]').daterangepicker({
         minDate: '2015/01/01 00:00:00',    //最小时间
         showDropdowns: true,
@@ -268,6 +291,14 @@
         $('input[name="sendTime"]').val(t);
         $('#sendTime').data('daterangepicker').hide();
     });
+
+  $(function () {
+      var msg = [[${msg}]];
+      if (msg!==null){
+          swal("发送成功!", "返回列表信息!", "success");
+      }
+  })
+
 </script>
 </body>
 </html>
