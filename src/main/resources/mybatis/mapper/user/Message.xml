@@ -27,10 +27,10 @@
     <insert id="insert" parameterType="com.saber.credit.entities.Message">
         INSERT INTO MESSAGE (ID,CREATE_USER,CREATE_DATE,LAST_CHANGE_USER,
                 LAST_CHANGE_DATE,DEL_FLAG,TITLE,SEND_TYPE,MESSAGE_TYPE,
-                CONTENT,JUMP_TYPE,SEND_TIME) VALUES {
+                CONTENT,JUMP_TYPE,SEND_TIME) VALUES (
                 #{id},#{createUser},#{createDate},#{lastChangeUser},#{lastChangeDate},
                 #{delFlag},#{title},#{sendType},#{messageType},#{content},#{jumpType},#{sendTime}
-                }
+                )
     </insert>
 
     <delete id="delete" parameterType="com.saber.credit.entities.Message">

@@ -74,13 +74,13 @@
                             <div class="col-sm-8 row">
                               <div class="form-check form-check-info">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input rounded" name="cooperation"  value="仅消息通知" checked>
+                                  <input type="radio" class="form-check-input rounded" name="sendType"  value="仅消息通知" checked>
                                   仅消息通知
                                 </label>
                               </div>
                               <div class="form-check ml-3 form-check-info">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="cooperation"  value="仅消息通知+弹窗">
+                                  <input type="radio" class="form-check-input" name="sendType"  value="仅消息通知+弹窗">
                                   仅消息通知+弹窗
                                 </label>
                               </div>
@@ -90,7 +90,7 @@
                             <label class="col-sm-4 col-form-label ant-form-item-required">通知类型：</label>
                             <div class="col-sm-8 row">
                               <div class="form-group">
-                                <select class="custom-select h6" name="settlementCycle" required>
+                                <select class="custom-select h6" name="messageType" required>
                                   <option value=""  disabled selected hidden>请选择通知类型</option>
                                   <option th:each="enumerateItem:${enumerate.MESSAGE_TYPE.itemList}">[[${enumerateItem.value}]]</option>
                                 </select>
@@ -101,7 +101,7 @@
                           <div class="form-group row">
                             <label for="content" class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
                             <div class="col-sm-8 row">
-                              <textarea class="form-control" id="content" rows="4" required></textarea>
+                              <textarea class="form-control" id="content" rows="4" name="content" required></textarea>
                               <div class="invalid-feedback">请输入通知内容</div>
                             </div>
                           </div>
@@ -133,7 +133,7 @@
                             <div class="col-sm-8 row">
                               <div class="input-group" style="height: 20px">
                                 <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
-                                <input type="text" class="  input-sm form-control rounded" id="sendTime" name="sendTime" required>
+                                <input type="text" class="  input-sm form-control rounded" id="sendTime" name="sendTime" placeholder="请选择时间" required>
                                 <div class="invalid-feedback">请选择发布时间</div>
                               </div>
                             </div>
@@ -173,27 +173,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="message:${messages}">
                   <td class="py-1">
-                    <img src="../../images/faces-clipart/pic-1.png" alt="image"/>
+                   [[${message.id}]]
                   </td>
                   <td>
-                    Herman Beck
+                    [[${message.messageType}]]
                   </td>
                   <td>
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                    [[${message.title}]]
                   </td>
                   <td>
-                    $ 77.99
+                    [[${message.jumpType}]]
                   </td>
                   <td>
-                    May 15, 2015
+                    [[${message.sendTime}]]
                   </td>
                   <td>
                     <a class="btn btn-sm btn-gradient-primary">查看</a>
-                    <button class="btn btn-sm btn-gradient-danger">删除</button>
+                    <button class="btn btn-sm btn-gradient-danger deleteBtn" th:attr="delete_uri=@{/message/}+${message.id}">删除</button>
                   </td>
                 </tr>
                 </tbody>
@@ -212,6 +210,10 @@
   </div>
   <!-- page-body-wrapper ends -->
 </div>
+<!--将form表单写在外面，所有的删除操作共用一个表单-->
+<form id="deleteForm" method="post">
+  <input type="hidden" name="_method" value="delete"/>
+</form>
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
@@ -282,14 +284,17 @@
     function(start, end, label) {
 
     });
+    $('input[name="sendTime"]').val("");
+    <!---->
     $('.nowBtn').click(function () {
+        $('#sendTime').data('daterangepicker').hide();
         var time = new Date();   // 程序计时的月从0开始取值后+1
         var m = time.getMonth() + 1;
         var t = time.getFullYear() + "-" + m + "-"
             + time.getDate() + " " + time.getHours() + ":"
             + time.getMinutes() + ":" + time.getSeconds();
         $('input[name="sendTime"]').val(t);
-        $('#sendTime').data('daterangepicker').hide();
+        $('input[name="sendTime"]').val();
     });
 
   $(function () {
@@ -297,7 +302,15 @@
       if (msg!==null){
           swal("发送成功!", "返回列表信息!", "success");
       }
-  })
+  });
+
+  //删除列表数据
+  $(".deleteBtn").click(function () {
+
+      $("#deleteForm").attr("action",$(this).attr("delete_uri")).submit();
+      return false;
+      
+  });
 
 </script>
 </body>
