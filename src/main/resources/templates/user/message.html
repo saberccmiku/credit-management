@@ -2,217 +2,247 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <<title>贷超管理系统</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
-  <link rel="stylesheet" th:href="@{/bootstrap-daterangepicker/daterangepicker.css}">
-  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
-  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <<title>贷超管理系统</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap-daterangepicker/daterangepicker.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
 </head>
 
 <body>
 <div class="container-scroller">
-  <!-- partial:../../partials/_navbar.html -->
-  <div th:replace="/commons/bar::topBar"></div>
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-    <!-- partial:../../partials/_sidebar.html -->
-    <div th:replace="/commons/bar::#sideBar"></div>
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="/commons/bar::topBar"></div>
     <!-- partial -->
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <div class="page-header">
-          <h3 class="page-title">
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="/commons/bar::#sideBar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h3 class="page-title">
 
-          </h3>
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">用户</a></li>
-              <li class="breadcrumb-item active" aria-current="page">消息通知</li>
-            </ol>
-          </nav>
-        </div>
-        <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="card-title">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#exampleModalCenter">
-                  发布通知
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <form class="forms-sample needs-validation" th:action="@{/user/sendMessage}" method="post" novalidate>
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content bg-white">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">发布消息通知</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div class="card-body">
-                          <div class="form-group row">
-                            <label for="title" class="col-sm-4 col-form-label ant-form-item-required">通知标题：</label>
-                            <div class="col-sm-8 row">
-                              <input type="text" class="form-control rounded" id="title" name="title" placeholder="请输入通知标题,15个字以内" required>
-                              <div class="invalid-feedback">请输入通知标题,15个字以内</div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label ant-form-item-required">发送方式：</label>
-                            <div class="col-sm-8 row">
-                              <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input rounded" name="sendType"  value="仅消息通知" checked>
-                                  仅消息通知
-                                </label>
-                              </div>
-                              <div class="form-check ml-3 form-check-info">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="sendType"  value="仅消息通知+弹窗">
-                                  仅消息通知+弹窗
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label ant-form-item-required">通知类型：</label>
-                            <div class="col-sm-8 row">
-                              <div class="form-group">
-                                <select class="custom-select h6" name="messageType" required>
-                                  <option value=""  disabled selected hidden>请选择通知类型</option>
-                                  <option th:each="enumerateItem:${enumerate.MESSAGE_TYPE.itemList}">[[${enumerateItem.value}]]</option>
-                                </select>
-                                <div class="invalid-feedback">请选择通知类型</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="content" class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
-                            <div class="col-sm-8 row">
-                              <textarea class="form-control" id="content" rows="4" name="content" required></textarea>
-                              <div class="invalid-feedback">请输入通知内容</div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label ant-form-item-required">跳转类型：</label>
-                            <div class="col-sm-8 row">
-                              <div class="form-check form-check-info">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input rounded" name="jumpType"  value="无" checked>
-                                  无
-                                </label>
-                              </div>
-                              <div class="form-check ml-2 form-check-info  ml-3">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="jumpType"  value="产品详细页">
-                                  产品详细页
-                                </label>
-                              </div>
-                              <div class="form-check ml-2 form-check-info ml-3">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="jumpType"  value="H5链接">
-                                  H5链接
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="sendTime" class="col-sm-4 col-form-label ant-form-item-required">发布时间：</label>
-                            <div class="col-sm-8 row">
-                              <div class="input-group" style="height: 20px">
-                                <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
-                                <input type="text" class="  input-sm form-control rounded" id="sendTime" name="sendTime" placeholder="请选择时间" required>
-                                <div class="invalid-feedback">请选择发布时间</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default rounded" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-info">保存</button>
-                      </div>
-                    </div>
-                  </div>
-                  </form>
+                    </h3>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">用户</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">消息通知</li>
+                        </ol>
+                    </nav>
                 </div>
-              </h4>
-              <table class="table table-striped">
-                <thead>
-                <tr>
-                  <th>
-                    ID
-                  </th>
-                  <th>
-                    通知类型
-                  </th>
-                  <th>
-                    通知标题
-                  </th>
-                  <th>
-                    跳转页面
-                  </th>
-                  <th>
-                    发送时间
-                  </th>
-                  <th>
-                    操作
-                  </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="message:${messages}">
-                  <td class="py-1">
-                   [[${message.id}]]
-                  </td>
-                  <td>
-                    [[${message.messageType}]]
-                  </td>
-                  <td>
-                    [[${message.title}]]
-                  </td>
-                  <td>
-                    [[${message.jumpType}]]
-                  </td>
-                  <td>
-                    [[${message.sendTime}]]
-                  </td>
-                  <td>
-                    <a class="btn btn-sm btn-gradient-primary">查看</a>
-                    <button class="btn btn-sm btn-gradient-danger deleteBtn" th:attr="delete_uri=@{/message/}+${message.id}">删除</button>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-info btn-md" data-toggle="modal"
+                                            data-target="#exampleModalCenter">
+                                        发布通知
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <form class="forms-sample needs-validation" th:action="@{/user/sendMessage}"
+                                              method="post" novalidate>
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content bg-white">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">发布消息通知</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card-body">
+                                                            <div class="form-group row">
+                                                                <label for="title"
+                                                                       class="col-sm-4 col-form-label ant-form-item-required">通知标题：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <input type="text" class="form-control rounded"
+                                                                           id="title" name="title"
+                                                                           placeholder="请输入通知标题,15个字以内" required>
+                                                                    <div class="invalid-feedback">请输入通知标题,15个字以内</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label ant-form-item-required">发送方式：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <div class="form-check form-check-info">
+                                                                        <label class="form-check-label">
+                                                                            <input type="radio"
+                                                                                   class="form-check-input rounded"
+                                                                                   name="sendType" value="仅消息通知"
+                                                                                   checked>
+                                                                            仅消息通知
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check ml-3 form-check-info">
+                                                                        <label class="form-check-label">
+                                                                            <input type="radio" class="form-check-input"
+                                                                                   name="sendType" value="仅消息通知+弹窗">
+                                                                            仅消息通知+弹窗
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label ant-form-item-required">通知类型：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <div class="form-group">
+                                                                        <select class="custom-select h6"
+                                                                                name="messageType" required>
+                                                                            <option value="" disabled selected hidden>
+                                                                                请选择通知类型
+                                                                            </option>
+                                                                            <option th:each="enumerateItem:${enumerate.MESSAGE_TYPE.itemList}">
+                                                                                [[${enumerateItem.value}]]
+                                                                            </option>
+                                                                        </select>
+                                                                        <div class="invalid-feedback">请选择通知类型</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="content"
+                                                                       class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <textarea class="form-control" id="content" rows="4"
+                                                                              name="content" required></textarea>
+                                                                    <div class="invalid-feedback">请输入通知内容</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label ant-form-item-required">跳转类型：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <div class="form-check form-check-info">
+                                                                        <label class="form-check-label">
+                                                                            <input type="radio"
+                                                                                   class="form-check-input rounded"
+                                                                                   name="jumpType" value="无" checked>
+                                                                            无
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check ml-2 form-check-info  ml-3">
+                                                                        <label class="form-check-label">
+                                                                            <input type="radio" class="form-check-input"
+                                                                                   name="jumpType" value="产品详细页">
+                                                                            产品详细页
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check ml-2 form-check-info ml-3">
+                                                                        <label class="form-check-label">
+                                                                            <input type="radio" class="form-check-input"
+                                                                                   name="jumpType" value="H5链接">
+                                                                            H5链接
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="sendTime"
+                                                                       class="col-sm-4 col-form-label ant-form-item-required">发布时间：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <div class="input-group" style="height: 20px">
+                                                                        <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
+                                                                        <input type="text"
+                                                                               class="  input-sm form-control rounded"
+                                                                               id="sendTime" name="sendTime"
+                                                                               placeholder="请选择时间" required>
+                                                                        <div class="invalid-feedback">请选择发布时间</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default rounded"
+                                                                data-dismiss="modal">取消
+                                                        </button>
+                                                        <button type="submit" class="btn btn-info">保存</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </h4>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            通知类型
+                                        </th>
+                                        <th>
+                                            通知标题
+                                        </th>
+                                        <th>
+                                            跳转页面
+                                        </th>
+                                        <th>
+                                            发送时间
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="message:${messages}">
+                                        <td class="py-1">
+                                            [[${message.id}]]
+                                        </td>
+                                        <td>
+                                            [[${message.messageType}]]
+                                        </td>
+                                        <td>
+                                            [[${message.title}]]
+                                        </td>
+                                        <td>
+                                            [[${message.jumpType}]]
+                                        </td>
+                                        <td>
+                                            [[${message.sendTime}]]
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-gradient-primary">查看</a>
+                                            <button class="btn btn-sm btn-gradient-danger deleteBtn"
+                                                    th:attr="delete_uri=@{/message/}+${message.id}">删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <div th:replace="/commons/bar::#footerBar"></div>
+            <!-- partial -->
         </div>
-        </div>
-      </div>
-      <!-- content-wrapper ends -->
-      <!-- partial:../../partials/_footer.html -->
-      <div th:replace="/commons/bar::#footerBar"></div>
-      <!-- partial -->
+        <!-- main-panel ends -->
     </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
 </div>
 <!--将form表单写在外面，所有的删除操作共用一个表单-->
 <form id="deleteForm" method="post">
-  <input type="hidden" name="_method" value="delete"/>
+    <input type="hidden" name="_method" value="delete"/>
 </form>
 <!-- container-scroller -->
 <!-- plugins:js -->
@@ -230,17 +260,17 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
-<script  th:inline="javascript">
+<script th:inline="javascript">
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -252,38 +282,38 @@
     })();
 
     $('input[name="sendTime"]').daterangepicker({
-        minDate: '2015/01/01 00:00:00',    //最小时间
-        showDropdowns: true,
-        showWeekNumbers: true, //是否显示第几周
-        dateLimit: {days: 300}, //起止时间的最大间隔
-        timePicker: true,
-        timePickerIncrement: 1, //时间的增量，单位为分钟
-        timePicker24Hour: true,
-        timePickerSeconds:true,
-        opens: 'right', //日期选择框的弹出位置
-        drops: 'up',
-        buttonClasses: ['btn btn-default'],
-        applyClass: 'btn-small btn-primary blue',
-        cancelClass: 'btn-small',
-        format: 'YYYY/MM/DD HH:mm:ss', //控件中from和to 显示的日期格式MM/DD/YYYY
-        singleDatePicker:true,
-        separator: '-',
-        defaultDate: new Date(),
-        monthHtml :'<select class="monthselect custom-select">',
-        locale: {
-            format: 'YYYY-MM-DD HH:mm:ss',
-            applyLabel: '确定',
-            cancelLabel: '取消',
-            fromLabel: '起始时间',
-            toLabel: '结束时间',
-            daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            firstDay: 1
-        }
-    },
-    function(start, end, label) {
+            minDate: '2015/01/01 00:00:00',    //最小时间
+            showDropdowns: true,
+            showWeekNumbers: true, //是否显示第几周
+            dateLimit: {days: 300}, //起止时间的最大间隔
+            timePicker: true,
+            timePickerIncrement: 1, //时间的增量，单位为分钟
+            timePicker24Hour: true,
+            timePickerSeconds: true,
+            opens: 'right', //日期选择框的弹出位置
+            drops: 'up',
+            buttonClasses: ['btn btn-default'],
+            applyClass: 'btn-small btn-primary blue',
+            cancelClass: 'btn-small',
+            format: 'YYYY/MM/DD HH:mm:ss', //控件中from和to 显示的日期格式MM/DD/YYYY
+            singleDatePicker: true,
+            separator: '-',
+            defaultDate: new Date(),
+            monthHtml: '<select class="monthselect custom-select">',
+            locale: {
+                format: 'YYYY-MM-DD HH:mm:ss',
+                applyLabel: '确定',
+                cancelLabel: '取消',
+                fromLabel: '起始时间',
+                toLabel: '结束时间',
+                daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                firstDay: 1
+            }
+        },
+        function (start, end, label) {
 
-    });
+        });
     $('input[name="sendTime"]').val("");
     <!---->
     $('.nowBtn').click(function () {
@@ -297,20 +327,51 @@
         $('input[name="sendTime"]').val();
     });
 
-  $(function () {
-      var msg = [[${msg}]];
-      if (msg!==null){
-          swal("发送成功!", "返回列表信息!", "success");
-      }
-  });
+    $(function () {
+        var msg = [[${msg}]];
+        if (msg !== null) {
+            swal("发送成功!", "返回列表信息!", "success");
+        }
+    });
 
-  //删除列表数据
-  $(".deleteBtn").click(function () {
+    //删除列表数据
+    $(".deleteBtn").click(function () {
 
-      $("#deleteForm").attr("action",$(this).attr("delete_uri")).submit();
-      return false;
-      
-  });
+        swal(
+
+            {title:"您确定要删除这条信息吗",
+                text:"删除后将无法恢复，请谨慎操作！",
+                icon:"warning",
+                dangerMode: true,
+                buttons:{
+                    cancel: {
+                        text: "取消",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "确认",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                }
+            }
+        )
+            .then((willDelete) => {
+                if (willDelete) {
+                  $("#deleteForm").attr("action",$(this).attr("delete_uri")).submit();
+                } else {
+                    swal.close();
+                }
+            });
+
+
+    });
+
 
 </script>
 </body>

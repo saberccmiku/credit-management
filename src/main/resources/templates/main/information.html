@@ -39,13 +39,15 @@
           <ul class="list-group col-lg-12 accordion" id="accordionExample">
                 <!--Collapse-->
               <li class="list-group-item" th:each="information:${informationList}">
-                  <div class="col-12 text-left" th:id="${'#title'+information.id}" data-toggle="collapse" th:data-target="${'#content'+information.id}" aria-expanded="true" th:aria-controls="${'content'+information.id}">
+                  <details>
+                  <summary class="col-12 text-left" th:id="${'#title'+information.id}" data-toggle="collapse" th:data-target="${'#content'+information.id}" aria-expanded="true" th:aria-controls="${'content'+information.id}">
                       [[${'【'+information.type+'】 '+information.title}]]
-                      <div class="float-right">
+                      <a class="float-right">
                           [[${#dates.format(information.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
                           <i class="mdi mdi-chevron-right icon-sm"></i>
-                      </div>
-                  </div>
+                      </a>
+                  </summary>
+                  </details>
                   <div th:id="${'content'+information.id}" class="collapse" th:aria-labelledby="${'#title'+information.id}" data-parent="#accordionExample">
                       <div class="card-body">
                           [[${information.content}]]
