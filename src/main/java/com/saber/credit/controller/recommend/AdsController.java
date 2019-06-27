@@ -15,6 +15,7 @@ public class AdsController extends BaseController {
     @GetMapping(value = "/recommend/ads")
     public String list(Model model){
         initPage(model);
+        initEnumerate(model,"IMG_RECOMMEND");
         return "recommend/ads";
 
     }
