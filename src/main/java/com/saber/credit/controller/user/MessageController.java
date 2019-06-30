@@ -45,7 +45,7 @@ public class MessageController extends BaseController {
      * @return
      */
     @GetMapping("user/message/refresh")
-    public String localRefresh(Model model, @RequestParam (value = "page",defaultValue = "1") Integer page, @RequestParam (value = "limit",defaultValue = "2") Integer limit) {
+    public String localRefresh(Model model, @RequestParam (value = "page",defaultValue = "1") Integer page, @RequestParam (value = "limit",defaultValue = "10") Integer limit) {
         // "test"是test.html的名，
         // "table_refresh"是test.html中需要刷新的部分标志,
         // 在标签里加入：th:fragment="table_refresh"
