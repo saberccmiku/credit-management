@@ -52,7 +52,7 @@
             html.push('<li class="next"><a href="#">&raquo;</a></li>');
             html.push('<li class="ml-2"><select id="pagination" class="custom-select" style="height: 2.5em"><option selected value="10">10 条/页</option> <option value="20">20 条/页</option> <option value="30">30 条/页</option></select></li>');
             html.push('<span class="pagination-nav">跳至</span>');
-            html.push('<li><input type="email" style="width: 3.5em" class="form-control form-control-sm" id="pageNum" aria-describedby="pageNum" placeholder=""></li>');
+            html.push('<li><input id="toPage" type="email" style="width: 3.5em" class="form-control form-control-sm" id="pageNum" aria-describedby="pageNum" placeholder=""></li>');
             html.push('<span class="pagination-nav">页</span></ul>');
             $(this).html(html.join(''));
             if (totalPage > showPage) $(this).find('ul.pagination li.next').prev().removeClass('hidden');

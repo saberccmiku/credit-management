@@ -32,13 +32,29 @@ public class MessageController extends BaseController {
         List<Message> messages = messageService.query();
         model.addAttribute("messages",messages);
         PageInfo<Message> pageInfo = new PageInfo<>(messages);
-        System.out.println("--------------------------------------------");
-        System.out.println(pageInfo);
-        System.out.println("--------------------------------------------");
         model.addAttribute("pageInfo",pageInfo);
         initPage(model);
         initEnumerate(model,"MESSAGE_TYPE");
         return "user/message";
+    }
+
+
+    /**
+     * 局部刷新，注意返回值
+     * @param model
+     * @return
+     */
+    @GetMapping("user/message/refresh")
+    public String localRefresh(Model model, @RequestParam (value = "page",defaultValue = "1") Integer page, @RequestParam (value = "limit",defaultValue = "2") Integer limit) {
+        // "test"是test.html的名，
+        // "table_refresh"是test.html中需要刷新的部分标志,
+        // 在标签里加入：th:fragment="table_refresh"
+        PageHelper.startPage(page,limit);
+        List<Message> messages = messageService.query();
+        model.addAttribute("messages",messages);
+        PageInfo<Message> pageInfo = new PageInfo<>(messages);
+        model.addAttribute("pageInfo",pageInfo);
+        return "user/message::table_refresh";
     }
 
     @PostMapping(value = "user/sendMessage")
