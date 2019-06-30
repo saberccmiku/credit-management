@@ -1,6 +1,19 @@
 /**
- * Created by Hope on 2014/12/28.
+ * 分页加载
+ * 使用方法写一个元素标签
+ * 然后引用该js实现参数
  *
+ *         $('#id').extendPagination({
+
+            totalCount: 10,
+            showCount: 10,
+            limit: 10,
+            callback:function (curr, limit, totalCount) {
+                // 装载局部刷新返回的页面
+                $('#frame').load("url");
+            }
+
+        });
  */
 (function ($) {
     $.fn.extendPagination = function (options) {
