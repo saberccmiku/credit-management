@@ -18,12 +18,6 @@ public interface BaseMapper<T> {
      */
     List<T> query();
     /**
-     * @param page page表示当前页数
-     * @param limit limit表示用户设置的每页显示多少条数据
-     * @return 对象集合
-     */
-    List<T> query(Integer page, Integer limit);
-    /**
      * 通过id查询数据
      * @return 该id对应的数据
      */

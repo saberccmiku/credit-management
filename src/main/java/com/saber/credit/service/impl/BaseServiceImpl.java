@@ -4,7 +4,6 @@ import com.saber.credit.entities.BaseBean;
 import com.saber.credit.entities.User;
 import com.saber.credit.mapper.BaseMapper;
 import com.saber.credit.service.BaseService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +24,6 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
     @Override
     public List<T> query() {
         return baseMapper.query();
-    }
-
-    @Override
-    public List<T> query(Integer page, Integer limit) {
-        return baseMapper.query(page,limit);
     }
 
     @Override

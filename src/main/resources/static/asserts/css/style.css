@@ -20985,3 +20985,9 @@ select {
   padding-right: 14px;
 }
 /*# sourceMappingURL=maps/style.css.map */
+
+/*# 子元素居中 */
+.pagination-nav {
+  display: block;
+  padding: 0.5rem 0.75rem;
+}

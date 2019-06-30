@@ -1,5 +1,6 @@
 package com.saber.credit.controller.product;
 
+import com.github.pagehelper.PageHelper;
 import com.saber.credit.controller.BaseController;
 import com.saber.credit.entities.Product;
 import com.saber.credit.service.impl.ProductServiceImpl;
@@ -25,7 +26,8 @@ public class ProductController extends BaseController {
     @GetMapping(value = "/product/products")
     public String productList(Model model){
         initPage(model);
-        List<Product> products = productService.query(0, 10);
+        PageHelper.startPage(1,20);
+        List<Product> products = productService.query();
         String [] titleList = new String[]{"编号","logo","信贷名称","放款金额区间","放款周期区间","利息","详情页UV","按钮UV",
                 "预计注册量","虚拟访问量","合作方式","合作价格","添加时间","产品上架状态","操作"};
 

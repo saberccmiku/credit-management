@@ -1,5 +1,6 @@
 package com.saber.credit.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.saber.credit.entities.Information;
 import com.saber.credit.service.impl.InformationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class MainController extends BaseController{
     @GetMapping("/information")
     public String toAnnouncement(Model model){
         initPage(model);
-        List<Information> informationList = informationService.query(1, 20);
+        PageHelper.startPage(1,20);
+        List<Information> informationList = informationService.query();
         model.addAttribute("informationList",informationList);
         return "main/information";
     }

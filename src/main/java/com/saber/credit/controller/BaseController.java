@@ -23,6 +23,7 @@ public class BaseController {
     @Autowired
     private EnumerateServiceImpl enumerateService;
 
+
     /**
      * 获取sideBar的menu值
      *

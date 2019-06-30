@@ -47,7 +47,7 @@
                                 <h4 class="card-title">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#exampleModalCenter">
+                                            data-target="#exampleModalCenter" th:onclick="showMessage([[${message}]])">
                                         发布通知
                                     </button>
                                     <!-- Modal -->
@@ -66,6 +66,16 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="card-body">
+
+                                                            <div class="form-group row" hidden>
+                                                                <label for="id"
+                                                                       class="col-sm-4 col-form-label ant-form-item-required">ID：</label>
+                                                                <div class="col-sm-8 row">
+                                                                    <input type="text" class="form-control rounded"
+                                                                           id="id" name="id">
+                                                                </div>
+                                                            </div>
+
                                                             <div class="form-group row">
                                                                 <label for="title"
                                                                        class="col-sm-4 col-form-label ant-form-item-required">通知标题：</label>
@@ -102,7 +112,8 @@
                                                                 <div class="col-sm-8 row">
                                                                     <div class="form-group">
                                                                         <select class="custom-select h6"
-                                                                                name="messageType" required>
+                                                                                name="messageType" id="messageType"
+                                                                                required>
                                                                             <option value="" disabled selected hidden>
                                                                                 请选择通知类型
                                                                             </option>
@@ -218,8 +229,9 @@
                                             [[${message.sendTime}]]
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-gradient-primary"  data-toggle="modal"
-                                               data-target="#exampleModalCenter">查看</a>
+                                            <a class="btn btn-sm btn-gradient-primary" data-toggle="modal"
+                                               data-target="#exampleModalCenter"
+                                               th:onclick="showMessage([[${message}]]);">查看</a>
                                             <button class="btn btn-sm btn-gradient-danger deleteBtn"
                                                     th:attr="delete_uri=@{/message/}+${message.id}">删除
                                             </button>
@@ -227,6 +239,38 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation example" class="float-right mt-4">
+                                    <ul class="pagination ">
+                                        <li class="page-item"><span class="pagination-nav">共[[${pageInfo.total}]]条数据</span></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item" th:each="i:${#numbers.sequence(1,pageInfo.pages)}"><a class="page-link" th:href="@{'message?page='+${i}+'&limit=2'}">[[${i}]]</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item ml-2">
+                                            <select id="pagination" class="custom-select" style="height: 2.5em">
+                                                <option selected value="10">10 条/页</option>
+                                                <option value="20">20 条/页</option>
+                                                <option value="30">30 条/页</option>
+                                            </select>
+                                        </li>
+                                        <li class="page-item">
+                                            <span class="pagination-nav">跳至</span>
+                                        </li>
+                                        <li class="page-item">
+                                            <input type="email" style="width: 3.5em" class="form-control form-control-sm" id="pageNum" aria-describedby="pageNum" placeholder="">
+                                        </li>
+                                        <li class="page-item">
+                                            <span class="pagination-nav">页</span>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -261,7 +305,7 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
-<script th:inline="javascript">
+<script type="text/javascript" th:inline="javascript">
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -329,22 +373,30 @@
     });
 
     $(function () {
-        var msg = [[${msg}]];
+        //操作回调显示
+        let msg = [[${msg}]];
         if (msg !== null) {
             swal("发送成功!", "返回列表信息!", "success");
         }
+
+        //pagination触发事件
+        $('#pagination').change(function () {
+            let limit = this.value;
+            window.location.href = "/management/user/message?page="++"limit="+limit;
+        })
+
     });
 
     //删除列表数据
     $(".deleteBtn").click(function () {
 
         swal(
-
-            {title:"您确定要删除这条信息吗",
-                text:"删除后将无法恢复，请谨慎操作！",
-                icon:"warning",
+            {
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                icon: "warning",
                 dangerMode: true,
-                buttons:{
+                buttons: {
                     cancel: {
                         text: "取消",
                         value: null,
@@ -364,7 +416,7 @@
         )
             .then((willDelete) => {
                 if (willDelete) {
-                  $("#deleteForm").attr("action",$(this).attr("delete_uri")).submit();
+                    $("#deleteForm").attr("action", $(this).attr("delete_uri")).submit();
                 } else {
                     swal.close();
                 }
@@ -372,6 +424,34 @@
 
 
     });
+
+    //查看信息，依然使用bootstrap的model
+    function showMessage(message) {
+        if (message !== null) {
+            $('#exampleModalCenterTitle').text("查看消息通知");
+            $('#title').val(message.title).attr("disabled", true);
+            $("input[type=radio][name=sendType][value='" + message.sendType + "']").prop("checked", 'checked');
+            $("input[type=radio][name=sendType]").attr("disabled", true);
+            $('#messageType').val(message.messageType).attr("disabled", true);
+            $('#content').val(message.content).attr("disabled", true);
+            $("input[type=radio][name=jumpType][value='" + message.jumpType + "']").prop("checked", 'checked');
+            $("input[type=radio][name=jumpType]").attr("disabled", true);
+            $('#sendTime').val(message.sendTime).attr("disabled", true);
+        }else {
+            $('#exampleModalCenterTitle').text("");
+            $('#title').val("").attr("disabled", false);
+            $("input[type=radio][name=sendType]").attr("disabled", false);
+            $('#messageType').val("").attr("disabled", false);
+            $('#content').val("").attr("disabled", false);
+            $("input[type=radio][name=jumpType]").attr("disabled", false);
+            $('#sendTime').val("").attr("disabled", false);
+            $("input:radio[name=sendType]").eq(0).prop("checked",'checked');
+            $("input:radio[name=jumpType]").eq(0).prop("checked",'checked');
+        }
+
+
+    }
+
 
 
 </script>

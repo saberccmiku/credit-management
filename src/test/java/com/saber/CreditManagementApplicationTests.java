@@ -1,6 +1,8 @@
 package com.saber;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.saber.credit.entities.Menu;
 import com.saber.credit.service.impl.MenuServiceImpl;
 import org.junit.Test;
@@ -21,15 +23,11 @@ public class CreditManagementApplicationTests {
 	@Test
 	public void contextLoads() {
 		System.out.println("-------------------------------分界线-------------------------------");
-//		PageHelper.startPage(4-1,3);
-//		List<Menu> menus = menuService.query(4,3);
-//		PageInfo<Menu> pageInfo = new PageInfo<>(menus);
-//		System.out.println(menus);
-//		System.out.println(pageInfo.getTotal());
-
+		PageHelper.startPage(2,3);
 		List<Menu> menus = menuService.query();
-		Map<String,List<Menu>> listMap = menus.stream().collect(Collectors.groupingBy(Menu::getPid));
-		System.out.println(listMap);
+		PageInfo<Menu> pageInfo = new PageInfo<>(menus);
+		System.out.println(menus);
+		System.out.println(pageInfo);
 		System.out.println("-------------------------------分界线-------------------------------");
 	}
 
