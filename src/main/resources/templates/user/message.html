@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
     <link rel="stylesheet" th:href="@{/bootstrap-daterangepicker/daterangepicker.css}">
     <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -188,7 +189,7 @@
                                         </form>
                                     </div>
                                 </h4>
-                                <table class="table table-striped">
+                                <table class="table table-striped table-hover">
                                     <thead>
                                     <tr>
                                         <th>
@@ -239,38 +240,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example" class="float-right mt-4">
-                                    <ul class="pagination ">
-                                        <li class="page-item"><span class="pagination-nav">共[[${pageInfo.total}]]条数据</span></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item" th:each="i:${#numbers.sequence(1,pageInfo.pages)}"><a class="page-link" th:href="@{'message?page='+${i}+'&limit=2'}">[[${i}]]</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item ml-2">
-                                            <select id="pagination" class="custom-select" style="height: 2.5em">
-                                                <option selected value="10">10 条/页</option>
-                                                <option value="20">20 条/页</option>
-                                                <option value="30">30 条/页</option>
-                                            </select>
-                                        </li>
-                                        <li class="page-item">
-                                            <span class="pagination-nav">跳至</span>
-                                        </li>
-                                        <li class="page-item">
-                                            <input type="email" style="width: 3.5em" class="form-control form-control-sm" id="pageNum" aria-describedby="pageNum" placeholder="">
-                                        </li>
-                                        <li class="page-item">
-                                            <span class="pagination-nav">页</span>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <div id="callBackPager" class="float-right"></div>
                             </div>
                         </div>
                     </div>
@@ -302,6 +272,7 @@
 <script th:src="@{/bootstrap-daterangepicker/moment.min.js}"></script>
 <script th:src="@{/bootstrap-daterangepicker/daterangepicker.js}"></script>
 <script th:src="@{/asserts/js/sweetalert.min.js}"></script>
+<script th:src="@{/asserts/js/extendPagination.js}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
@@ -379,11 +350,25 @@
             swal("发送成功!", "返回列表信息!", "success");
         }
 
+        /*
+         * 页面加载初始化分页
+         */
+        $('#callBackPager').extendPagination({
+
+            totalCount: [[${pageInfo.total}]],
+
+            showCount: 10,
+
+            limit: [[${pageInfo.pageSize}]]
+
+        });
+
         //pagination触发事件
         $('#pagination').change(function () {
             let limit = this.value;
-            window.location.href = "/management/user/message?page="++"limit="+limit;
+            window.location.href = "/management/user/message?limit="+limit;
         })
+
 
     });
 
@@ -437,7 +422,7 @@
             $("input[type=radio][name=jumpType][value='" + message.jumpType + "']").prop("checked", 'checked');
             $("input[type=radio][name=jumpType]").attr("disabled", true);
             $('#sendTime').val(message.sendTime).attr("disabled", true);
-        }else {
+        } else {
             $('#exampleModalCenterTitle').text("");
             $('#title').val("").attr("disabled", false);
             $("input[type=radio][name=sendType]").attr("disabled", false);
@@ -445,14 +430,10 @@
             $('#content').val("").attr("disabled", false);
             $("input[type=radio][name=jumpType]").attr("disabled", false);
             $('#sendTime').val("").attr("disabled", false);
-            $("input:radio[name=sendType]").eq(0).prop("checked",'checked');
-            $("input:radio[name=jumpType]").eq(0).prop("checked",'checked');
+            $("input:radio[name=sendType]").eq(0).prop("checked", 'checked');
+            $("input:radio[name=jumpType]").eq(0).prop("checked", 'checked');
         }
-
-
     }
-
-
 
 </script>
 </body>

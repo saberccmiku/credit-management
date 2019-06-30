@@ -32,9 +32,9 @@ public class MessageController extends BaseController {
         List<Message> messages = messageService.query();
         model.addAttribute("messages",messages);
         PageInfo<Message> pageInfo = new PageInfo<>(messages);
-//        System.out.println("--------------------------------------------");
-//        System.out.println(pageInfo);
-//        System.out.println("--------------------------------------------");
+        System.out.println("--------------------------------------------");
+        System.out.println(pageInfo);
+        System.out.println("--------------------------------------------");
         model.addAttribute("pageInfo",pageInfo);
         initPage(model);
         initEnumerate(model,"MESSAGE_TYPE");
