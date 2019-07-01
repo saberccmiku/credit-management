@@ -157,38 +157,12 @@
         /*
          * 页面加载初始化分页
          */
-        let pageNum = [[${pageInfo.pageNum}]];
-        let limit = [[${pageInfo.pageSize}]];
 
         $('#callBackPager').extendPagination({
-
             totalCount: [[${pageInfo.total}]],
             showCount: 10,
             limit: [[${pageInfo.pageSize}]],
-            callback:function (curr, limit, totalCount) {
-                // 装载局部刷新返回的页面
-                $('#table_refresh').load("/management/product/products/refresh?page="+curr+"&limit="+limit);
-
-            }
-
-        });
-
-        //pagination触发事件
-        $('#pagination').change(function () {
-            let limit = this.value;
-            // 装载局部刷新返回的页面
-            $('#table_refresh').load("/management/product/products/refresh?page="+pageNum+"&limit="+limit);
-        });
-
-
-        //回车搜索
-        $('#toPage').bind('keydown', function (event) {
-            var event = window.event || arguments.callee.caller.arguments[0];
-            if (event.keyCode === 13){
-                let toPage = $('#toPage').val()
-                // 装载局部刷新返回的页面
-                $('#table_refresh').load("/management/product/products/refresh?page="+toPage+"&limit="+[[${pageInfo.pageSize}]]);
-            }
+            refreshUrl:"/management/product/products/refresh"
         });
 
     });
