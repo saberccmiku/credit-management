@@ -51,7 +51,8 @@
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <form id="form" class="forms-sample needs-validation" th:action="@{/user/sendMessage}"
+                                    <form id="form" class="forms-sample needs-validation"
+                                          th:action="@{/user/sendMessage}"
                                           method="post" novalidate>
                                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                             <div class="modal-content bg-white">
@@ -81,7 +82,8 @@
                                                                                             name="messageType"
                                                                                             id="messageType"
                                                                                             required>
-                                                                                        <option value="" disabled selected
+                                                                                        <option value="" disabled
+                                                                                                selected
                                                                                                 hidden>
                                                                                             请选择通知类型
                                                                                         </option>
@@ -95,7 +97,8 @@
                                                                                             位置3
                                                                                         </option>
                                                                                     </select>
-                                                                                    <div class="invalid-feedback">请选择通知类型
+                                                                                    <div class="invalid-feedback">
+                                                                                        请选择通知类型
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -125,7 +128,8 @@
                                                                                     <label class="form-check-label">
                                                                                         <input type="radio"
                                                                                                class="form-check-input"
-                                                                                               name="jumpType" value="H5链接">
+                                                                                               name="jumpType"
+                                                                                               value="H5链接">
                                                                                         H5链接
                                                                                     </label>
                                                                                 </div>
@@ -160,55 +164,56 @@
                                         </div>
                                     </form>
                                 </div>
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th>
-                                        位置
-                                    </th>
-                                    <th>
-                                        链接类型
-                                    </th>
-                                    <th>
-                                        链接目标页名称
-                                    </th>
-                                    <th>
-                                        图片预览
-                                    </th>
-                                    <th>
-                                        添加时间
-                                    </th>
-                                    <th>
-                                        状态
-                                    </th>
-                                    <th>
-                                        操作
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        Herman Beck
-                                    </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
-                                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        $ 77.99
-                                    </td>
-                                    <td>
-                                        May 15, 2015
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            位置
+                                        </th>
+                                        <th>
+                                            链接类型
+                                        </th>
+                                        <th>
+                                            链接目标页名称
+                                        </th>
+                                        <th>
+                                            图片预览
+                                        </th>
+                                        <th>
+                                            添加时间
+                                        </th>
+                                        <th>
+                                            状态
+                                        </th>
+                                        <th>
+                                            操作
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            Herman Beck
+                                        </td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: 25%"
+                                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            $ 77.99
+                                        </td>
+                                        <td>
+                                            May 15, 2015
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -252,14 +257,13 @@
                 $("#addImg").text("添加" + $(this).text().trim());
                 $("#btnGroup>button").removeClass("active");
                 $(this).addClass("active");
-                $("#frame_refresh").load("/management/recommend/ads/refresh?type="+$(this).text().trim(),function () {
-                    var oFileInput = new FileInput();
-                    oFileInput.Init("logo", "/api/OrderApi/ImportOrder");
+                $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + $(this).text().trim(), function (data) {
+                    initFileInput("logo", "/api/OrderApi/ImportOrder");
                 });
             });
         });
         //默认选择第一button
-        if (count=== $("#btnGroup>button").length){
+        if (count === $("#btnGroup>button").length) {
             let elementObj = $("#btnGroup>button").first();
             elementObj.addClass("active");
             $("#addImg").text("添加" + elementObj.text().trim());
@@ -267,60 +271,53 @@
         }
         //初始化fileinput插件
         //0.初始化fileinput
-        var oFileInput = new FileInput();
-        oFileInput.Init("logo", "/api/OrderApi/ImportOrder");
+        initFileInput("logo", "/api/OrderApi/ImportOrder");
     });
 
     //初始化fileinput
-    var FileInput = function () {
-        var oFile = new Object();
-
-        //初始化fileinput控件（第一次初始化）
-        oFile.Init = function (ctrlName, uploadUrl) {
-            var control = $('#' + ctrlName);
-
-            //初始化上传控件的样式
-            control.fileinput({
-                language: 'zh', //设置语言
-                uploadUrl: '/api/OrderApi/ImportOrder', //上传的地址,影响略缩图上的删除和上传按钮
-                allowedFileExtensions: ['jpg', 'png'],//接收的文件后缀
-                showUpload: false, //是否显示上传按钮
-                showCaption: false,//是否显示标题
-                browseClass: "btn btn-primary", //按钮样式
-                dropZoneEnabled: true,//是否显示拖拽区域
-                showCancel: false,
-                minImageWidth: 750, //图片的最小宽度
-                minImageHeight: 350,//图片的最小高度
-                maxImageWidth: 750,//图片的最大宽度
-                maxImageHeight: 350,//图片的最大高度
-                maxFileSize: 200,//单位为kb，如果为0表示不限制文件大小
-                minFileCount: 1,
-                maxFileCount: 1, //表示允许同时上传的最大文件个数
-                enctype: 'multipart/form-data',
-                validateInitialCount: true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-                layoutTemplates: {
+    function initFileInput(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
+        //初始化上传控件的样式
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: uploadUrl, //上传的地址,影响略缩图上的删除和上传按钮
+            allowedFileExtensions: ['jpg', 'png'],//接收的文件后缀
+            showUpload: false, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: true,//是否显示拖拽区域
+            showCancel: false,
+            minImageWidth: 750, //图片的最小宽度
+            minImageHeight: 350,//图片的最小高度
+            maxImageWidth: 750,//图片的最大宽度
+            maxImageHeight: 350,//图片的最大高度
+            maxFileSize: 200,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 1,
+            maxFileCount: 1, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            layoutTemplates: {
 //                    actionDelete:'', //去除上传预览的缩略图中的删除图标
 //                    actionUpload:'',//去除上传预览缩略图中的上传图片；
 //                    actionZoom:'<i class="mdi mdi-user-box-outline"></i>'   //去除上传预览缩略图中的查看详情预览的缩略图标。
-                }
-            });
-            //导入文件上传完成之后的事件
-            $("#avatar").on("fileuploaded", function (event, data, previewId, index) {
-                $("#myModal").modal("hide");
-                var data = data.response.lstOrderImport;
-                if (data == undefined) {
-                    toastr.error('文件格式类型不正确');
-                    return;
-                }
-                //1.初始化表格
-                var oTable = new TableInit();
-                oTable.Init(data);
-                $("#div_startimport").show();
-            });
-        };
-        return oFile;
+            }
+        });
+        //导入文件上传完成之后的事件
+        $("#avatar").on("fileuploaded", function (event, data, previewId, index) {
+            $("#myModal").modal("hide");
+            var data = data.response.lstOrderImport;
+            if (data == undefined) {
+                toastr.error('文件格式类型不正确');
+                return;
+            }
+            //1.初始化表格
+            var oTable = new TableInit();
+            oTable.Init(data);
+            $("#div_startimport").show();
+        });
+
     };
 </script>
 </body>
