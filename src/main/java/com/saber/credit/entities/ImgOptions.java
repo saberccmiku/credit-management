@@ -11,6 +11,10 @@ public class ImgOptions {
     private double size;
     private String url;
 
+
+    public ImgOptions() {
+    }
+
     public ImgOptions(String name, double width, double height, double size, String url) {
         this.name = name;
         this.width = width;
@@ -57,5 +61,16 @@ public class ImgOptions {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "ImgOptions{" +
+                "name='" + name + '\'' +
+                ", width=" + width +
+                ", height=" + height +
+                ", size=" + size +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

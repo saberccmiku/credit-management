@@ -23,10 +23,7 @@ public class AdsController extends BaseController {
 
     @GetMapping(value = "/recommend/ads")
     public String list(Model model){
-        initPage(model);
-        initEnumerate(model,"IMG_RECOMMEND");
-        return "recommend/ads";
-
+        return loadData(model,"轮播图","recommend/ads");
     }
 
     @GetMapping(value = "/recommend/ads/refresh")
@@ -35,6 +32,7 @@ public class AdsController extends BaseController {
     }
 
     public String loadData(Model model,String type,String view){
+        initPage(model);
         initEnumerate(model,"IMG_RECOMMEND");
         Map<String,ImgOptions> map =new HashMap<>();
         map.put("轮播图",new ImgOptions("轮播图",750,350,200,""));

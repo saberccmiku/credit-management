@@ -105,29 +105,26 @@
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-4 col-form-label ant-form-item-required">跳转类型：</label>
-                                                                            <div class="col-sm-9 row">
-                                                                                <div class="form-check form-check-info">
-                                                                                    <label class="form-check-label">
+                                                                            <div class="col-sm-9 row mt-3">
+                                                                                <div>
+                                                                                    <label>
                                                                                         <input type="radio"
-                                                                                               class="form-check-input rounded"
                                                                                                name="jumpType" value="无"
                                                                                                checked>
                                                                                         无
                                                                                     </label>
                                                                                 </div>
-                                                                                <div class="form-check ml-2 form-check-info  ml-3">
-                                                                                    <label class="form-check-label">
+                                                                                <div class="ml-3">
+                                                                                    <label>
                                                                                         <input type="radio"
-                                                                                               class="form-check-input"
                                                                                                name="jumpType"
                                                                                                value="产品详细页">
                                                                                         产品详细页
                                                                                     </label>
                                                                                 </div>
-                                                                                <div class="form-check ml-2 form-check-info ml-3">
-                                                                                    <label class="form-check-label">
+                                                                                <div class="ml-3">
+                                                                                    <label>
                                                                                         <input type="radio"
-                                                                                               class="form-check-input"
                                                                                                name="jumpType"
                                                                                                value="H5链接">
                                                                                         H5链接
@@ -137,9 +134,9 @@
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
-                                                                            <div class="col-sm-9 row">
+                                                                            <div class="col-sm-9 row mt-2">
                                                                                 <ul>
-                                                                                    <li>尺寸：<span class="text-danger">750px * 350px</span>
+                                                                                    <li>尺寸：<span class="text-danger" th:text="${#numbers.formatDecimal(imgOptions.width,0,0)+'px * '+#numbers.formatDecimal(imgOptions.height,0,0)+'px'}"></span>
                                                                                     </li>
                                                                                     <li>大小：<span
                                                                                             class="text-danger">200k</span>以下
@@ -267,7 +264,7 @@
             let elementObj = $("#btnGroup>button").first();
             elementObj.addClass("active");
             $("#addImg").text("添加" + elementObj.text().trim());
-            //$("#frame_refresh").load("/management/recommend/ads/refresh?type="+elementObj.text().trim());
+            $("#frame_refresh").load("/management/recommend/ads/refresh?type="+elementObj.text().trim());
         }
         //初始化fileinput插件
         //0.初始化fileinput
