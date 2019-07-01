@@ -147,12 +147,7 @@
         $("[data-toggle='tooltip']").tooltip();
 
         //给开关应用样式
-        let productList = [[${products}]];
-        for (let i = 0; i < productList.length; i++) {
-            let product = productList[i];
-            //初始化列表的开关按钮
-            initBootstrapSwitch(product);
-        }
+        loadBootstrapSwitch();
 
         /*
          * 页面加载初始化分页
@@ -162,10 +157,22 @@
             totalCount: [[${pageInfo.total}]],
             showCount: 10,
             limit: [[${pageInfo.pageSize}]],
-            refreshUrl:"/management/product/products/refresh"
+            refreshUrl:"/management/product/products/refresh",
+            reloadWidget:function () {
+                loadBootstrapSwitch();
+            }
         });
 
     });
+
+    function loadBootstrapSwitch() {
+        let productList = [[${products}]];
+        for (let i = 0; i < productList.length; i++) {
+            let product = productList[i];
+            //初始化列表的开关按钮
+            initBootstrapSwitch(product);
+        }
+    }
 
     function initBootstrapSwitch(product) {
         var bootstrapSwitchName = "isShow" + product.id;

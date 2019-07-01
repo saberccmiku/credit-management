@@ -13741,6 +13741,9 @@ button.close {
   .modal-sm {
     max-width: 300px;
   }
+  .modal-md {
+    max-width: 50%;
+  }
 }
 
 @media (min-width: 992px) {
