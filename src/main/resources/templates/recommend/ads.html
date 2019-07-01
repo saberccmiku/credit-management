@@ -52,7 +52,7 @@
                                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <form id="form" class="forms-sample needs-validation"
-                                          th:action="@{/user/sendMessage}"
+                                          th:action="@{/recommend/ads/save}"
                                           method="post" novalidate>
                                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                             <div class="modal-content bg-white">
@@ -75,17 +75,12 @@
                                                                 <div class="col-md-7">
                                                                     <div class="card-body">
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">通知类型：</label>
+                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">选择位置：</label>
                                                                             <div class="col-sm-8 row">
                                                                                 <div class="form-group">
-                                                                                    <select class="custom-select h6"
-                                                                                            name="messageType"
-                                                                                            id="messageType"
-                                                                                            required>
-                                                                                        <option value="" disabled
-                                                                                                selected
-                                                                                                hidden>
-                                                                                            请选择通知类型
+                                                                                    <select class="custom-select h6" name="position" id="position" required>
+                                                                                        <option value="" disabled selected hidden>
+                                                                                            请选择位置
                                                                                         </option>
                                                                                         <option>
                                                                                             位置1
@@ -98,48 +93,43 @@
                                                                                         </option>
                                                                                     </select>
                                                                                     <div class="invalid-feedback">
-                                                                                        请选择通知类型
+                                                                                        请选择位置
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">跳转类型：</label>
+                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">链接类型：</label>
                                                                             <div class="col-sm-9 row mt-3">
                                                                                 <div>
                                                                                     <label>
-                                                                                        <input type="radio"
-                                                                                               name="jumpType" value="无"
-                                                                                               checked>
+                                                                                        <input type="radio" name="linkType" value="无" checked>
                                                                                         无
                                                                                     </label>
                                                                                 </div>
                                                                                 <div class="ml-3">
                                                                                     <label>
-                                                                                        <input type="radio"
-                                                                                               name="jumpType"
-                                                                                               value="产品详细页">
+                                                                                        <input type="radio" name="linkType" value="产品详细页">
                                                                                         产品详细页
                                                                                     </label>
                                                                                 </div>
                                                                                 <div class="ml-3">
                                                                                     <label>
-                                                                                        <input type="radio"
-                                                                                               name="jumpType"
-                                                                                               value="H5链接">
+                                                                                        <input type="radio" name="linkType" value="H5链接">
                                                                                         H5链接
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">通知内容：</label>
+                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">图片要求：</label>
                                                                             <div class="col-sm-9 row mt-2">
                                                                                 <ul>
-                                                                                    <li>尺寸：<span class="text-danger" th:text="${#numbers.formatDecimal(imgOptions.width,0,0)+'px * '+#numbers.formatDecimal(imgOptions.height,0,0)+'px'}"></span>
+                                                                                    <li>尺寸：<span class="text-danger"
+                                                                                                 th:text="${#numbers.formatDecimal(imgOptions.width,0,0)+'px * '+#numbers.formatDecimal(imgOptions.height,0,0)+'px'}"></span>
                                                                                     </li>
                                                                                     <li>大小：<span
-                                                                                            class="text-danger">200k</span>以下
+                                                                                            class="text-danger">[[${#numbers.formatDecimal(imgOptions.size,0,0)+'k'}]]</span>以下
                                                                                         格式：PNG、JPG
                                                                                     </li>
                                                                                 </ul>
@@ -161,7 +151,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered text-center table-hover">
                                     <thead>
                                     <tr>
                                         <th>
@@ -188,12 +178,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr th:each="advert:${adverts}">
                                         <td>
-                                            1
+                                            [[${advert.position}]]
                                         </td>
                                         <td>
-                                            Herman Beck
+                                            [[${advert.linkType}]]
                                         </td>
                                         <td>
                                             <div class="progress">
@@ -203,10 +193,17 @@
                                             </div>
                                         </td>
                                         <td>
-                                            $ 77.99
+                                            <img  th:src="@{/asserts/images/faces/face3.jpg}" src=""/>
                                         </td>
                                         <td>
-                                            May 15, 2015
+                                            [[${#dates.format(advert.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
+                                        </td>
+                                        <td>
+                                            [[${advert.status}]]
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-sm btn-gradient-info" data-toggle="modal"
+                                               data-target="#exampleModalCenter">编辑</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -242,7 +239,33 @@
 <!-- End custom js for this page-->
 <script th:inline="javascript">
 
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+
     $(function () {
+
+        //操作回调显示
+        let msg = [[${msg}]];
+        if (msg !== null) {
+            swal("发送成功!", "返回列表信息!", "success");
+        }
 
         //获取当前推荐图标选择的类型
         let count = 0;//标记btn的活跃数量
@@ -264,11 +287,13 @@
             let elementObj = $("#btnGroup>button").first();
             elementObj.addClass("active");
             $("#addImg").text("添加" + elementObj.text().trim());
-            $("#frame_refresh").load("/management/recommend/ads/refresh?type="+elementObj.text().trim());
+            $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + elementObj.text().trim(), function () {
+                //初始化fileinput插件
+                //0.初始化fileinput
+                initFileInput("logo", "/api/OrderApi/ImportOrder");
+            });
         }
-        //初始化fileinput插件
-        //0.初始化fileinput
-        initFileInput("logo", "/api/OrderApi/ImportOrder");
+
     });
 
     //初始化fileinput
