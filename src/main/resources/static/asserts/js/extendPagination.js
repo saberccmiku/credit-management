@@ -7,12 +7,8 @@
 
             totalCount: 10,
             showCount: 10,
-            limit: 10,
-            callback:function (curr, limit, totalCount) {
-                // 装载局部刷新返回的页面
-                $('#frame').load("url");
-            }
-
+            limit: 10
+            refreshUrl:""
         });
  */
 (function ($) {
@@ -22,7 +18,10 @@
             totalCount: '',
             showPage: '10',
             limit: '5',
-            callback: function () {
+            refreshUrl:"#",
+            callback: function (curr, limit, totalCount) {
+                // 装载局部刷新返回的页面
+                $('#table_refresh').load(defaults.refreshUrl+"?page="+curr+"&limit="+limit);
                 return false;
             }
         };
@@ -168,5 +167,22 @@
                 });
             });
         }
+        //pagination触发事件
+        $('#pagination').change(function () {
+            let limit = this.value;
+            // 装载局部刷新返回的页面
+            $('#table_refresh').load(defaults.refreshUrl+"?page=1&limit="+limit);
+        });
+
+
+        //回车搜索
+        $('#toPage').bind('keydown', function (event) {
+            var event = window.event || arguments.callee.caller.arguments[0];
+            if (event.keyCode === 13){
+                let toPage = $('#toPage').val()
+                // 装载局部刷新返回的页面
+                $('#table_refresh').load(defaults.refreshUrl+"?page="+toPage+"&limit="+defaults.limit);
+            }
+        });
     };
 })(jQuery);
