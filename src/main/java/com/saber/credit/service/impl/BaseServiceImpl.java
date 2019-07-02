@@ -27,6 +27,11 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
     }
 
     @Override
+    public List<T> query(T t) {
+        return baseMapper.query(t);
+    }
+
+    @Override
     public T queryById(String id) {
         return baseMapper.queryById(id);
     }

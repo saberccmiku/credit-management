@@ -19,8 +19,9 @@
         select <include refid="Base_Column_List"/> from ADVERT where id = #{id}
     </select>
 
-    <select id="query" resultType="com.saber.credit.entities.Advert">
-        select <include refid="Base_Column_List"/>  from ADVERT
+    <select id="query" parameterType="com.saber.credit.entities.Advert" resultType="com.saber.credit.entities.Advert">
+        select <include refid="Base_Column_List"/>  from ADVERT WHERE 1=1
+        <if test="func!=null">AND FUNC = #{func}</if>
     </select>
 
     <insert id="insert" parameterType="com.saber.credit.entities.Advert">
