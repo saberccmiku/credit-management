@@ -7,9 +7,7 @@ import com.saber.credit.service.impl.AdvertServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +49,16 @@ public class AdsController extends BaseController {
     }
 
     @PostMapping(value = "/recommend/ads/save")
-    public String save(Model model, Advert advert,Map<String,Object> map) {
+    public String save(Model model, Advert advert) {
         advertService.insert(advert);
-        map.put("msg","success");
+        model.addAttribute("msg","success");
+        return list(model);
+    }
+
+    @PutMapping("/advert/update")
+    public String update(Model model,@RequestBody Advert advert){
+        advertService.update(advert);
+        model.addAttribute("msg","success");
         return list(model);
     }
 

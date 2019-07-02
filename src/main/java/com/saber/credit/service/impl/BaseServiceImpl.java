@@ -40,6 +40,9 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(T t) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        t.setLastChangeUser(loginUser.getId());
+        t.setLastChangeDate(new Date());
         baseMapper.update(t);
     }
 
