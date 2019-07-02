@@ -98,7 +98,7 @@ public class UserController extends BaseController {
         return loadData(model,page,limit,"frame_refresh");
     }
 
-    private String loadData(Model model,@RequestParam(value = "page",defaultValue = "1") Integer page, @RequestParam(value = "limit",defaultValue = "10") Integer limit,String view){
+    private String loadData(Model model,Integer page,Integer limit,String view){
         initPage(model);
         PageHelper.startPage(page, limit);
         List<User> userList = userService.queryDetail();
@@ -112,7 +112,7 @@ public class UserController extends BaseController {
         model.addAttribute("users", userList);
         PageInfo<User> pageInfo = new PageInfo<>(userList);
         model.addAttribute("pageInfo", pageInfo);
-        return userList(model,page,limit);
+        return view;
     }
 
 }
