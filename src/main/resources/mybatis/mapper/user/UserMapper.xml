@@ -55,9 +55,9 @@
     </select>
 
     <select id="queryProductFlow" resultType="com.saber.credit.entities.Product">
-        SELECT f.ID id,f.GOODS_ID goodsId,f.USER_ID userId,f.CLICK_COUNT clickCount,f.READ_COUNT readCount,f.CREATE_DATE readDate,e.VALUE name
-        from GOODS_FLOW f
-        LEFT JOIN ENUMERATE e on e.id = f.GOODS_ID
+        SELECT f.ID id,f.PRODUCT_ID productId,f.USER_ID userId,f.CLICK_COUNT clickCount,f.READ_COUNT readCount,f.CREATE_DATE readDate,e.VALUE name
+        from PRODUCT_FLOW f
+        LEFT JOIN ENUMERATE e on e.id = f.PRODUCT_ID
         WHERE f.USER_ID = #{userId}
     </select>
 

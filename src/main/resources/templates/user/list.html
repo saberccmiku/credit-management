@@ -121,25 +121,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <form class="d-sm-flex justify-content-end">
-                                    <span class="text-muted text-center text-sm-right d-block d-sm-inline-block">共0条数据
-                                      <i class="btn mdi mdi-chevron-double-left btn-sm" href="#"></i>
-                                        <a class="btn btn-sm btn-outline-dark">1</a>
-                                        <a class="btn btn-sm btn-outline-dark">···</a>
-                                        <a class="btn btn-sm btn-outline-dark">10</a>
-                                      <i class="btn mdi mdi-chevron-double-right btn-sm"  href="#"></i>
-                                          <div class="btn-group">
-                                                <select class="custom-select">
-                                                  <option selected value="1">10 条/页</option>
-                                                  <option value="2">20 条/页</option>
-                                                  <option value="3">30 条/页</option>
-                                                </select>
-                                          </div>
-                                        <a class="mr-2 ml-2">跳至</a>
-                                        <input type="email" class="form-control form-control-sm col-1 btn-group" id="pageNum" aria-describedby="pageNum" placeholder="">
-                                        <a class="mr-4 ml-2">页</a>
-                                    </span>
-                                </form>
+                                <div id="callBackPager" class="float-right"></div>
                             </div>
                         </div>
                     </div>
@@ -167,6 +149,23 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
+<script th:inline="javascript">
+    $(function () {
+        /*
+         * 页面加载初始化分页
+         */
+
+        $('#callBackPager').extendPagination({
+            totalCount: [[${pageInfo.total}]],
+            showCount: 10,
+            limit: [[${pageInfo.pageSize}]],
+            refreshUrl:"/management/account/refresh",
+            reloadWidget:function () {
+               //刷新页面后需要初始化的组件
+            }
+        });
+    })
+</script>
 </body>
 
 </html>

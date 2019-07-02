@@ -21,7 +21,7 @@ public interface UserService extends BaseService<User> {
      * 查询用户管理列表界面的用户信息
      * @return userList
      */
-    List<User> queryDetail(Integer page,Integer limit);
+    List<User> queryDetail();
     /**
      * 根据登录账号获查询用户浏览过的产品记录
      * @param userId 登录账号

@@ -24,8 +24,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public List<User> queryDetail(Integer page,Integer limit) {
-        return userMapper.queryDetail(page,page);
+    public List<User> queryDetail() {
+        return userMapper.queryDetail();
     }
 
     @Override
