@@ -19,18 +19,35 @@
         select <include refid="Base_Column_List"/> from ADVERT where id = #{id}
     </select>
 
-    <select id="query" resultType="com.saber.credit.entities.Advert">
-        select <include refid="Base_Column_List"/>  from ADVERT
+    <select id="query" parameterType="com.saber.credit.entities.Advert" resultType="com.saber.credit.entities.Advert">
+        select <include refid="Base_Column_List"/>  from ADVERT WHERE 1=1
+        <if test="func!=null">AND FUNC = #{func}</if>
     </select>
 
-    <insert id="insert">
+    <insert id="insert" parameterType="com.saber.credit.entities.Advert">
         INSERT INTO ADVERT (ID,CREATE_USER,CREATE_DATE,POSITON,LINK_TYPE,TARGET_NAME,IMG,STATUS,FUNC) VALUES
         (#{id},#{createUser},#{createDate},#{position},#{linkType},#{targetName},#{img},'是',#{func})
     </insert>
 
-    <delete id="delete">
+    <delete id="delete" parameterType="com.saber.credit.entities.Advert">
         DELETE FROM ADVERT WHERE ID = #{id}
     </delete>
+
+    <update id="update" parameterType="com.saber.credit.entities.Advert">
+        UPDATE ADVERT
+        <trim prefix="set" suffixOverrides=",">
+            <if test="lastChangeUser!=null">LAST_CHANGE_USER=#{lastChangeUser},</if>
+            <if test="lastChangeDate!=null">LAST_CHANGE_DATE=#{lastChangeDate},</if>
+            <if test="delFlag!=null">DEL_FLAG=#{delFlag},</if>
+            <if test="position!=null">POSITON=#{position},</if>
+            <if test="linkType!=null">LINK_TYPE=#{linkType},</if>
+            <if test="targetName!=null">TARGET_NAME=#{targetName},</if>
+            <if test="img!=null">IMG=#{img,</if>
+            <if test="status!=null">STATUS=#{status},</if>
+            <if test="func!=null">FUNC=#{func},</if>
+        </trim>
+        WHERE ID = #{id}
+    </update>
 
 
 </mapper>

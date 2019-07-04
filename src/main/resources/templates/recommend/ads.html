@@ -12,6 +12,7 @@
     <!-- endinject -->
     <!-- plugin css for this page -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-fileinput/css/fileinput.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-switch/3.3.2/css/bootstrap3/bootstrap-switch.css}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
@@ -74,22 +75,28 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                     <div class="card-body">
+                                                                        <div class="form-group row" th:if="${advert}!=null" hidden>
+                                                                            <label for="id" class="col-sm-4 col-form-label ant-form-item-required">id：</label>
+                                                                            <div class="col-sm-9 row mt-2">
+                                                                                <input id="id" name="id">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row" hidden>
+                                                                            <label for="func" class="col-sm-4 col-form-label ant-form-item-required">功能用途：</label>
+                                                                            <div class="col-sm-9 row mt-2">
+                                                                                <input id="func" name="func" th:value="${selectPosition.value}">
+                                                                            </div>
+                                                                        </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-4 col-form-label ant-form-item-required">选择位置：</label>
+                                                                            <label for="position" class="col-sm-4 col-form-label ant-form-item-required">选择位置：</label>
                                                                             <div class="col-sm-8 row">
                                                                                 <div class="form-group">
                                                                                     <select class="custom-select h6" name="position" id="position" required>
                                                                                         <option value="" disabled selected hidden>
                                                                                             请选择位置
                                                                                         </option>
-                                                                                        <option>
-                                                                                            位置1
-                                                                                        </option>
-                                                                                        <option>
-                                                                                            位置2
-                                                                                        </option>
-                                                                                        <option>
-                                                                                            位置3
+                                                                                        <option th:each="position:${selectPosition.itemList}">
+                                                                                            [[${position.value}]]
                                                                                         </option>
                                                                                     </select>
                                                                                     <div class="invalid-feedback">
@@ -199,7 +206,8 @@
                                             [[${#dates.format(advert.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
                                         </td>
                                         <td>
-                                            [[${advert.status}]]
+                                            <input type="checkbox" th:name="${'status'+advert.id}"
+                                                   th:id="${'status'+advert.id}">
                                         </td>
                                         <td>
                                             <a class="btn btn-sm btn-gradient-info" data-toggle="modal"
@@ -230,10 +238,10 @@
 <!-- Plugin js for this page-->
 <script th:src="@{/webjars/bootstrap-fileinput/js/fileinput.js}"></script>
 <script th:src="@{/webjars/bootstrap-fileinput/js/locales/zh.js}"></script>
+<script th:src="@{/webjars/bootstrap-switch/3.3.2/js/bootstrap-switch.js}"></script>
+<script th:src="@{/asserts/js/sweetalert.min.js}"></script>
 <!-- End plugin js for this page-->
 <!-- inject:js -->
-<script th:src="@{/asserts/js/off-canvas.js}"></script>
-<script th:src="@{/asserts/js/misc.js}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
@@ -267,38 +275,34 @@
             swal("发送成功!", "返回列表信息!", "success");
         }
 
-        //获取当前推荐图标选择的类型
-        let count = 0;//标记btn的活跃数量
+        //获取当前推荐图标选择的类型,注意使用了第三方组件一定要在load函数的回调方法里面重新加载
+        let currentPage = [[${selectPosition.value}]];
         $("#btnGroup>button").each(function () {
-            if (!$(this).hasClass("active")) {
-                count++;
+            if ($(this).text().trim()===currentPage){
+                $(this).addClass("active");
             }
             $(this).click(function () {
                 $("#addImg").text("添加" + $(this).text().trim());
                 $("#btnGroup>button").removeClass("active");
                 $(this).addClass("active");
                 $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + $(this).text().trim(), function (data) {
+                    alert([[${type}]])
                     initFileInput("logo", "/api/OrderApi/ImportOrder");
+                    loadBootstrapSwitch([[${adverts}]]);
                 });
             });
         });
-        //默认选择第一button
-        if (count === $("#btnGroup>button").length) {
-            let elementObj = $("#btnGroup>button").first();
-            elementObj.addClass("active");
-            $("#addImg").text("添加" + elementObj.text().trim());
-            $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + elementObj.text().trim(), function () {
-                //初始化fileinput插件
-                //0.初始化fileinput
-                initFileInput("logo", "/api/OrderApi/ImportOrder");
-            });
-        }
+
+        //初始化上传附件
+        initFileInput("logo", "/api/OrderApi/ImportOrder");
+        //初始化选择开关
+        loadBootstrapSwitch([[${adverts}]]);
 
     });
 
-    //初始化fileinput
+    //初始化fileInput
     function initFileInput(ctrlName, uploadUrl) {
-        var control = $('#' + ctrlName);
+        let control = $('#' + ctrlName);
         //初始化上传控件的样式
         control.fileinput({
             language: 'zh', //设置语言
@@ -340,7 +344,45 @@
             $("#div_startimport").show();
         });
 
-    };
+    }
+
+    function loadBootstrapSwitch(adverts) {
+        for (let i = 0; i < adverts.length; i++) {
+            let advert = adverts[i];
+            //初始化列表的开关按钮
+            initBootstrapSwitch(advert);
+        }
+    }
+
+    function initBootstrapSwitch(advert) {
+        var bootstrapSwitchName = "status" + advert.id;
+        $("[name='" + bootstrapSwitchName + "']").bootstrapSwitch({
+            state: advert.status === "是",
+            size: 'mini',
+            onColor: "primary",
+            offColor: "warning",
+            onText: "显示",
+            offText: "隐藏",
+            labelWidth: 15,
+            onSwitchChange: function () {
+
+                //.prop方法查看input的checked属性，即使查看其开关状态
+                var checkedOfAll = $("#" + bootstrapSwitchName).prop("checked");
+                if (checkedOfAll){
+                    advert.status ='是';
+                }else {
+                    advert.status ='否';
+                }
+                //向后台发送请求
+                $.ajax({
+                    url:"/management/advert/update",
+                    type:"PUT",
+                    contentType:"application/json",//设置请求参数类型为json字符串
+                    data:JSON.stringify(advert),//将json对象转换成json字符串发送
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>

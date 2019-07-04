@@ -5,6 +5,7 @@ package com.saber.credit.entities;
  */
 public class ImgOptions {
 
+    private String code;
     private String name;
     private double width;
     private double height;
@@ -15,12 +16,22 @@ public class ImgOptions {
     public ImgOptions() {
     }
 
-    public ImgOptions(String name, double width, double height, double size, String url) {
+    public ImgOptions(String code,String name, double width, double height, double size, String url) {
+        this.code = code;
         this.name = name;
         this.width = width;
         this.height = height;
         this.size = size;
         this.url = url;
+    }
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -63,14 +74,4 @@ public class ImgOptions {
         this.url = url;
     }
 
-    @Override
-    public String toString() {
-        return "ImgOptions{" +
-                "name='" + name + '\'' +
-                ", width=" + width +
-                ", height=" + height +
-                ", size=" + size +
-                ", url='" + url + '\'' +
-                '}';
-    }
 }

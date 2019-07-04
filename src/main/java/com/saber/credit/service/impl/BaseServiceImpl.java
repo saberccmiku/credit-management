@@ -27,6 +27,11 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
     }
 
     @Override
+    public List<T> query(T t) {
+        return baseMapper.query(t);
+    }
+
+    @Override
     public T queryById(String id) {
         return baseMapper.queryById(id);
     }
@@ -40,6 +45,9 @@ public class BaseServiceImpl<T extends BaseBean> implements BaseService<T> {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(T t) {
+        User loginUser = (User) session.getAttribute("loginUser");
+        t.setLastChangeUser(loginUser.getId());
+        t.setLastChangeDate(new Date());
         baseMapper.update(t);
     }
 

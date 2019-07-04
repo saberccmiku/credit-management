@@ -16,7 +16,8 @@
     </sql>
 
     <select id="query" resultType="com.saber.credit.entities.Product">
-        select <include refid="Base_Column_List"/>  from PRODUCT
+        select <include refid="Base_Column_List"/>  from PRODUCT WHERE 1=1
+        <if test="isShow!=null"> AND IS_SHOW = #{isShow}</if>
     </select>
 
     <select id="queryById" resultType="com.saber.credit.entities.Product">

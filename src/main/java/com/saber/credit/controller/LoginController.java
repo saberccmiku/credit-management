@@ -5,6 +5,7 @@ import com.saber.credit.service.impl.UserServiceImpl;
 import com.saber.credit.util.MD5Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +24,7 @@ public class LoginController {
     private UserServiceImpl userService;
 
     @PostMapping(value = "/user/login")
-    public String Login(@RequestParam("userName") String userName, @RequestParam("password") String password, Map<String, Object> map, HttpSession session) throws NoSuchAlgorithmException {
+    public String login(@RequestParam("userName") String userName, @RequestParam("password") String password, Map<String, Object> map, HttpSession session) throws NoSuchAlgorithmException {
         User user = userService.queryByUserIdOrPhone(userName);
         if (user != null && user.getPassword().equals(MD5Helper.MD5Digest(password))) {
             session.setAttribute("loginUser", user);
@@ -32,6 +33,13 @@ public class LoginController {
             map.put("msg", "账户或者密码错误");
             return "login";
         }
+    }
+
+
+    @GetMapping("/user/loginOut")
+    public String loginOut(HttpSession session){
+        session.removeAttribute("loginUser");
+        return "redirect:/login";
     }
 
 }

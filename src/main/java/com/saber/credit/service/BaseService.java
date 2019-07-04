@@ -13,6 +13,11 @@ public interface BaseService<T> {
       */
      List<T> query();
      /**
+      * 查询符合条件的所有数据
+      * @return 所有数据的集合
+      */
+     List<T> query(T t);
+     /**
       * 通过id查询数据
       * @return 该id对应的数据
       */
