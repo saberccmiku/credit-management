@@ -4,7 +4,7 @@ spring:
   # 数据源基本配置
     username: root
     password: passw0rd
-    url: jdbc:mysql://47.110.59.149:3306/idoc?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+    url: jdbc:mysql://47.110.59.149:3307/idoc?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   # 数据源其他配置
