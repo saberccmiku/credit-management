@@ -216,6 +216,9 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <script th:inline="javascript">
+                                    advertsData = [[${adverts}]];
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -247,6 +250,7 @@
 <!-- End custom js for this page-->
 <script th:inline="javascript">
 
+    var advertsData = [[${adverts}]];
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -286,9 +290,8 @@
                 $("#btnGroup>button").removeClass("active");
                 $(this).addClass("active");
                 $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + $(this).text().trim(), function (data) {
-                    alert([[${type}]])
                     initFileInput("logo", "/api/OrderApi/ImportOrder");
-                    loadBootstrapSwitch([[${adverts}]]);
+                    loadBootstrapSwitch(advertsData);
                 });
             });
         });
@@ -296,7 +299,7 @@
         //初始化上传附件
         initFileInput("logo", "/api/OrderApi/ImportOrder");
         //初始化选择开关
-        loadBootstrapSwitch([[${adverts}]]);
+        loadBootstrapSwitch(advertsData);
 
     });
 
