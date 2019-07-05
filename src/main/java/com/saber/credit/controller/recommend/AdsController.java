@@ -1,6 +1,5 @@
 package com.saber.credit.controller.recommend;
 
-import com.github.pagehelper.PageHelper;
 import com.saber.credit.controller.BaseController;
 import com.saber.credit.entities.*;
 import com.saber.credit.service.impl.AdvertServiceImpl;
@@ -85,6 +84,11 @@ public class AdsController extends BaseController {
         advertService.update(advert);
         model.addAttribute("msg","success");
         return list(model,advert.getFunc());
+    }
+
+    @GetMapping("/advert/detail")
+    public String detail(Model model){
+        return loadData(model,null,"detail");
     }
 
 }
