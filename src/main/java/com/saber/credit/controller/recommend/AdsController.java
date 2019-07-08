@@ -86,11 +86,11 @@ public class AdsController extends BaseController {
 
 
     private void getSelectedPosition(Model model, String type, Map<String, ImgOptions> map) {
-        Enumerate enumerate;
+
         Product product = new Product();
         product.setIsShow("是");
         List<Product> products = productService.query(product);
-        enumerate = initEnumerate(map.get(type).getCode());
+        Enumerate enumerate = initEnumerate(map.get(type).getCode());
         model.addAttribute("products", products);
         model.addAttribute("imgOptions", map.get(type));
         model.addAttribute("selectPosition", enumerate);

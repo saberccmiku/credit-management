@@ -74,24 +74,17 @@
                                         <label class="col-sm-2 col-form-label ant-form-item-required">跳转类型 :</label>
                                         <div class="form-check form-check-info ml-4">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="linkType"
-                                                       value="无"
-                                                       checked>
-                                                无
+                                                <input type="radio" class="form-check-input" name="linkType" value="无" checked>无
                                             </label>
                                         </div>
                                         <div class="form-check ml-2 form-check-info">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="linkType"
-                                                       value="产品详情页">
-                                                产品详情页
+                                                <input type="radio" class="form-check-input" name="linkType" value="产品详情页">产品详情页
                                             </label>
                                         </div>
                                         <div class="form-check form-check-info ml-4">
                                             <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="linkType"
-                                                       value="H5链接">
-                                                H5链接
+                                                <input type="radio" class="form-check-input" name="linkType" value="H5链接">H5链接
                                             </label>
                                         </div>
                                     </div>
@@ -143,6 +136,18 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
+<script type="text/html" id="positionId">
+    <label for='position' class='col-sm-2 col-form-label ant-form-item-required'>选择位置：</label>
+    <div class='col-sm-4'>
+        <div class='form-group'>
+            <select class='custom-select h6' name='position' id='position' required>
+                <option value='' disabled selected hidden> 请选择位置</option>
+                <option th:each='product:${products}'> [[${product.name}]]</option>
+            </select>
+            <div class='invalid-feedback'> 请选择位置</div>
+        </div>
+    </div>
+</script>
 <script th:inline="javascript">
     $(function () {
         initFileInput("logo", "/api/OrderApi/ImportOrder");
@@ -154,13 +159,9 @@
                         $("#changeDiv").attr("hidden",true);
                         break;
                     case "产品详情页":
-                        $("#changeDiv").attr("hidden",false);
+                        $("#changeDiv").attr("hidden", false);
                         $("#changeDiv").empty();
-                        $("#changeDiv").append("<label for='name' class='col-sm-2 col-form-label ant-form-item-required'>产品详情页:</label>" +
-                            "<div class='col-sm-4'>" +
-                            "<input type='text' class='form-control rounded' id='name' name='name' placeholder='请输入产品详情页' required>" +
-                            "<div class='invalid-feedback'>" +
-                            "产品详情页 </div></div>");
+                        $("#changeDiv").html($("#positionId").html());
                         break;
                     case "H5链接":
                         $("#changeDiv").attr("hidden",false);
@@ -173,9 +174,11 @@
                         break;
                 }
             })
-        })
+        });
 
-    })
+        initViewData();
+
+    });
     //初始化fileinput
     function initFileInput(ctrlName, uploadUrl) {
         var control = $('#' + ctrlName);
@@ -224,9 +227,11 @@
 
     //UI赋值
     function initViewData() {
-
-        $('#selectPosition').selected()
-
+        $('#selectPosition').val([[${advert.position}]]);
+        $('input[name="linkType"][value="'+[[${advert.linkType}]]+'"]').attr("checked",true);
+        $('input[name="linkType"]').trigger("change");
+        $('#position').val([[${advert.linkContent}]]);
+        $('#name').val([[${advert.linkContent}]]);
     }
 </script>
 </body>
