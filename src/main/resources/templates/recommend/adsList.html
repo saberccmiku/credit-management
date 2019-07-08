@@ -75,24 +75,32 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                     <div class="card-body">
-                                                                        <div class="form-group row" th:if="${advert}!=null" hidden>
-                                                                            <label for="id" class="col-sm-4 col-form-label ant-form-item-required">id：</label>
+                                                                        <div class="form-group row"
+                                                                             th:if="${advert}!=null" hidden>
+                                                                            <label for="id"
+                                                                                   class="col-sm-4 col-form-label ant-form-item-required">id：</label>
                                                                             <div class="col-sm-9 row mt-2">
                                                                                 <input id="id" name="id">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row" hidden>
-                                                                            <label for="func" class="col-sm-4 col-form-label ant-form-item-required">功能用途：</label>
+                                                                            <label for="func"
+                                                                                   class="col-sm-4 col-form-label ant-form-item-required">功能用途：</label>
                                                                             <div class="col-sm-9 row mt-2">
-                                                                                <input id="func" name="func" th:value="${selectPosition.value}">
+                                                                                <input id="func" name="func"
+                                                                                       th:value="${selectPosition.value}">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label for="position" class="col-sm-4 col-form-label ant-form-item-required">选择位置：</label>
+                                                                            <label for="position"
+                                                                                   class="col-sm-4 col-form-label ant-form-item-required">选择位置：</label>
                                                                             <div class="col-sm-8 row">
                                                                                 <div class="form-group">
-                                                                                    <select class="custom-select h6" name="position" id="position" required>
-                                                                                        <option value="" disabled selected hidden>
+                                                                                    <select class="custom-select h6"
+                                                                                            name="position"
+                                                                                            id="position" required>
+                                                                                        <option value="" disabled
+                                                                                                selected hidden>
                                                                                             请选择位置
                                                                                         </option>
                                                                                         <option th:each="position:${selectPosition.itemList}">
@@ -110,24 +118,33 @@
                                                                             <div class="col-sm-9 row mt-3">
                                                                                 <div>
                                                                                     <label>
-                                                                                        <input type="radio" name="linkType" value="无" checked>
+                                                                                        <input type="radio"
+                                                                                               name="linkType" value="无"
+                                                                                               checked>
                                                                                         无
                                                                                     </label>
                                                                                 </div>
                                                                                 <div class="ml-3">
                                                                                     <label>
-                                                                                        <input type="radio" name="linkType" value="产品详细页">
-                                                                                        产品详细页
+                                                                                        <input type="radio"
+                                                                                               name="linkType"
+                                                                                               value="产品详情页">
+                                                                                        产品详情页
                                                                                     </label>
                                                                                 </div>
                                                                                 <div class="ml-3">
                                                                                     <label>
-                                                                                        <input type="radio" name="linkType" value="H5链接">
+                                                                                        <input type="radio"
+                                                                                               name="linkType"
+                                                                                               value="H5链接">
                                                                                         H5链接
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <!--根据上级选择变化-->
+                                                                        <div class="form-group row" id="changeDiv"
+                                                                             hidden></div>
                                                                         <div class="form-group row">
                                                                             <label class="col-sm-4 col-form-label ant-form-item-required">图片要求：</label>
                                                                             <div class="col-sm-9 row mt-2">
@@ -200,7 +217,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <img  th:src="@{/asserts/images/faces/face3.jpg}" src=""/>
+                                            <img th:src="@{/asserts/images/faces/face3.jpg}" src=""/>
                                         </td>
                                         <td>
                                             [[${#dates.format(advert.createDate, 'yyyy-MM-dd HH:mm:ss')}]]
@@ -210,8 +227,8 @@
                                                    th:id="${'status'+advert.id}">
                                         </td>
                                         <td>
-                                            <a class="btn btn-sm btn-gradient-info" data-toggle="modal"
-                                               data-target="#exampleModalCenter">编辑</a>
+                                            <a class="btn btn-sm btn-gradient-info"
+                                               th:href="@{/advert/detail/}+${selectPosition.value}+'/'+${advert.id}">编辑</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -248,9 +265,22 @@
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
+<script type="text/html" id="positionId">
+    <label for='position' class='col-sm-4 col-form-label ant-form-item-required'>选择位置：</label>
+    <div class='col-sm-8 row'>
+        <div class='form-group'>
+            <select class='custom-select h6' name='position' id='position' required>
+                <option value='' disabled selected hidden> 请选择位置</option>
+                <option th:each='product:${products}'> [[${product.name}]]</option>
+            </select>
+            <div class='invalid-feedback'> 请选择位置</div>
+        </div>
+    </div>
+</script>
 <script th:inline="javascript">
 
-    var advertsData = [[${adverts}]];
+    let advertsData = [[${adverts}]];
+    let currentPage = [[${selectPosition.value}]];
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -280,9 +310,9 @@
         }
 
         //获取当前推荐图标选择的类型,注意使用了第三方组件一定要在load函数的回调方法里面重新加载
-        let currentPage = [[${selectPosition.value}]];
         $("#btnGroup>button").each(function () {
-            if ($(this).text().trim()===currentPage){
+
+            if ($(this).text().trim() === currentPage) {
                 $(this).addClass("active");
             }
             $(this).click(function () {
@@ -292,6 +322,7 @@
                 $("#frame_refresh").load("/management/recommend/ads/refresh?type=" + $(this).text().trim(), function (data) {
                     initFileInput("logo", "/api/OrderApi/ImportOrder");
                     loadBootstrapSwitch(advertsData);
+                    initCheckRadioByLinkType();
                 });
             });
         });
@@ -300,6 +331,9 @@
         initFileInput("logo", "/api/OrderApi/ImportOrder");
         //初始化选择开关
         loadBootstrapSwitch(advertsData);
+
+        //根据链接类型加载不同选填框
+        initCheckRadioByLinkType();
 
     });
 
@@ -371,20 +405,46 @@
 
                 //.prop方法查看input的checked属性，即使查看其开关状态
                 var checkedOfAll = $("#" + bootstrapSwitchName).prop("checked");
-                if (checkedOfAll){
-                    advert.status ='是';
-                }else {
-                    advert.status ='否';
+                if (checkedOfAll) {
+                    advert.status = '是';
+                } else {
+                    advert.status = '否';
                 }
                 //向后台发送请求
                 $.ajax({
-                    url:"/management/advert/update",
-                    type:"PUT",
-                    contentType:"application/json",//设置请求参数类型为json字符串
-                    data:JSON.stringify(advert),//将json对象转换成json字符串发送
+                    url: "/management/advert/update",
+                    type: "PUT",
+                    contentType: "application/json",//设置请求参数类型为json字符串
+                    data: JSON.stringify(advert),//将json对象转换成json字符串发送
                 });
             }
         });
+    }
+
+    function initCheckRadioByLinkType() {
+        $('input[name="linkType"]').change(function () {
+            $('input[name="linkType"]:checked').each(function () {
+                switch ($(this).val()) {
+                    case "无":
+                        $("#changeDiv").attr("hidden", true);
+                        break;
+                    case "产品详情页":
+                        $("#changeDiv").attr("hidden", false);
+                        $("#changeDiv").empty();
+                        $("#changeDiv").html($("#positionId").html());
+                        break;
+                    case "H5链接":
+                        $("#changeDiv").attr("hidden", false);
+                        $("#changeDiv").empty();
+                        $("#changeDiv").append("<label for='name' class='col-sm-4 col-form-label ant-form-item-required'>链接地址:</label>" +
+                            "<div class='col-sm-8 row'>" +
+                            "<input type='text' class='form-control rounded' id='name' name='name' placeholder='https://www.baidu.com/' required>" +
+                            "<div class='text-danger'>推荐使用以https://开头的链接</div>" +
+                            "<div class='invalid-feedback'>页面名称 </div></div>");
+                        break;
+                }
+            })
+        })
     }
 </script>
 </body>

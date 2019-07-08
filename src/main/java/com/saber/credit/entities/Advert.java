@@ -12,6 +12,7 @@ public class Advert extends BaseBean{
     private String img;
     private String status;
     private String func;
+    private String linkContent;
 
     public String getPosition() {
         return position;
@@ -59,5 +60,13 @@ public class Advert extends BaseBean{
 
     public void setFunc(String func) {
         this.func = func;
+    }
+
+    public String getLinkContent() {
+        return linkContent;
+    }
+
+    public void setLinkContent(String linkContent) {
+        this.linkContent = linkContent;
     }
 }

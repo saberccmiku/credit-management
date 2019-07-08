@@ -12,7 +12,8 @@
         TARGET_NAME targetName,
         IMG img,
         STATUS status,
-        FUNC func
+        FUNC func,
+        LINK_CONTENT linkContent
     </sql>
 
     <select id="queryById" resultType="com.saber.credit.entities.Advert">
@@ -25,8 +26,8 @@
     </select>
 
     <insert id="insert" parameterType="com.saber.credit.entities.Advert">
-        INSERT INTO ADVERT (ID,CREATE_USER,CREATE_DATE,POSITON,LINK_TYPE,TARGET_NAME,IMG,STATUS,FUNC) VALUES
-        (#{id},#{createUser},#{createDate},#{position},#{linkType},#{targetName},#{img},'是',#{func})
+        INSERT INTO ADVERT (ID,CREATE_USER,CREATE_DATE,POSITON,LINK_TYPE,TARGET_NAME,IMG,STATUS,FUNC,LINK_CONTENT) VALUES
+        (#{id},#{createUser},#{createDate},#{position},#{linkType},#{targetName},#{img},'是',#{func},#{linkContent})
     </insert>
 
     <delete id="delete" parameterType="com.saber.credit.entities.Advert">
@@ -45,6 +46,7 @@
             <if test="img!=null">IMG=#{img,</if>
             <if test="status!=null">STATUS=#{status},</if>
             <if test="func!=null">FUNC=#{func},</if>
+            <if test="linkContent!=null">LINK_CONTENT=#{linkContent},</if>
         </trim>
         WHERE ID = #{id}
     </update>

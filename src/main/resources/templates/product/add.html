@@ -2,430 +2,506 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <<title>贷超管理系统</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
-  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
-  <link rel="stylesheet" th:href="@{/vendors/css/bootstrap-multiselect.css}">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap-fileinput/css/fileinput.css}">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
-  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <<title>贷超管理系统</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/bootstrap-multiselect.css}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-fileinput/css/fileinput.css}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
 </head>
 
 <body>
 <div class="container-scroller">
-  <!-- partial:../../partials/_navbar.html -->
-  <div th:replace="/commons/bar::topBar"></div>
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-    <!-- partial:../../partials/_sidebar.html -->
-    <div th:replace="/commons/bar::#sideBar"></div>
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="/commons/bar::topBar"></div>
     <!-- partial -->
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <div class="row">
-          <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <div class="page-header">
-                  <h3 class="page-title">
-                    请填写产品信息
-                  </h3>
-                  <a class="mdi mdi-backspace icon-md text-primary" th:href="@{/product/products}"></a>
-                </div>
-                <form class="needs-validation" method="post" th:action="@{/product}" novalidate>
-                  <!--合作方式-->
-                  <div class="form-group row">
-                      <label class="col-sm-2 col-form-label ant-form-item-required">合作方式 :</label>
-                        <div class="form-check form-check-info ml-4">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="cooperation"  value="CPA" checked>
-                            CPA
-                          </label>
-                        </div>
-                        <div class="form-check ml-2 form-check-info">
-                          <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="cooperation"  value="UV">
-                            UV
-                          </label>
-                        </div>
-                    </div>
-                  <!--结算周期-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label ant-form-item-required">结算周期</label>
-                    <div class="col-sm-4">
-                      <div class="form-group">
-                        <select class="custom-select" name="settlementCycle" required>
-                          <option value="" disabled selected hidden>结算周期未选择</option>
-                          <option th:each="enumerateItem:${enumerate.SETTLEMENT_CYCLE.itemList}">[[${enumerateItem.value}]]</option>
-                        </select>
-                        <div class="invalid-feedback">请选择结算周期</div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--价格-->
-                  <div class="form-group row">
-                    <label for="price" class="col-sm-2 col-form-label ant-form-item-required">价格 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="price" id="price" placeholder="请输入价格,可输入0-1000之间的整数或者小数" required>
-                      <div class="invalid-feedback">
-                        请填写价格
-                      </div>
-                    </div>
-                  </div>
-                  <!--产品名称-->
-                  <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label ant-form-item-required">产品名称 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="name" name="name" placeholder="请输入产品名称,最多7个字" required>
-                      <div class="invalid-feedback">
-                        请填写产品名称
-                      </div>
-                    </div>
-                  </div>
-                  <!--产品logo-->
-                  <div class="form-group row">
-                    <label for="logo" class="col-sm-2 col-form-label ant-form-item-required">产品logo :</label>
-                    <div class="col-sm-4">
-                      <input id="logo" name="logo" type="file" multiple  class="file-loading"  data-show-upload="false" data-show-caption="true">
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                    </div>
-                  </div>
-                  <!--产品简介-->
-                  <div class="form-group row">
-                    <label for="introduction" class="col-sm-2 col-form-label ant-form-item-required">产品简介 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" id="introduction" name="introduction" placeholder="请输入产品简介,最多12个字" required>
-                      <div class="invalid-feedback">
-                        请填写产品简介
-                      </div>
-                    </div>
-                  </div>
-                  <!--贷款利率-->
-                  <div class="form-group row">
-                    <label for="creditRate" class="col-sm-2 col-form-label ant-form-item-required">贷款利率 :</label>
-                    <div class="col-sm-4">
-                      <div class="form-inline">
-                        <input type="text" class="form-control rounded" id="creditRate" name="creditRate" placeholder="请填写贷款利率" required>
-                        <select class="custom-select ml-5" name="creditRateUnit">
-                          <option value="日利率">日利率</option>
-                          <option value="年利率">年利率</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          请填写贷款利率.
-                        </div>
-                      </div>
-                      <h6 class="mt-4">提示：<span class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
-                    </div>
-                  </div>
-                  <!--贷款额度-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label ant-form-item-required">贷款额度 :</label>
-                    <div class="col-sm-4">
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="最低500" name="amountMin" required>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">~</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="最大100W" name="amountMax" required>
-                        <div class="invalid-feedback">
-                          请输入贷款额度.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--贷款周期-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label ant-form-item-required">贷款周期 :</label>
-                    <div class="col-sm-4">
-                      <!-- Build your select: -->
-                      <select id="creditCycle" class="custom-select ml-5" name="creditCycle" multiple="multiple" required>
-                        <option th:each="enumerateItem:${enumerate.CREDIT_CYCLE.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                      <div class="invalid-feedback">请选择贷款周期</div>
-                      <h6 class="mt-4">提示：<span class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
-                    </div>
-                  </div>
-                  <!--审核时长-->
-                  <div class="form-group row">
-                    <label for="auditDuration" class="col-sm-2 col-form-label">审核时长 :</label>
-                    <div class="col-sm-4">
-                      <div class="form-inline">
-                      <input type="text" class="form-control rounded" id="auditDuration" name="auditDuration" placeholder="请输入审核时长" required>
-                      <select class="custom-select ml-5" name="auditDurationUnit" >
-                        <option >秒</option>
-                        <option >分钟</option>
-                        <option >小时</option>
-                        <option >天</option>
-                      </select>
-                      <div class="invalid-feedback">
-                        请填写审核时长.
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--下款速度-->
-                  <div class="form-group row">
-                    <label for="paySpeed" class="col-sm-2 col-form-label ant-form-item-required">下款速度 :</label>
-                    <div class="col-sm-4">
-                      <div class="form-inline">
-                      <input type="text" class="form-control rounded" id="paySpeed" name="paySpeed" placeholder="申请借款到下款的时长" required>
-                      <select class="custom-select ml-5" name="paySpeedUnit">
-                        <option value="秒">秒</option>
-                        <option value="分钟">分钟</option>
-                        <option value="小时">小时</option>
-                        <option value="天">天</option>
-                      </select>
-                      <div class="invalid-feedback">
-                        请填写下款速度.
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--合作推广链接-->
-                  <div class="form-group row">
-                    <label for="links" class="col-sm-2 col-form-label ant-form-item-required">合作推广链接 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="links" id="links" placeholder="https://www.baidu.com" required>
-                      <div class="invalid-feedback">
-                        请填写合作推广链接.
-                      </div>
-                      <h6 class="mt-4">提示：<span class="text-danger">推荐使用以https://开头的链接</span></h6>
-                    </div>
-                  </div>
-                  <!--到账方式-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">到账方式 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="account">
-                        <option value="" disabled selected hidden>请选择</option>
-                        <option th:each="enumerateItem:${enumerate.ACCOUNT_WAY.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                    </div>
-                  </div>
-                  <!--还款方式-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">还款方式 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="repayment">
-                        <option value="" disabled selected hidden>请选择</option>
-                        <option th:each="enumerateItem:${enumerate.REPAYMENT_WAY.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                    </div>
-                  </div>
-                  <!--日最高注册量-->
-                  <div class="form-group row">
-                    <label for="registerCount" class="col-sm-2 col-form-label ant-form-item-required">日最高注册量 :</label>
-                    <div class="col-sm-4">
-                      <div class="input-group mb-3 ">
-                        <input type="text" id ="registerCount" class="form-control rounded" name="registerCount" placeholder="请输入数字" aria-label="registerCount" aria-describedby="basic-addon1" required>
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">个</span>
-                        </div>
-                        <div class="invalid-feedback">
-                          请填写日最高注册量.
-                        </div>
-                      </div>
-                    </div>
-                      <i class="mdi mdi-help-circle text-info d-flex align-self-center mb-3" data-toggle="tooltip" data-placement="top" title="日最高注册量的提示：当日注册量达到上限（进件上限）后，该产品在移动端的各个列表中将被置底显示。
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="/commons/bar::#sideBar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="page-header">
+                                    <h3 class="page-title">
+                                        请填写产品信息
+                                    </h3>
+                                    <a class="mdi mdi-backspace icon-md text-primary"
+                                       th:href="@{/product/products}"></a>
+                                </div>
+                                <form class="needs-validation" method="post" th:action="@{/product}" novalidate>
+                                    <!--合作方式-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required">合作方式 :</label>
+                                        <div class="form-check form-check-info ml-4">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="cooperation"
+                                                       value="CPA" checked>
+                                                CPA
+                                            </label>
+                                        </div>
+                                        <div class="form-check ml-2 form-check-info">
+                                            <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="cooperation"
+                                                       value="UV">
+                                                UV
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--结算周期-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required">结算周期</label>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <select class="custom-select" name="settlementCycle" required>
+                                                    <option value="" disabled selected hidden>结算周期未选择</option>
+                                                    <option th:each="enumerateItem:${enumerate.SETTLEMENT_CYCLE.itemList}">
+                                                        [[${enumerateItem.value}]]
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">请选择结算周期</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--价格-->
+                                    <div class="form-group row">
+                                        <label for="price" class="col-sm-2 col-form-label ant-form-item-required">价格
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="price" id="price"
+                                                   placeholder="请输入价格,可输入0-1000之间的整数或者小数" required>
+                                            <div class="invalid-feedback">
+                                                请填写价格
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--产品名称-->
+                                    <div class="form-group row">
+                                        <label for="name" class="col-sm-2 col-form-label ant-form-item-required">产品名称
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" id="name" name="name"
+                                                   placeholder="请输入产品名称,最多7个字" required>
+                                            <div class="invalid-feedback">
+                                                请填写产品名称
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--产品logo-->
+                                    <div class="form-group row">
+                                        <label for="logo" class="col-sm-2 col-form-label ant-form-item-required">产品logo
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input id="logo" name="logo" type="file" multiple class="file-loading"
+                                                   data-show-upload="false" data-show-caption="true">
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--产品简介-->
+                                    <div class="form-group row">
+                                        <label for="introduction"
+                                               class="col-sm-2 col-form-label ant-form-item-required">产品简介 :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" id="introduction"
+                                                   name="introduction" placeholder="请输入产品简介,最多12个字" required>
+                                            <div class="invalid-feedback">
+                                                请填写产品简介
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--贷款利率-->
+                                    <div class="form-group row">
+                                        <label for="creditRate" class="col-sm-2 col-form-label ant-form-item-required">贷款利率
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control rounded" id="creditRate"
+                                                       name="creditRate" placeholder="请填写贷款利率" required>
+                                                <select class="custom-select ml-5" name="creditRateUnit">
+                                                    <option value="日利率">日利率</option>
+                                                    <option value="年利率">年利率</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    请填写贷款利率.
+                                                </div>
+                                            </div>
+                                            <h6 class="mt-4">提示：<span
+                                                    class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
+                                        </div>
+                                    </div>
+                                    <!--贷款额度-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required">贷款额度 :</label>
+                                        <div class="col-sm-4">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="最低500"
+                                                       name="amountMin" required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">~</span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="最大100W"
+                                                       name="amountMax" required>
+                                                <div class="invalid-feedback">
+                                                    请输入贷款额度.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--贷款周期-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required">贷款周期 :</label>
+                                        <div class="col-sm-4">
+                                            <!-- Build your select: -->
+                                            <select id="creditCycle" class="custom-select ml-5" name="creditCycle"
+                                                    multiple="multiple" required>
+                                                <option th:each="enumerateItem:${enumerate.CREDIT_CYCLE.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                            <div class="invalid-feedback">请选择贷款周期</div>
+                                            <h6 class="mt-4">提示：<span
+                                                    class="text-danger">日利率不得超过0.06%；年利率不得超过24%。</span></h6>
+                                        </div>
+                                    </div>
+                                    <!--审核时长-->
+                                    <div class="form-group row">
+                                        <label for="auditDuration" class="col-sm-2 col-form-label">审核时长 :</label>
+                                        <div class="col-sm-4">
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control rounded" id="auditDuration"
+                                                       name="auditDuration" placeholder="请输入审核时长" required>
+                                                <select class="custom-select ml-5" name="auditDurationUnit">
+                                                    <option>秒</option>
+                                                    <option>分钟</option>
+                                                    <option>小时</option>
+                                                    <option>天</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    请填写审核时长.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--下款速度-->
+                                    <div class="form-group row">
+                                        <label for="paySpeed" class="col-sm-2 col-form-label ant-form-item-required">下款速度
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <div class="form-inline">
+                                                <input type="text" class="form-control rounded" id="paySpeed"
+                                                       name="paySpeed" placeholder="申请借款到下款的时长" required>
+                                                <select class="custom-select ml-5" name="paySpeedUnit">
+                                                    <option value="秒">秒</option>
+                                                    <option value="分钟">分钟</option>
+                                                    <option value="小时">小时</option>
+                                                    <option value="天">天</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    请填写下款速度.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--合作推广链接-->
+                                    <div class="form-group row">
+                                        <label for="links" class="col-sm-2 col-form-label ant-form-item-required">合作推广链接
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="links" id="links"
+                                                   placeholder="https://www.baidu.com" required>
+                                            <div class="invalid-feedback">
+                                                请填写合作推广链接.
+                                            </div>
+                                            <h6 class="mt-4">提示：<span class="text-danger">推荐使用以https://开头的链接</span></h6>
+                                        </div>
+                                    </div>
+                                    <!--到账方式-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">到账方式 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="account">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.ACCOUNT_WAY.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--还款方式-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">还款方式 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="repayment">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.REPAYMENT_WAY.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--日最高注册量-->
+                                    <div class="form-group row">
+                                        <label for="registerCount"
+                                               class="col-sm-2 col-form-label ant-form-item-required">日最高注册量 :</label>
+                                        <div class="col-sm-4">
+                                            <div class="input-group mb-3 ">
+                                                <input type="text" id="registerCount" class="form-control rounded"
+                                                       name="registerCount" placeholder="请输入数字"
+                                                       aria-label="registerCount" aria-describedby="basic-addon1"
+                                                       required>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">个</span>
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    请填写日最高注册量.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <i class="mdi mdi-help-circle text-info d-flex align-self-center mb-3"
+                                           data-toggle="tooltip" data-placement="top" title="日最高注册量的提示：当日注册量达到上限（进件上限）后，该产品在移动端的各个列表中将被置底显示。
 举例：如果该产品是在首页推荐位中，且该推荐位在后台有10个产品，但移动端只展示4个产品，则把该产品置底到第10位。以此类推，直到10个产品都达到进件上限，则不再继续排序。次日恢复默认排序。"></i>
-                  </div>
+                                    </div>
 
-                  <!--进件时间段-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label ant-form-item-required">进件时间段 :</label>
-                    <div class="ml-4 form-inline">
-                      <div class="form-check form-check-info">
-                        <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="innerTime" value="全天" checked>
-                          全天
-                        </label>
-                      </div>
-                      <div class="form-check form-check-info ml-2">
-                        <label class="form-check-label">
-                          <input type="radio" class="form-check-input" name="innerTime" value="规定时段">
-                          规定时段
-                        </label>
-                      </div>
-                      <div class="ml-3 input-group">
-                        <input type="text" id="innerTimeMin" class="form-control rounded" name="innerTimeMin" placeholder="0" th:value="0" readonly required>
-                        <i class="mdi mdi-window-minimize align-self-center"></i>
-                        <input type="text" id="innerTimeMax" class="form-control rounded" name="innerTimeMax" placeholder="24" th:value="24" readonly required>
-                        <div class="invalid-feedback">
-                          请填写进件时间段.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--申请条件-->
-                  <div class="form-group row">
-                    <label for="application" class="col-sm-2 col-form-label ant-form-item-required">申请条件 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="application" id="application" placeholder="用户申请的借款条件,不能超过15字" required>
-                      <div class="invalid-feedback">
-                        请填写申请条件.
-                      </div>
-                    </div>
-                  </div>
-                  <!--贷款所需材料-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label ant-form-item-required ant-form-item-required">贷款所需材料 :</label>
-                    <div class="col-sm-7 ">
-                    <div class="row" id="creditMaterialRow">
-                        <div class="form-check form-check-primary ml-4" th:each="enumerateItem:${enumerate.CREDIT_MATERIAL_TYPE.itemList}">
-                          <label class="form-check-label">
-                            <input type="checkbox" name="creditMaterial" th:value="${enumerateItem.value}" class="form-check-input">
-                            [[${enumerateItem.value}]]
-                            <i class="input-helper"></i></label>
-                        </div>
-                    </div>
-                      <div class="">
-                        <div>
-                            <input type="checkbox" class="custom-control-input d-none" name="checkCreditMaterial" id="checkCreditMaterial" required>
-                            <label class="custom-control-label  d-none" for="checkCreditMaterial">Check this checkbox</label>
-                            <div class="invalid-feedback mb-2">请选择贷款所需材料</div>
-                        </div>
-                      </div>
+                                    <!--进件时间段-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required">进件时间段 :</label>
+                                        <div class="ml-4 form-inline">
+                                            <div class="form-check form-check-info">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="innerTime"
+                                                           value="全天" checked>
+                                                    全天
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-info ml-2">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="innerTime"
+                                                           value="规定时段">
+                                                    规定时段
+                                                </label>
+                                            </div>
+                                            <div class="ml-3 input-group">
+                                                <input type="text" id="innerTimeMin" class="form-control rounded"
+                                                       name="innerTimeMin" placeholder="0" th:value="0" readonly
+                                                       required>
+                                                <i class="mdi mdi-window-minimize align-self-center"></i>
+                                                <input type="text" id="innerTimeMax" class="form-control rounded"
+                                                       name="innerTimeMax" placeholder="24" th:value="24" readonly
+                                                       required>
+                                                <div class="invalid-feedback">
+                                                    请填写进件时间段.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--申请条件-->
+                                    <div class="form-group row">
+                                        <label for="application" class="col-sm-2 col-form-label ant-form-item-required">申请条件
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="application"
+                                                   id="application" placeholder="用户申请的借款条件,不能超过15字" required>
+                                            <div class="invalid-feedback">
+                                                请填写申请条件.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--贷款所需材料-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label ant-form-item-required ant-form-item-required">贷款所需材料
+                                            :</label>
+                                        <div class="col-sm-7 ">
+                                            <div class="row" id="creditMaterialRow">
+                                                <div class="form-check form-check-primary ml-4"
+                                                     th:each="enumerateItem:${enumerate.CREDIT_MATERIAL_TYPE.itemList}">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" name="creditMaterial"
+                                                               th:value="${enumerateItem.value}"
+                                                               class="form-check-input">
+                                                        [[${enumerateItem.value}]]
+                                                        <i class="input-helper"></i></label>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <input type="checkbox" class="custom-control-input d-none"
+                                                           name="checkCreditMaterial" id="checkCreditMaterial" required>
+                                                    <label class="custom-control-label  d-none"
+                                                           for="checkCreditMaterial">Check this checkbox</label>
+                                                    <div class="invalid-feedback mb-2">请选择贷款所需材料</div>
+                                                </div>
+                                            </div>
 
-                      <button type="button" class="btn btn-sm btn-gradient-success btn-fw" data-toggle="modal" data-target="#customContentModalCenter">自定义内容</button>
-                    </div>
-                  </div>
-                  <!-- Modal -->
-                  <div class="modal fade" id="customContentModalCenter" tabindex="-1" role="dialog" aria-labelledby="customContentModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content bg-white">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="customContentModalCenterTitle">创建自定义内容</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                                            <button type="button" class="btn btn-sm btn-gradient-success btn-fw"
+                                                    data-toggle="modal" data-target="#customContentModalCenter">自定义内容
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="customContentModalCenter" tabindex="-1" role="dialog"
+                                         aria-labelledby="customContentModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content bg-white">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="customContentModalCenterTitle">
+                                                        创建自定义内容</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="customContent"
+                                                               class="ant-form-item-required">内容</label>
+                                                        <input type="text" class="form-control" id="customContent"
+                                                               placeholder="贷款所需材料">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        取消
+                                                    </button>
+                                                    <button type="button" class="btn btn-info" id="addCustomContent">
+                                                        确认
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--征信信息-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">征信信息 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="creditInfo">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.CREDIT_INFO.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--审核方式-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">审核方式 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="review">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.REVIEW_WAY.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--前期费用-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">前期费用 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="prePayment">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.PREPAYMENT.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--电话核实-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">电话核实 :</label>
+                                        <div class="col-sm-4">
+                                            <select class="custom-select" name="verify">
+                                                <option value="" disabled selected hidden>请选择</option>
+                                                <option th:each="enumerateItem:${enumerate.VERIFY_WAY.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--企业名称-->
+                                    <div class="form-group row">
+                                        <label for="businessName"
+                                               class="col-sm-2 col-form-label ant-form-item-required">企业名称 :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="businessName"
+                                                   id="businessName" placeholder="请输入企业名称,最多30个字" required>
+                                            <div class="invalid-feedback">
+                                                请填写企业名称.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--联系人姓名-->
+                                    <div class="form-group row">
+                                        <label for="contact" class="col-sm-2 col-form-label ant-form-item-required">联系人姓名
+                                            :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="contact" id="contact"
+                                                   placeholder="请输入姓名" required>
+                                            <div class="invalid-feedback">
+                                                请填写联系人姓名.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--联系人手机号-->
+                                    <div class="form-group row">
+                                        <label for="contactPhone"
+                                               class="col-sm-2 col-form-label ant-form-item-required">联系人手机号 :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="contactPhone"
+                                                   id="contactPhone" placeholder="请输入手机号" required>
+                                            <div class="invalid-feedback">
+                                                请填写联系人手机号.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--联系人微信-->
+                                    <div class="form-group row">
+                                        <label for="contactWeChat" class="col-sm-2 col-form-label">联系人微信 :</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control rounded" name="contactWeChat"
+                                                   id="contactWeChat" placeholder="请输入微信">
+                                            <div class="invalid-feedback">
+                                                Please provide a valid city.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-info" type="submit">提交</button>
+                                        <a class="btn btn-outline-info" th:href="@{/product/products}">取消</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                          <div class="form-group">
-                            <label for="customContent" class="ant-form-item-required">内容</label>
-                            <input type="text" class="form-control" id="customContent" placeholder="贷款所需材料">
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                          <button type="button" class="btn btn-info" id="addCustomContent">确认</button>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                  <!--征信信息-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">征信信息 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="creditInfo">
-                        <option value="" disabled selected hidden >请选择</option>
-                        <option th:each="enumerateItem:${enumerate.CREDIT_INFO.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--审核方式-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">审核方式 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="review">
-                        <option value="" disabled selected hidden >请选择</option>
-                        <option th:each="enumerateItem:${enumerate.REVIEW_WAY.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--前期费用-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">前期费用 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="prePayment">
-                        <option value="" disabled selected hidden>请选择</option>
-                        <option th:each="enumerateItem:${enumerate.PREPAYMENT.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--电话核实-->
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">电话核实 :</label>
-                    <div class="col-sm-4">
-                      <select class="custom-select" name="verify">
-                        <option value="" disabled selected hidden>请选择</option>
-                        <option th:each="enumerateItem:${enumerate.VERIFY_WAY.itemList}">[[${enumerateItem.value}]]</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!--企业名称-->
-                  <div class="form-group row">
-                    <label for="businessName" class="col-sm-2 col-form-label ant-form-item-required">企业名称 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="businessName" id="businessName" placeholder="请输入企业名称,最多30个字" required>
-                      <div class="invalid-feedback">
-                        请填写企业名称.
-                      </div>
-                    </div>
-                  </div>
-                  <!--联系人姓名-->
-                  <div class="form-group row">
-                    <label for="contact" class="col-sm-2 col-form-label ant-form-item-required">联系人姓名 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="contact" id="contact" placeholder="请输入姓名" required>
-                      <div class="invalid-feedback">
-                        请填写联系人姓名.
-                      </div>
-                    </div>
-                  </div>
-                  <!--联系人手机号-->
-                  <div class="form-group row">
-                    <label for="contactPhone" class="col-sm-2 col-form-label ant-form-item-required">联系人手机号 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded" name="contactPhone" id="contactPhone" placeholder="请输入手机号" required>
-                      <div class="invalid-feedback">
-                        请填写联系人手机号.
-                      </div>
-                    </div>
-                  </div>
-                  <!--联系人微信-->
-                  <div class="form-group row">
-                    <label for="contactWeChat" class="col-sm-2 col-form-label">联系人微信 :</label>
-                    <div class="col-sm-4">
-                      <input type="text" class="form-control rounded"  name="contactWeChat" id="contactWeChat" placeholder="请输入微信">
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-center">
-                    <button class="btn btn-info" type="submit">提交</button>
-                    <a class="btn btn-outline-info" th:href="@{/product/products}">取消</a>
-                  </div>
-                  </form>
-              </div>
+                </div>
             </div>
-          </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <div th:replace="/commons/bar::#footerBar"></div>
+            <!-- partial -->
         </div>
-      </div>
-      <!-- content-wrapper ends -->
-      <!-- partial:../../partials/_footer.html -->
-      <div th:replace="/commons/bar::#footerBar"></div>
-      <!-- partial -->
+        <!-- main-panel ends -->
     </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
@@ -445,14 +521,14 @@
 <!-- End custom js for this page-->
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
@@ -463,7 +539,7 @@
         }, false);
     })();
     <!-- Initialize the plugin: 下拉复选-->
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#creditCycle').multiselect({
             //inheritClass: true,
             buttonClass: 'btn btn-gradient-danger',
@@ -471,106 +547,95 @@
         });
         $('#addCustomContent').click(function () {
             //获取自定义dialog中input值
-            var content =  $(" #customContent").val();
+            var content = $(" #customContent").val();
             //回调函数处理当前modal的状态，关闭dialog
             $('#customContentModalCenter').modal('hide');
             //向页面增加自定义内容的复选框
-            $("#creditMaterialRow").append("<div class='form-check form-check-primary ml-4'>"+
-            "<label class='form-check-label'>"+
-                "<input type='checkbox' class='form-check-input' name='creditMaterial' value='"+content+"'>"+content+"<i class='input-helper'></i></label> </div>");
+            $("#creditMaterialRow").append("<div class='form-check form-check-primary ml-4'>" +
+                "<label class='form-check-label'>" +
+                "<input type='checkbox' class='form-check-input' name='creditMaterial' value='" + content + "'>" + content + "<i class='input-helper'></i></label> </div>");
         });
 
         //title
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
-        });
-        //初始化fileinput插件
-        $(function () {
-            //0.初始化fileinput
-            var oFileInput = new FileInput();
-            oFileInput.Init("logo", "/api/OrderApi/ImportOrder");
+            initFileInput("logo", "/api/OrderApi/ImportOrder");
         });
         //jquery绑定innerTimed的change事件即可。
-        $(function(){
-            $('input[name="innerTime"]').change(function() {
+        $(function () {
+            $('input[name="innerTime"]').change(function () {
                 var selectedValue = $("input[name='innerTime']:checked").val();
-                if (selectedValue==="全天"){
-                    $('#innerTimeMin').attr("readonly",true);
-                    $('#innerTimeMax').attr("readonly",true);
-                }else {
-                    $('#innerTimeMin').attr("readonly",false);
-                    $('#innerTimeMax').attr("readonly",false);
+                if (selectedValue === "全天") {
+                    $('#innerTimeMin').attr("readonly", true);
+                    $('#innerTimeMax').attr("readonly", true);
+                } else {
+                    $('#innerTimeMin').attr("readonly", false);
+                    $('#innerTimeMax').attr("readonly", false);
                 }
             });
         });
         //jquery绑定creditMaterial的change事件即可。
-        $(function(){
-            $('input[name="creditMaterial"]').change(function() {
-                var chk_value =[];
-                $('input[name="creditMaterial"]:checked').each(function(){
+        $(function () {
+            $('input[name="creditMaterial"]').change(function () {
+                var chk_value = [];
+                $('input[name="creditMaterial"]:checked').each(function () {
                     chk_value.push($(this).val());
                 });
                 //给隐藏的input赋值 判断当前checkbox是否选中了
-                if (chk_value.length!==0){
-                    $("#checkCreditMaterial").prop("checked",true);
-                }else {
-                    $("#checkCreditMaterial").prop("checked",false);
+                if (chk_value.length !== 0) {
+                    $("#checkCreditMaterial").prop("checked", true);
+                } else {
+                    $("#checkCreditMaterial").prop("checked", false);
                 }
             });
         });
     });
 
     //初始化fileinput
-    var FileInput = function () {
-        var oFile = new Object();
+    function initFileInput(ctrlName, uploadUrl) {
+        var control = $('#' + ctrlName);
 
-        //初始化fileinput控件（第一次初始化）
-        oFile.Init = function(ctrlName, uploadUrl) {
-            var control = $('#' + ctrlName);
-
-            //初始化上传控件的样式
-            control.fileinput({
-                language: 'zh', //设置语言
-                uploadUrl: '/api/OrderApi/ImportOrder', //上传的地址,影响略缩图上的删除和上传按钮
-                allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
-                showUpload: false, //是否显示上传按钮
-                showCaption: false,//是否显示标题
-                browseClass: "btn btn-primary", //按钮样式
-                dropZoneEnabled: false,//是否显示拖拽区域
-                showCancel:false,
-                //minImageWidth: 50, //图片的最小宽度
-                //minImageHeight: 50,//图片的最小高度
-                //maxImageWidth: 1000,//图片的最大宽度
-                //maxImageHeight: 1000,//图片的最大高度
-                maxFileSize: 200,//单位为kb，如果为0表示不限制文件大小
-                minFileCount: 1,
-                maxFileCount: 1, //表示允许同时上传的最大文件个数
-                enctype: 'multipart/form-data',
-                validateInitialCount:true,
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-                layoutTemplates :{
+        //初始化上传控件的样式
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '/api/OrderApi/ImportOrder', //上传的地址,影响略缩图上的删除和上传按钮
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: false, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            showCancel: false,
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            maxFileSize: 200,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 1,
+            maxFileCount: 1, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            layoutTemplates: {
 //                    actionDelete:'', //去除上传预览的缩略图中的删除图标
 //                    actionUpload:'',//去除上传预览缩略图中的上传图片；
 //                    actionZoom:'<i class="mdi mdi-user-box-outline"></i>'   //去除上传预览缩略图中的查看详情预览的缩略图标。
-                }
-            });
-            //导入文件上传完成之后的事件
-            $("#logo").on("fileuploaded", function (event, data, previewId, index) {
-                $("#myModal").modal("hide");
-                var data = data.response.lstOrderImport;
-                if (data == undefined) {
-                    toastr.error('文件格式类型不正确');
-                    return;
-                }
-                //1.初始化表格
-                var oTable = new TableInit();
-                oTable.Init(data);
-                $("#div_startimport").show();
-            });
-        };
-        return oFile;
-    };
+            }
+        });
+        //导入文件上传完成之后的事件
+        $("#logo").on("fileuploaded", function (event, data, previewId, index) {
+            $("#myModal").modal("hide");
+            var data = data.response.lstOrderImport;
+            if (data == undefined) {
+                toastr.error('文件格式类型不正确');
+                return;
+            }
+            //1.初始化表格
+            var oTable = new TableInit();
+            oTable.Init(data);
+            $("#div_startimport").show();
+        });
+    }
 
 </script>
 </body>
