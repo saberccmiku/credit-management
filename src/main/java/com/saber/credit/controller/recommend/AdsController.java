@@ -65,9 +65,17 @@ public class AdsController extends BaseController {
 
     @PutMapping("/advert/update")
     public String update(Model model, @RequestBody Advert advert) {
-        advertService.update(advert);
-        model.addAttribute("msg", "success");
-        return list(model, advert.getFunc());
+        Advert tempAdvert = new Advert();
+        tempAdvert.setPosition(advert.getPosition());
+        List<Advert> adverts = advertService.query(tempAdvert);
+        if (adverts.size()!=0) {//非隐藏广告的位置被占用时隐藏的广告不允许开启显示，其他显示的广告不允许更换成这个位置
+            advertService.update(advert);
+            model.addAttribute("msg", "success");
+            return list(model, advert.getFunc());
+        }else {
+            model.addAttribute("msg", "failed");
+            return "recommend/adsDetail";
+        }
     }
 
     @GetMapping("/advert/detail/{type}/{id}")

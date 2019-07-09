@@ -40,7 +40,9 @@
                                     <a class="mdi mdi-backspace icon-md text-primary"
                                        th:href="@{/recommend/ads}"></a>
                                 </div>
-                                <form class="needs-validation" method="post" th:action="@{/product}" novalidate>
+                                <form class="needs-validation" method="post" th:action="@{/advert/update}" novalidate>
+                                    <input type="hidden" name="_method" value="put">
+                                    <input type="hidden" name="id" th:value="${advert.id}">
                                     <!--选择图片-->
                                     <div class="form-group row">
                                         <label for="logo" class="col-sm-2 col-form-label ant-form-item-required">选择图片

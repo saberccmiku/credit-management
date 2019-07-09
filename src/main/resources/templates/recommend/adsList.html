@@ -229,6 +229,8 @@
                                         <td>
                                             <a class="btn btn-sm btn-gradient-info"
                                                th:href="@{/advert/detail/}+${selectPosition.value}+'/'+${advert.id}">编辑</a>
+                                            <a class="btn btn-sm btn-gradient-danger deleteBtn"
+                                               th:attr="delete__url=@{/advert/}+${advert.id}">删除</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -250,6 +252,10 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+<!--将form表单写在外面，所有的删除操作共用一个表单-->
+<form id="deleteForm" method="post" hidden>
+    <input type="hidden" name="_method" value="delete"/>
+</form>
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
@@ -392,7 +398,7 @@
     }
 
     function initBootstrapSwitch(advert) {
-        var bootstrapSwitchName = "status" + advert.id;
+        let bootstrapSwitchName = "status" + advert.id;
         $("[name='" + bootstrapSwitchName + "']").bootstrapSwitch({
             state: advert.status === "是",
             size: 'mini',
@@ -444,6 +450,40 @@
                         break;
                 }
             })
+        })
+    }
+
+    //监听删除事件
+    function registerDeleteBtn() {
+        $('.deleteBtn').click(function () {
+            swal({
+                title: "您确定要删除这条信息吗",
+                text: "删除后将无法恢复，请谨慎操作！",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: {
+                        text: "取消",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "确认",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $("#deleteForm").attr("action", $(this).attr("delete_uri")).submit();
+                } else {
+                    swal.close();
+                }
+            });
         })
     }
 </script>

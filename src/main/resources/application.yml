@@ -27,10 +27,16 @@ spring:
 
   thymeleaf:
     cache: false
+  mvc:
+    throw-exception-if-no-handler-found: true #出现错误时, 直接抛出异常
+  resources:
+    add-mappings: true #不要为我们工程中的资源文件建立映射
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/**/*.xml
 server:
   servlet:
     context-path: /management
+
+
 
