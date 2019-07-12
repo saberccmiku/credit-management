@@ -104,4 +104,11 @@ public class AdsController extends BaseController {
         model.addAttribute("selectPosition", enumerate);
     }
 
+    @DeleteMapping("/advert/{type}/{id}")
+    public String delete(@PathVariable("type") String type,@PathVariable("id") String id,Model model,Map<String,Object> map){
+        advertService.delete(id);
+        map.put("msg","success");
+        return list(model,type);
+    }
+
 }
