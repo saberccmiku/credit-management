@@ -37,6 +37,7 @@ mybatis:
 server:
   servlet:
     context-path: /management
+  port: 1688
 
 
 
