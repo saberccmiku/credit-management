@@ -2,43 +2,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <<title>贷超管理系统</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
-  <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
-  <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <<title>贷超管理系统</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/iconfonts/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" th:href="@{/asserts/css/daterangepicker-bs3.css}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+
+    <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
+
+    <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
 </head>
 
 <body>
 <div class="container-scroller">
-  <!-- partial:../../partials/_navbar.html -->
-  <div th:replace="/commons/bar::topBar"></div>
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-    <!-- partial:../../partials/_sidebar.html -->
-    <div th:replace="/commons/bar::#sideBar"></div>
+    <!-- partial:../../partials/_navbar.html -->
+    <div th:replace="/commons/bar::topBar"></div>
     <!-- partial -->
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <div class="col-lg-12 grid-margin stretch-card">
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="/commons/bar::#sideBar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">渠道搜索：</label>
+                                        <div>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">推广方式：</label>
+                                        <div class="form-group w-50">
+                                            <select class="custom-select" name="settlementCycle" required>
+                                                <option value="全部" selected hidden>全部</option>
+                                                <option th:each="enumerateItem:${enumerate.PROMOTE_WAY.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                            <div class="invalid-feedback">请选择推广方式</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">渠道状态：</label>
+                                        <div class="form-group w-50">
+                                            <select class="custom-select" name="settlementCycle" required>
+                                                <option value="全部" selected hidden>全部</option>
+                                                <option th:each="enumerateItem:${enumerate.STATUS.itemList}">
+                                                    [[${enumerateItem.value}]]
+                                                </option>
+                                            </select>
+                                            <div class="invalid-feedback">请选择渠道状态</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">添加时间：</label>
+                                        <div>
+                                            <fieldset>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div class="input-prepend input-group">
+                                                            <span class="add-on input-group-addon"><i
+                                                                    class="glyphicon glyphicon-calendar fa fa-calendar"></i></span><input
+                                                                type="text" readonly style="width: 200px"
+                                                                name="reservation" id="reservation" class="form-control"
+                                                                value="2014-5-21 - 2014-6-21"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <div th:replace="/commons/bar::#footerBar"></div>
+            <!-- partial -->
         </div>
-      </div>
-      <!-- content-wrapper ends -->
-      <!-- partial:../../partials/_footer.html -->
-      <div th:replace="/commons/bar::#footerBar"></div>
-      <!-- partial -->
+        <!-- main-panel ends -->
     </div>
-    <!-- main-panel ends -->
-  </div>
-  <!-- page-body-wrapper ends -->
+    <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
@@ -46,12 +111,19 @@
 <script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page-->
+<script th:src="@{/asserts/js/moment.min.js}"></script>
+<script th:src="@{/asserts/js/daterangepicker.js}"></script>
 <!-- End plugin js for this page-->
 <!-- inject:js -->
-<script th:src="@{/asserts/js/off-canvas.js}"></script>
-<script th:src="@{/asserts/js/misc.js}"></script>
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#reservation').daterangepicker(null, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+</script>
 </body>
 </html>

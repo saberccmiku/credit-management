@@ -14,8 +14,13 @@ public class ChannelController extends BaseController {
 
     @GetMapping(value = "/market/channel")
     public String list(Model model){
-        initPage(model);
-        return "market/channel";
+        return load(model,"market/channel");
 
+    }
+
+    public String load(Model model,String view){
+        initPage(model);
+        initEnumerate(model,"PROMOTE_WAY","STATUS");
+        return view;
     }
 }
