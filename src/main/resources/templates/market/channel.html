@@ -11,12 +11,10 @@
     <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
     <!-- endinject -->
     <!-- plugin css for this page -->
-    <link rel="stylesheet" th:href="@{/asserts/css/daterangepicker-bs3.css}">
+    <link rel="stylesheet" th:href="@{/bootstrap-daterangepicker/daterangepicker.css}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-
     <link rel="stylesheet" th:href="@{/asserts/css/style.css}">
-
     <link rel="shortcut icon" th:href="@{/favicon.ico}"/>
 </head>
 
@@ -35,7 +33,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group row">
                                         <label class="col-form-label">渠道搜索：</label>
                                         <div>
@@ -57,6 +55,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-form-label">添加时间：</label>
+                                        <div class="input-group col-md-10" style="height: 40px">
+                                            <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
+                                            <input type="text"
+                                                   class="  input-sm form-control rounded"
+                                                   id="sendTime" name="sendTime"
+                                                   placeholder="请选择时间" required>
+                                            <div class="invalid-feedback">请选择发布时间</div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-3">
                                     <div class="form-group row">
                                         <label class="col-form-label">渠道状态：</label>
@@ -68,26 +79,6 @@
                                                 </option>
                                             </select>
                                             <div class="invalid-feedback">请选择渠道状态</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group row">
-                                        <label class="col-form-label">添加时间：</label>
-                                        <div>
-                                            <fieldset>
-                                                <div class="control-group">
-                                                    <div class="controls">
-                                                        <div class="input-prepend input-group">
-                                                            <span class="add-on input-group-addon"><i
-                                                                    class="glyphicon glyphicon-calendar fa fa-calendar"></i></span><input
-                                                                type="text" readonly style="width: 200px"
-                                                                name="reservation" id="reservation" class="form-control"
-                                                                value="2014-5-21 - 2014-6-21"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>
@@ -111,19 +102,49 @@
 <script th:src="@{/vendors/js/vendor.bundle.addons.js}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page-->
-<script th:src="@{/asserts/js/moment.min.js}"></script>
-<script th:src="@{/asserts/js/daterangepicker.js}"></script>
+<script th:src="@{/bootstrap-daterangepicker/moment.min.js}"></script>
+<script th:src="@{/bootstrap-daterangepicker/daterangepicker.js}"></script>
 <!-- End plugin js for this page-->
 <!-- inject:js -->
 <!-- endinject -->
 <!-- Custom js for this page-->
 <!-- End custom js for this page-->
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#reservation').daterangepicker(null, function (start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-        });
-    });
+    $(function () {
+        $('input[name="sendTime"]').daterangepicker({
+                minDate: '2015/01/01 00:00:00',    //最小时间
+                showDropdowns: true,
+                showWeekNumbers: true, //是否显示第几周
+                dateLimit: {days: 300}, //起止时间的最大间隔
+                timePicker: true,
+                timePickerIncrement: 1, //时间的增量，单位为分钟
+                timePicker24Hour: true,
+                timePickerSeconds: true,
+                opens: 'right', //日期选择框的弹出位置
+                drops: 'down',
+                buttonClasses: ['btn btn-default'],
+                applyClass: 'btn-small btn-primary blue',
+                cancelClass: 'btn-small',
+                format: 'YYYY/MM/DD HH:mm:ss', //控件中from和to 显示的日期格式MM/DD/YYYY
+                separator: '-',
+                defaultDate: new Date(),
+                monthHtml: '<select class="monthselect custom-select">',
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    applyLabel: '确定',
+                    cancelLabel: '取消',
+                    fromLabel: '起始时间',
+                    toLabel: '结束时间',
+                    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                    monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    firstDay: 1
+                }
+            },
+            function (start, end, label) {
+
+            });
+        $('input[name="sendTime"]').val("");
+    })
 </script>
 </body>
 </html>
