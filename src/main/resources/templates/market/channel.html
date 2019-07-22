@@ -33,15 +33,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="ml-5" style="width: 20%">
                                     <div class="form-group row">
                                         <label class="col-form-label">渠道搜索：</label>
-                                        <div>
+                                        <div class="w-50">
                                             <input type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div style="width: 20%">
                                     <div class="form-group row">
                                         <label class="col-form-label">推广方式：</label>
                                         <div class="form-group w-50">
@@ -55,20 +55,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div style="width: 30%">
                                     <div class="form-group row">
                                         <label class="col-form-label">添加时间：</label>
-                                        <div class="input-group col-md-10" style="height: 40px">
+                                        <div class="input-group" style="height: 40px;width: 60%">
                                             <i class="glyphicon glyphicon-calendar input-group-text bg-white"></i>
                                             <input type="text"
-                                                   class="  input-sm form-control rounded"
+                                                   class="input form-control rounded"
                                                    id="sendTime" name="sendTime"
                                                    placeholder="请选择时间" required>
                                             <div class="invalid-feedback">请选择发布时间</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div style="width: 20%">
                                     <div class="form-group row">
                                         <label class="col-form-label">渠道状态：</label>
                                         <div class="form-group w-50">
@@ -82,6 +82,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <button class="btn btn-sm btn-info">查询</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button class="ml-4 btn btn-info btn-sm">添加渠道</button>
+                                <button class="ml-4 btn btn-info btn-sm">渠道统计信息</button>
                             </div>
                         </div>
                     </div>
@@ -112,7 +119,7 @@
 <script type="text/javascript">
     $(function () {
         $('input[name="sendTime"]').daterangepicker({
-                minDate: '2015/01/01 00:00:00',    //最小时间
+                minDate: '2015/01/01',    //最小时间
                 showDropdowns: true,
                 showWeekNumbers: true, //是否显示第几周
                 dateLimit: {days: 300}, //起止时间的最大间隔
@@ -125,12 +132,12 @@
                 buttonClasses: ['btn btn-default'],
                 applyClass: 'btn-small btn-primary blue',
                 cancelClass: 'btn-small',
-                format: 'YYYY/MM/DD HH:mm:ss', //控件中from和to 显示的日期格式MM/DD/YYYY
+                format: 'YYYY-MM-DD', //控件中from和to 显示的日期格式MM/DD/YYYY
                 separator: '-',
                 defaultDate: new Date(),
                 monthHtml: '<select class="monthselect custom-select">',
                 locale: {
-                    format: 'YYYY-MM-DD HH:mm:ss',
+                    format: 'YYYY-MM-DD',
                     applyLabel: '确定',
                     cancelLabel: '取消',
                     fromLabel: '起始时间',
